@@ -1,2 +1,5 @@
-# projet2
-Groupe 1 du jeudi
+GROUPE 2!
+
+Caron Pierre-Edouard
+Vitse Florent
+Adriansen Etienne
