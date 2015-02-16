@@ -9,6 +9,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * @author FLORENT
@@ -17,6 +18,7 @@ import org.newdawn.slick.SlickException;
 public class WindowGame extends BasicGame {
 
     private GameContainer container;
+	private TiledMap map;
 
 	/**
      * Crétion de la fenetre.
@@ -32,6 +34,7 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
+		this.map.render(0, 0);
     }
 
 	/** 
@@ -40,6 +43,8 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
         this.container = container;
+        // Charge la map
+        this.map = new TiledMap("resources/map/firstMap.tmx");
     }
 
 	/** 
