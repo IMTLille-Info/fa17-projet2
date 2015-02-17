@@ -90,9 +90,25 @@
  <tileset firstgid="29" name="houseTwoWindows" tilewidth="32" tileheight="32">
   <image source="tuiles/houseTwoWindows.png" width="32" height="32"/>
  </tileset>
- <layer name="Calque General" width="20" height="15">
+ <tileset firstgid="30" name="leafWithoutGrass" tilewidth="32" tileheight="32">
+  <image source="tuiles/leafWithoutGrass.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="31" name="collision" tilewidth="32" tileheight="32">
+  <image source="tuiles/collision/collision.png" width="32" height="32"/>
+ </tileset>
+ <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83S3QqDMAwF4EKdf3M6Bd2q8/1f0wgJhJKkdVdefBdKzqGhHZxzU8KIUnNv0Bg8KhB9W5nWoPVZGer9ghWEC+eTMtS7gBl8ovMVEZ/IdOghZHOVrOeJamGO9uGCMFexHqvv3GcHG+71w93+7cul9cX3Gd+r9l/ra5Scht6O1sffcK5W6XuxO7+qF/ru6gAMCF2AsAQAAA==
+   H4sIAAAAAAAAC83S3QqDMAwF4FKcf3M6Bd2q8/1f0wgJhJKkdVdefBdKzqGhHZxzU8KIUnNv0Bg8KhB9W5nWoPVZGer9ghWEC+eTMtS7gBl8ovMVEZ/IdOghZHOVrOeJamGO9uGCMFexHqvv3GcHG+71w93+7cul9cX3Gd+r9l/ra5Scht6O1sffcK5W6XuxO7+qF/ru6gDSUlTOsAQAAA==
+  </data>
+ </layer>
+ <layer name="leaves" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoB+Qg2Jc/OFoHjFio4A2AFf8kSqOroYU+4lRQwoe6QAAufZiVbAEAAA=
+  </data>
+ </layer>
+ <layer name="logic" width="20" height="15" opacity="0.55">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC5NnYGCQpxPGBUbNI00/IUCseYNdHbGAXuaRYya98tZIwQCoyQTdsAQAAA==
   </data>
  </layer>
 </map>
