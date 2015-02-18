@@ -73,37 +73,37 @@ public class WindowGame extends BasicGame {
         this.map = new TiledMap("resources/map/firstMap.tmx");
         
         // Images du joueur correspondante à ces états statique
-        standings[0] = new Image("src/resources/map/player/personStandUp.png");
-        standings[1] = new Image("src/resources/map/player/personStandLeft.png");
-        standings[2] = new Image("src/resources/map/player/personStandDown.png");
-        standings[3] = new Image("src/resources/map/player/personStandRight.png");
+        standings[0] = new Image("resources/map/player/personStandUp.png");
+        standings[1] = new Image("resources/map/player/personStandLeft.png");
+        standings[2] = new Image("resources/map/player/personStandDown.png");
+        standings[3] = new Image("resources/map/player/personStandRight.png");
         
         /* ANIMATIONS */
         
         // Marcher vers le haut
         Animation walkNorth = new Animation();
-        walkNorth.addFrame(new Image("src/resources/map/player/personWalkingUp.png"), 100);
-        walkNorth.addFrame(new Image("src/resources/map/player/personWalkingUp.png"), 100);
-        walkNorth.addFrame(new Image("src/resources/map/player/personWalkingUp2.png"), 100);
+        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), 100);
+        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), 100);
+        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp2.png"), 100);
         this.animations[0] = walkNorth;
         
         // Marcher vers la gauche
         Animation walkLeft = new Animation();
-        walkLeft.addFrame(new Image("src/resources/map/player/personStandLeft.png"), 100);
-        walkLeft.addFrame(new Image("src/resources/map/player/personWalkingLeft.png"), 100);
+        walkLeft.addFrame(new Image("resources/map/player/personStandLeft.png"), 100);
+        walkLeft.addFrame(new Image("resources/map/player/personWalkingLeft.png"), 100);
         this.animations[1] = walkLeft;
         
         // Marcher vers le bas
         Animation walkSouth = new Animation();
-        walkSouth.addFrame(new Image("src/resources/map/player/personStandDown.png"), 100);
-        walkSouth.addFrame(new Image("src/resources/map/player/personWalkingDown.png"), 100);
-        walkSouth.addFrame(new Image("src/resources/map/player/personWalkingDown2.png"), 100);
+        walkSouth.addFrame(new Image("resources/map/player/personStandDown.png"), 100);
+        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown.png"), 100);
+        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown2.png"), 100);
         this.animations[2] = walkSouth;
         
         // Marcher vers la droite
         Animation walkRight = new Animation();
-        walkRight.addFrame(new Image("src/resources/map/player/personStandRight.png"), 100);
-        walkRight.addFrame(new Image("src/resources/map/player/personWalkingRight.png"), 100);
+        walkRight.addFrame(new Image("resources/map/player/personStandRight.png"), 100);
+        walkRight.addFrame(new Image("resources/map/player/personWalkingRight.png"), 100);
         this.animations[3] = walkRight;
         
     }
