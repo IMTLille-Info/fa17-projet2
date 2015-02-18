@@ -94,7 +94,7 @@
   <image source="tuiles/leafWithoutGrass.png" width="32" height="32"/>
  </tileset>
  <tileset firstgid="31" name="collision" tilewidth="32" tileheight="32">
-  <image source="tuiles/collision/collision.png" width="32" height="32"/>
+  <image source="tuiles/collision.png" width="32" height="32"/>
  </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
@@ -108,7 +108,7 @@
  </layer>
  <layer name="logic" width="20" height="15" opacity="0.55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5NnYGCQpxPGBUbNI00/IUCseYNdHbGAXuaRYya98tZIwQCoyQTdsAQAAA==
+   H4sIAAAAAAAAC5NnYGCQpxPGBUbNI00/IUCseYNdHbGAXuaRYya145ge+XQwYwAd5/cFsAQAAA==
   </data>
  </layer>
 </map>
