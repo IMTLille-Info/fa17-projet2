@@ -23,8 +23,8 @@ public class WindowGame extends BasicGame {
 	private TiledMap map;
 	
 	// Coordonnees du personnage au départ
-	private float x = 10 * TILE_SIZE,
-				  y = 8 * TILE_SIZE;
+	private float x = 0,
+				  y = 0;
 	
 	private int direction = 2;
 	private boolean moving = false;
@@ -114,19 +114,47 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		float futurX = 0f, futurY = 0f;
+		
 		if (this.moving) {
 	        switch (this.direction) {
-	            case 0: this.y -= .1f * delta;
-	            		break;
-	            case 1: this.x -= .1f * delta;
-	            		break;
-	            case 2: this.y += .1f * delta;
-	            		break;
-	            case 3: this.x += .1f * delta;
-	            		break;
-	        }
+	        	case 0 :futurY = y - (0.1f * delta);
+	        			break;
+	        	case 1 :futurX = x - (0.1f * delta);
+        				break;
+	        	case 2 :futurY = y + (0.1f * delta);
+    					break;
+	        	case 3 :futurX = x + (0.1f * delta);
+						break;
+	        	}
+	        
+				System.out.println("X : " + x + " | Y : " + y);
+
+						
+				if((futurX < 0.0) || (futurX > this.container.getWidth()))
+				{
+					this.moving = false;
+				}
+				if((futurY < 0.0) || (futurY > this.container.getHeight()))
+				{
+					this.moving = false;
+				}		
+					
+				
+				if (this.moving) {
+			        switch (this.direction) {
+			        	case 0: this.y -= .1 * delta;
+	            			break;
+			        	case 1: this.x -= .1 * delta;
+	            			break;
+			        	case 2: this.y += .1 * delta;
+	            			break;
+			        	case 3: this.x += .1 * delta;
+	            			break;
+			        }
+				}
 	    }
-    }
+	}
 	
 	/** 
 	 * Démarre le jeu. 
