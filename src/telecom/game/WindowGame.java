@@ -23,7 +23,7 @@ public class WindowGame extends BasicGame {
 	private TiledMap map;
 	
 	// Coordonnees du personnage au départ
-	private float x = 10 * TILE_SIZE,
+	private float x = 16 * TILE_SIZE,
 				  y = 8 * TILE_SIZE;
 	
 	private int direction = 2;
@@ -114,19 +114,59 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+		float futurX = x, futurY = y;
+		float futureTuileX = x, futureTuileY = y;
+		
+		// Calcul des futurs coordonnées désirées
 		if (this.moving) {
 	        switch (this.direction) {
-	            case 0: this.y -= .1f * delta;
-	            		break;
-	            case 1: this.x -= .1f * delta;
-	            		break;
-	            case 2: this.y += .1f * delta;
-	            		break;
-	            case 3: this.x += .1f * delta;
-	            		break;
+	        	case 0 :futurY -= (0.1f * delta);
+	        			futureTuileY = futurY;
+	        			break;
+	        	case 1 :futurX -= (0.1f * delta);
+	        			futureTuileX = futurX;
+        				break;
+	        	case 2 :futurY += (0.1f * delta);
+	        			futureTuileY = y + TILE_SIZE;
+    					break;
+	        	case 3 :futurX += (0.1f * delta);
+	        			futureTuileX = x + TILE_SIZE;
+						break;
 	        }
+
+			/* Savoir si l'on va sortir de la fenêtre */
+	        // On arrête si on est inférieur à 0 (à gauche) ou supérieur à la largeur de la fenêtre 
+			if((futurX < 0.0) || (futurX > (this.container.getWidth() - TILE_SIZE)))
+			{
+				this.moving = false;
+			}
+			// On arrête si on est inférieur à 0 (en haut) ou supérieur à la hauteur de la fenêtre 
+			if((futurY < 0.0) || (futurY > (this.container.getHeight() - TILE_SIZE)))
+			{
+				this.moving = false;
+			}	
+			
+			System.out.println("x : " + (int) (x / TILE_SIZE) + " | y : " + (int) (y / TILE_SIZE));
+			System.out.println("TUILES - X : " + (int) (futureTuileX / TILE_SIZE) + " | Y : " + (int) (futureTuileY / TILE_SIZE));
+			
+			// Récupération de la future tuile
+			Image tile = this.map.getTileImage((int) (futureTuileX / TILE_SIZE),
+											   (int) (futureTuileY / TILE_SIZE),
+											   this.map.getLayerIndex("logic"));
+			// Il exite une tuile de collision
+			if(tile != null)
+			{
+				this.moving = false;
+				System.out.println("COLLISION");
+			}
+					
+			// Les futures coordonnées sont bonnes
+			if (this.moving) {
+				x = futurX;
+			    y = futurY;
+			}
 	    }
-    }
+	}
 	
 	/** 
 	 * Démarre le jeu. 
