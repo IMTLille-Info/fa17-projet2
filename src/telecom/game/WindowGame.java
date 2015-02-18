@@ -114,45 +114,38 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		float futurX = 0f, futurY = 0f;
+		float futurX = x, futurY = y;
 		
+		// Calcul des futurs coordonnées désirées
 		if (this.moving) {
 	        switch (this.direction) {
-	        	case 0 :futurY = y - (0.1f * delta);
+	        	case 0 :futurY -= (0.1f * delta);
 	        			break;
-	        	case 1 :futurX = x - (0.1f * delta);
+	        	case 1 :futurX -= (0.1f * delta);
         				break;
-	        	case 2 :futurY = y + (0.1f * delta);
+	        	case 2 :futurY += (0.1f * delta);
     					break;
-	        	case 3 :futurX = x + (0.1f * delta);
+	        	case 3 :futurX += (0.1f * delta);
 						break;
-	        	}
-	        
-				System.out.println("X : " + x + " | Y : " + y);
+	        }
 
-						
-				if((futurX < 0.0) || (futurX > (this.container.getWidth() - TILE_SIZE)))
-				{
-					this.moving = false;
-				}
-				if((futurY < 0.0) || (futurY > (this.container.getHeight() - TILE_SIZE)))
-				{
-					this.moving = false;
-				}		
+			/* Savoir si l'on va sortir de la fenêtre */
+	        // On arrête si on est inférieur à 0 (à gauche) ou supérieur à la largeur de la fenêtre 
+			if((futurX < 0.0) || (futurX > (this.container.getWidth() - TILE_SIZE)))
+			{
+				this.moving = false;
+			}
+			// On arrête si on est inférieur à 0 (en haut) ou supérieur à la hauteur de la fenêtre 
+			if((futurY < 0.0) || (futurY > (this.container.getHeight() - TILE_SIZE)))
+			{
+				this.moving = false;
+			}		
 					
-				
-				if (this.moving) {
-			        switch (this.direction) {
-			        	case 0: this.y -= .1 * delta;
-	            			break;
-			        	case 1: this.x -= .1 * delta;
-	            			break;
-			        	case 2: this.y += .1 * delta;
-	            			break;
-			        	case 3: this.x += .1 * delta;
-	            			break;
-			        }
-				}
+			// Les futures coordonnees sont bonnes
+			if (this.moving) {
+				x = futurX;
+			    y = futurY;
+			}
 	    }
 	}
 	
