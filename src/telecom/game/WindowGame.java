@@ -23,8 +23,8 @@ public class WindowGame extends BasicGame {
 	private TiledMap map;
 	
 	// Coordonnees du personnage au départ
-	private float x = 0,
-				  y = 0;
+	private float x = 19 * TILE_SIZE,
+				  y = 14 * TILE_SIZE;
 	
 	private int direction = 2;
 	private boolean moving = false;
@@ -131,11 +131,11 @@ public class WindowGame extends BasicGame {
 				System.out.println("X : " + x + " | Y : " + y);
 
 						
-				if((futurX < 0.0) || (futurX > this.container.getWidth()))
+				if((futurX < 0.0) || (futurX > (this.container.getWidth() - TILE_SIZE)))
 				{
 					this.moving = false;
 				}
-				if((futurY < 0.0) || (futurY > this.container.getHeight()))
+				if((futurY < 0.0) || (futurY > (this.container.getHeight() - TILE_SIZE)))
 				{
 					this.moving = false;
 				}		
