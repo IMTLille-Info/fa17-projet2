@@ -16,21 +16,31 @@ import org.newdawn.slick.tiled.TiledMap;
  */
 public class WindowGame extends BasicGame {
 
-	// Taille d'une tuile du jeu
-	final int TILE_SIZE = 32;
-	
     private GameContainer container;
 	private TiledMap map;
+	
+	// Taille d'une tuile du jeu
+	final int DURATION_FRAME = 2;
+	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
 	
 	// Coordonnees du personnage au départ
 	private float x = 16 * TILE_SIZE,
 				  y = 8 * TILE_SIZE;
 	
+	// Direction demandée
 	private int direction = 2;
+	
+	// État du personnage
 	private boolean moving = false;
 	
-	// 
+	// Coordonnees a atteindre
+	private float nextX = x,
+			  nextY = y;
+	
+	// Animations de mouvement
 	private Animation[] animations = new Animation[4];
+	
+	// Image quand le personnage est fixe
 	private Image[] standings = new Image[4];
 
 	/**
@@ -58,7 +68,7 @@ public class WindowGame extends BasicGame {
 		}
 		// Affichage de l'Avant-Plan
 	    this.map.render(0, 0, 1);
-	    // On affiche pas la couche de collision qui serait la seconde
+	    // On affiche pas la couche de collision qui serait la prochaine
 
     }
 
@@ -71,6 +81,9 @@ public class WindowGame extends BasicGame {
         
         // Charge la map
         this.map = new TiledMap("resources/map/firstMap.tmx");
+        TILE_SIZE = this.map.getTileHeight();
+        WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
+        HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
         
         // Images du joueur correspondante à ces états statique
         standings[0] = new Image("resources/map/player/personStandUp.png");
@@ -82,30 +95,29 @@ public class WindowGame extends BasicGame {
         
         // Marcher vers le haut
         Animation walkNorth = new Animation();
-        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), 100);
-        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), 100);
-        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp2.png"), 100);
+        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), DURATION_FRAME);
+        walkNorth.addFrame(new Image("resources/map/player/personWalkingUp2.png"), DURATION_FRAME);
         this.animations[0] = walkNorth;
+        this.animations[0].setLooping(true);
         
         // Marcher vers la gauche
         Animation walkLeft = new Animation();
-        walkLeft.addFrame(new Image("resources/map/player/personStandLeft.png"), 100);
-        walkLeft.addFrame(new Image("resources/map/player/personWalkingLeft.png"), 100);
+        walkLeft.addFrame(new Image("resources/map/player/personWalkingLeft.png"), DURATION_FRAME);
+        walkLeft.addFrame(new Image("resources/map/player/personStandLeft.png"), DURATION_FRAME);
         this.animations[1] = walkLeft;
         
         // Marcher vers le bas
         Animation walkSouth = new Animation();
-        walkSouth.addFrame(new Image("resources/map/player/personStandDown.png"), 100);
-        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown.png"), 100);
-        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown2.png"), 100);
+        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown.png"), DURATION_FRAME);
+        walkSouth.addFrame(new Image("resources/map/player/personWalkingDown2.png"), DURATION_FRAME);
+
         this.animations[2] = walkSouth;
         
         // Marcher vers la droite
         Animation walkRight = new Animation();
-        walkRight.addFrame(new Image("resources/map/player/personStandRight.png"), 100);
-        walkRight.addFrame(new Image("resources/map/player/personWalkingRight.png"), 100);
+        walkRight.addFrame(new Image("resources/map/player/personWalkingRight.png"), DURATION_FRAME);
+        walkRight.addFrame(new Image("resources/map/player/personStandRight.png"), DURATION_FRAME);
         this.animations[3] = walkRight;
-        
     }
 
 	/** 
@@ -114,81 +126,42 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		float futurX = x, futurY = y;
-		float futureTuileX = x, futureTuileY = y;
 		
 		// Calcul des futurs coordonnées désirées
 		if (this.moving) {
 	        switch (this.direction) {
-	        	case 0 :futurY -= (0.1f * delta);
-	        			futureTuileY = futurY;
+	        	// On veut monter
+	        	case 0 :
+	        			if((y > nextY)) { y -= DURATION_FRAME; }
 	        			break;
-	        	case 1 :futurX -= (0.1f * delta);
-	        			futureTuileX = futurX;
+	        	// On veut aller à gauche
+	        	case 1 :
+	        			if((x > nextX)) { x -= DURATION_FRAME; }
         				break;
-	        	case 2 :futurY += (0.1f * delta);
-	        			futureTuileY = y + TILE_SIZE;
+	        	// On veut descendre
+	        	case 2 :
+	        			if((y < nextY)) { y += DURATION_FRAME; }
     					break;
-	        	case 3 :futurX += (0.1f * delta);
-	        			futureTuileX = x + TILE_SIZE;
+	        	// On veut aller à droite
+	        	case 3 :
+	        			if((x < nextX)) { x += DURATION_FRAME; }
 						break;
 	        }
-
-			/* Savoir si l'on va sortir de la fenêtre */
-	        // On arrête si on est inférieur à 0 (à gauche) ou supérieur à la largeur de la fenêtre 
-			if((futurX < 0.0) || (futurX > (this.container.getWidth() - TILE_SIZE)))
-			{
-				this.moving = false;
-			}
-			// On arrête si on est inférieur à 0 (en haut) ou supérieur à la hauteur de la fenêtre 
-			if((futurY < 0.0) || (futurY > (this.container.getHeight() - TILE_SIZE)))
-			{
-				this.moving = false;
-			}	
-			
-			System.out.println("x : " + (int) (x / TILE_SIZE) + " | y : " + (int) (y / TILE_SIZE));
-			System.out.println("TUILES - X : " + (int) (futureTuileX / TILE_SIZE) + " | Y : " + (int) (futureTuileY / TILE_SIZE));
-			
-			// Récupération de la future tuile
-			Image tile = this.map.getTileImage((int) (futureTuileX / TILE_SIZE),
-											   (int) (futureTuileY / TILE_SIZE),
-											   this.map.getLayerIndex("logic"));
-			// Il exite une tuile de collision
-			if(tile != null)
-			{
-				this.moving = false;
-				System.out.println("COLLISION");
-			}
-					
-			// Les futures coordonnées sont bonnes
-			if (this.moving) {
-				x = futurX;
-			    y = futurY;
-			}
-	    }
+	    } 
+		
+		if((x == nextX) && (y == nextY))
+		{
+			this.moving = false;
+		}
 	}
 	
 	/** 
 	 * Démarre le jeu. 
 	 */
 	public static void main(String[] args) throws SlickException {
-		AppGameContainer container = new AppGameContainer(new WindowGame("The best Game"), 640, 480, false);
+		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
 		container.setShowFPS(false); // Désactivation de l'Affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre
-    }
-	
-	/** 
-	 * Méthode qui permet de savoir quand une touche est relachée.
-	 * 
-	 * Touche pour quitter : ESC. 
-	 */
-	@Override
-    public void keyReleased(int key, char c) {
-		// Relachement de touche, on arrête le mouvement
-		this.moving = false;
-		if (Input.KEY_ESCAPE == key) {
-            container.exit();
-        }
     }
 	
 	/** 
@@ -198,12 +171,37 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-	    // On appuie sur une touche
-		switch (key) {
-	        case Input.KEY_UP:    this.direction = 0; this.moving = true; break;
-	        case Input.KEY_LEFT:  this.direction = 1; this.moving = true; break;
-	        case Input.KEY_DOWN:  this.direction = 2; this.moving = true; break;
-	        case Input.KEY_RIGHT: this.direction = 3; this.moving = true; break;
+		
+		// Touche ESC on termine le programme
+		if (Input.KEY_ESCAPE == key) {
+            container.exit();
+        }
+		
+	    // Si l'on a fini le mouvement
+		if(!this.moving)
+		{
+			switch (key) {
+	        	case Input.KEY_UP:    
+	        		this.direction = 0;
+	        		this.moving = true;
+	        		if(y > 0) { nextY = y - TILE_SIZE; }
+	        		break;
+	        	case Input.KEY_LEFT:
+	        		this.direction = 1;
+	        		this.moving = true;
+	        		if(x > 0) { nextX = x - TILE_SIZE; }
+	        		break;
+	        	case Input.KEY_DOWN:
+	        		this.direction = 2;
+	        		this.moving = true;
+	        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; }
+	        		break;
+	        	case Input.KEY_RIGHT:
+	        		this.direction = 3;
+	        		this.moving = true;
+	        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; }
+	        		break;
+			}
 	    }
 	}
 }
