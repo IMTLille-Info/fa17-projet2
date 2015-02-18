@@ -162,7 +162,7 @@ public class WindowGame extends BasicGame {
         		if(y > 0) { nextY = y - TILE_SIZE; }
 			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
 			{
-				this.direction = 1;
+				this.direction = 1; 
         		this.moving = true;
         		if(x > 0) { nextX = x - TILE_SIZE; }
 			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
