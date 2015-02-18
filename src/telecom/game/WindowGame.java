@@ -151,7 +151,31 @@ public class WindowGame extends BasicGame {
 		
 		if((x == nextX) && (y == nextY))
 		{
-			this.moving = false;
+			
+			Input listener = container.getInput();
+			
+			// On est resté appuyé sur cette touche
+			if(listener.isKeyDown(Input.KEY_UP)) 
+			{
+        		this.direction = 0;
+        		this.moving = true;
+        		if(y > 0) { nextY = y - TILE_SIZE; }
+			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
+			{
+				this.direction = 1;
+        		this.moving = true;
+        		if(x > 0) { nextX = x - TILE_SIZE; }
+			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
+			{
+        		this.direction = 2;
+        		this.moving = true;
+        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; }
+			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
+			{
+        		this.direction = 3;
+        		this.moving = true;
+        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; }
+			} else { this.moving = false; }
 		}
 	}
 	
