@@ -192,7 +192,7 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		// Calcul des futurs coordonnÃ©es dÃ©sirÃ©es
+		// Calcul des futurs coordonnées désirées
 		x = getNextX(x, delta, xLimit);
 		y = getNextY(y, delta, yLimit);
 		
@@ -200,28 +200,22 @@ public class WindowGame extends BasicGame {
 		{
 			Input listener = container.getInput();
 			
-			// On est restÃ© appuyÃ© sur cette touche
+			// On est resté appuyé sur cette touche
 			if(listener.isKeyDown(Input.KEY_UP)) 
 			{
-        		this.direction = 0;
-        		this.moving = true;
-        		if(y > 0) { yLimit = y - TILE_SIZE; }
+				setMoving(Input.KEY_UP);
 			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
 			{
-				this.direction = 1; 
-        		this.moving = true;
-        		if(x > 0) { xLimit = x - TILE_SIZE; }
+				setMoving(Input.KEY_LEFT);
 			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
 			{
-        		this.direction = 2;
-        		this.moving = true;
-        		if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; }
+				setMoving(Input.KEY_DOWN);
 			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
 			{
-        		this.direction = 3;
-        		this.moving = true;
-        		if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; }
-			} else { this.moving = false; }
+				setMoving(Input.KEY_RIGHT);
+			} else {
+				this.moving = false; 
+			}
 		}
 	}
 	
@@ -243,35 +237,42 @@ public class WindowGame extends BasicGame {
 	public void keyPressed(int key, char c) {
 		
 		// Touche ESC on termine le programme
-		if (Input.KEY_ESCAPE == key) {
+		if (key == Input.KEY_ESCAPE) {
             container.exit();
         }
 		
 	    // Si l'on a fini le mouvement
 		if(!this.moving)
 		{
-			switch (key) {
-	        	case Input.KEY_UP:    
-	        		this.direction = 0;
-	        		this.moving = true;
-	        		if(y > 0) { yLimit = y - TILE_SIZE; yScale = y; }
-	        		break;
-	        	case Input.KEY_LEFT:
-	        		this.direction = 1;
-	        		this.moving = true;
-	        		if(x > 0) { xLimit = x - TILE_SIZE; xScale = x; }
-	        		break;
-	        	case Input.KEY_DOWN:
-	        		this.direction = 2;
-	        		this.moving = true;
-	        		if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; yScale = y; }
-	        		break;
-	        	case Input.KEY_RIGHT:
-	        		this.direction = 3;
-	        		this.moving = true;
-	        		if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; xScale = x; }
-	        		break;
-			}
+			setMoving(key);
 	    }
+	}
+	
+	// Met à jour les variables pour le mouvement
+	private void setMoving(int key)
+	{
+		switch (key) {
+    		case Input.KEY_UP:    
+    			this.direction = 0;
+    			this.moving = true;
+    			if(y > 0) { yLimit = y - TILE_SIZE; yScale = y; }
+    			break;
+    		case Input.KEY_LEFT:
+    			this.direction = 1;
+    			this.moving = true;
+    			if(x > 0) { xLimit = x - TILE_SIZE; xScale = x; }
+    			break;
+    		case Input.KEY_DOWN:
+    			this.direction = 2;
+    			this.moving = true;
+    			if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; yScale = y; }
+    			break;
+    		case Input.KEY_RIGHT:
+    			this.direction = 3;
+    			this.moving = true;
+    			if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; xScale = x; }
+    			break;
+		}
+	
 	}
 }
