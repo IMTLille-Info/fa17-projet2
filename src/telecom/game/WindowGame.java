@@ -20,7 +20,7 @@ public class WindowGame extends BasicGame {
 	private TiledMap map;
 	
 	// Constantes du programme
-	final int DURATION_FRAME = 2, SLOW_ANIM = 10;
+	final int DURATION_FRAME = 2;
 	
 	// Constantes de la Map
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
@@ -126,9 +126,9 @@ public class WindowGame extends BasicGame {
     }
 
 	
-	private float getNextX(float x, int delta, float xLimit)
+	public float getNextX(float x, int delta, float xLimit)
 	{
-		final int SLOW_ANIM = 10;
+		int SLOW_ANIM = 10;
 		
 		if (this.moving) {
 	        switch (this.direction) {
@@ -155,9 +155,9 @@ public class WindowGame extends BasicGame {
 		return x;
 	}
 	
-	private float getNextY(float y, int delta, float yLimit)
+	public float getNextY(float y, int delta, float yLimit)
 	{
-		final int SLOW_ANIM = 10;
+		int SLOW_ANIM = 10;
 		
 		if (this.moving) {
 	        switch (this.direction) {
@@ -249,28 +249,28 @@ public class WindowGame extends BasicGame {
 	}
 	
 	// Met à jour les variables pour le mouvement
-	private void setMoving(int key)
+	public void setMoving(int key)
 	{
 		switch (key) {
     		case Input.KEY_UP:    
     			this.direction = 0;
     			this.moving = true;
-    			if(y > 0) { yLimit = y - TILE_SIZE; yScale = y; }
+    			if(y > 0) { yLimit = y - TILE_SIZE; }
     			break;
     		case Input.KEY_LEFT:
     			this.direction = 1;
     			this.moving = true;
-    			if(x > 0) { xLimit = x - TILE_SIZE; xScale = x; }
+    			if(x > 0) { xLimit = x - TILE_SIZE; }
     			break;
     		case Input.KEY_DOWN:
     			this.direction = 2;
     			this.moving = true;
-    			if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; yScale = y; }
+    			if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; }
     			break;
     		case Input.KEY_RIGHT:
     			this.direction = 3;
     			this.moving = true;
-    			if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; xScale = x; }
+    			if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; }
     			break;
 		}
 	
