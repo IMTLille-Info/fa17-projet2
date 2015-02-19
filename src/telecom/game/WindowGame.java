@@ -36,8 +36,8 @@ public class WindowGame extends BasicGame {
 	private boolean moving = false;
 	
 	// Coordonn�es a atteindre
-	private float nextX = x,
-			  nextY = y;
+	private float xLimit = x,
+			  yLimit = y;
 	
 	// Animations de mouvement
 	private Animation[] animations = new Animation[4];
@@ -125,6 +125,66 @@ public class WindowGame extends BasicGame {
         this.animations[3] = walkRight;
     }
 
+	
+	private float getNextX(float x, int delta, float xLimit)
+	{
+		final int SLOW_ANIM = 10;
+		
+		if (this.moving) {
+	        switch (this.direction) {
+	        	// On veut aller � gauche
+	        	case 1 :
+	        			if((x > xLimit)) 
+	        			{ 
+	        				xScale -= delta;
+	        				if(xScale % SLOW_ANIM == 0)
+	        					x -= DURATION_FRAME;
+	        			}
+        				break;
+	        	// On veut aller � droite
+	        	case 3 :
+	        			if((x < xLimit))
+	        			{ 
+	        				xScale += delta;	
+	        				if(xScale % SLOW_ANIM == 0)
+	        					x += DURATION_FRAME; 
+	        			}
+						break;
+	        }
+		}
+		return x;
+	}
+	
+	private float getNextY(float y, int delta, float yLimit)
+	{
+		final int SLOW_ANIM = 10;
+		
+		if (this.moving) {
+	        switch (this.direction) {
+	        	// On veut monter
+	        	case 0 :
+	        			if((y > yLimit)) 
+	        			{ 
+	        				yScale -= delta;
+	        				if(yScale % SLOW_ANIM == 0)
+	        					y -= DURATION_FRAME;
+	        			}
+	        			break;
+	        	// On veut descendre
+	        	case 2 :
+	        			if((y < yLimit))
+	        			{ 
+	        				yScale += delta;
+	        				if(yScale % SLOW_ANIM == 0)
+	        					y += DURATION_FRAME;
+	        			}
+    					break;
+	        }
+	    } 
+		return y;
+	}
+	
+	
 	/** 
 	 * Met à jour les élément de la scène en fonction du delta temps qui est survenu. 
 	 * C’est ici que la logique du jeux est renfermé.
@@ -133,48 +193,10 @@ public class WindowGame extends BasicGame {
 	public void update(GameContainer container, int delta) throws SlickException {
 		
 		// Calcul des futurs coordonnées désirées
-		if (this.moving) {
-	        switch (this.direction) {
-	        	// On veut monter
-	        	case 0 :
-	        			if((y > nextY)) 
-	        			{ 
-	        				yScale -= delta;
-	        				if(yScale % SLOW_ANIM == 0)
-	        					y -= DURATION_FRAME;
-	        			}
-	        			break;
-	        	// On veut aller à gauche
-	        	case 1 :
-	        			if((x > nextX)) 
-	        			{ 
-	        				xScale-= delta;
-	        				if(xScale % SLOW_ANIM == 0)
-	        					x -= DURATION_FRAME;
-	        			}
-        				break;
-	        	// On veut descendre
-	        	case 2 :
-	        			if((y < nextY))
-	        			{ 
-	        				yScale += delta;
-	        				if(yScale % SLOW_ANIM == 0)
-	        					y += DURATION_FRAME;
-	        			}
-    					break;
-	        	// On veut aller à droite
-	        	case 3 :
-	        			if((x < nextX))
-	        			{ 
-	        				xScale += delta;	
-	        				if(xScale % SLOW_ANIM == 0)
-	        					x += DURATION_FRAME; 
-	        			}
-						break;
-	        }
-	    } 
+		x = getNextX(x, delta, xLimit);
+		y = getNextY(y, delta, yLimit);
 		
-		if((x == nextX) && (y == nextY))
+		if((x == xLimit) && (y == yLimit))
 		{
 			Input listener = container.getInput();
 			
@@ -183,22 +205,22 @@ public class WindowGame extends BasicGame {
 			{
         		this.direction = 0;
         		this.moving = true;
-        		if(y > 0) { nextY = y - TILE_SIZE; }
+        		if(y > 0) { yLimit = y - TILE_SIZE; }
 			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
 			{
 				this.direction = 1; 
         		this.moving = true;
-        		if(x > 0) { nextX = x - TILE_SIZE; }
+        		if(x > 0) { xLimit = x - TILE_SIZE; }
 			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
 			{
         		this.direction = 2;
         		this.moving = true;
-        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; }
+        		if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; }
 			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
 			{
         		this.direction = 3;
         		this.moving = true;
-        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; }
+        		if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; }
 			} else { this.moving = false; }
 		}
 	}
@@ -232,22 +254,22 @@ public class WindowGame extends BasicGame {
 	        	case Input.KEY_UP:    
 	        		this.direction = 0;
 	        		this.moving = true;
-	        		if(y > 0) { nextY = y - TILE_SIZE; yScale = y; }
+	        		if(y > 0) { yLimit = y - TILE_SIZE; yScale = y; }
 	        		break;
 	        	case Input.KEY_LEFT:
 	        		this.direction = 1;
 	        		this.moving = true;
-	        		if(x > 0) { nextX = x - TILE_SIZE; xScale = x; }
+	        		if(x > 0) { xLimit = x - TILE_SIZE; xScale = x; }
 	        		break;
 	        	case Input.KEY_DOWN:
 	        		this.direction = 2;
 	        		this.moving = true;
-	        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; yScale = y; }
+	        		if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; yScale = y; }
 	        		break;
 	        	case Input.KEY_RIGHT:
 	        		this.direction = 3;
 	        		this.moving = true;
-	        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; xScale = x; }
+	        		if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; xScale = x; }
 	        		break;
 			}
 	    }
