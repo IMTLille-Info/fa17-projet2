@@ -35,7 +35,7 @@ public class WindowGame extends BasicGame {
 	// √âtat du personnage
 	private boolean moving = false;
 	
-	// Coordonnees a atteindre
+	// CoordonnÈes a atteindre
 	private float nextX = x,
 			  nextY = y;
 	
@@ -91,7 +91,7 @@ public class WindowGame extends BasicGame {
         WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
         HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
         
-        // Images du joueur correspondante √† ces √©tats statique
+        // Images du joueur correspondante ‡ ces Ètats statique
         standings[0] = new Image("resources/map/player/personStandUp.png");
         standings[1] = new Image("resources/map/player/personStandLeft.png");
         standings[2] = new Image("resources/map/player/personStandDown.png");
@@ -104,7 +104,6 @@ public class WindowGame extends BasicGame {
         walkNorth.addFrame(new Image("resources/map/player/personWalkingUp.png"), DURATION_FRAME);
         walkNorth.addFrame(new Image("resources/map/player/personWalkingUp2.png"), DURATION_FRAME);
         this.animations[0] = walkNorth;
-        this.animations[0].setLooping(true);
         
         // Marcher vers la gauche
         Animation walkLeft = new Animation();
@@ -177,7 +176,6 @@ public class WindowGame extends BasicGame {
 		
 		if((x == nextX) && (y == nextY))
 		{
-			
 			Input listener = container.getInput();
 			
 			// On est rest√© appuy√© sur cette touche
