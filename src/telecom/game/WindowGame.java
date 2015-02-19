@@ -79,7 +79,7 @@ public class WindowGame extends BasicGame {
     }
 
 	/** 
-	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc…
+	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
 	 */
 	@Override
 	public void init(GameContainer container) throws SlickException {
@@ -139,7 +139,7 @@ public class WindowGame extends BasicGame {
 	        	case 0 :
 	        			if((y > nextY)) 
 	        			{ 
-	        				yScale--;
+	        				yScale -= delta;
 	        				if(yScale % SLOW_ANIM == 0)
 	        					y -= DURATION_FRAME;
 	        			}
@@ -148,7 +148,7 @@ public class WindowGame extends BasicGame {
 	        	case 1 :
 	        			if((x > nextX)) 
 	        			{ 
-	        				xScale--;
+	        				xScale-= delta;
 	        				if(xScale % SLOW_ANIM == 0)
 	        					x -= DURATION_FRAME;
 	        			}
@@ -157,7 +157,7 @@ public class WindowGame extends BasicGame {
 	        	case 2 :
 	        			if((y < nextY))
 	        			{ 
-	        				yScale++;
+	        				yScale += delta;
 	        				if(yScale % SLOW_ANIM == 0)
 	        					y += DURATION_FRAME;
 	        			}
@@ -166,7 +166,7 @@ public class WindowGame extends BasicGame {
 	        	case 3 :
 	        			if((x < nextX))
 	        			{ 
-	        				xScale++;	
+	        				xScale += delta;	
 	        				if(xScale % SLOW_ANIM == 0)
 	        					x += DURATION_FRAME; 
 	        			}
