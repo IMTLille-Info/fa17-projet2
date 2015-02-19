@@ -26,8 +26,8 @@ public class WindowGame extends BasicGame {
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
 	
 	// Coordonnees du personnage au départ
-	private float x = 16 * TILE_SIZE,
-				  y = 8 * TILE_SIZE;
+	private float x = 320,
+				  y = 256;
 	
 	// Direction demandée
 	private int direction = 2;
