@@ -1,4 +1,4 @@
-package telecom.game;
+package telecom.fa17.game;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
@@ -35,7 +35,7 @@ public class WindowGame extends BasicGame {
 	// Ã‰tat du personnage
 	private boolean moving = false;
 	
-	// Coordonnées a atteindre
+	// Coordonnï¿½es a atteindre
 	private float xLimit = x,
 			  yLimit = y;
 	
@@ -91,7 +91,7 @@ public class WindowGame extends BasicGame {
         WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
         HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
         
-        // Images du joueur correspondante à ces états statique
+        // Images du joueur correspondante ï¿½ ces ï¿½tats statique
         standings[0] = new Image("resources/map/player/personStandUp.png");
         standings[1] = new Image("resources/map/player/personStandLeft.png");
         standings[2] = new Image("resources/map/player/personStandDown.png");
@@ -132,7 +132,7 @@ public class WindowGame extends BasicGame {
 		
 		if (this.moving) {
 	        switch (this.direction) {
-	        	// On veut aller à gauche
+	        	// On veut aller ï¿½ gauche
 	        	case 1 :
 	        			if((x > xLimit)) 
 	        			{ 
@@ -141,7 +141,7 @@ public class WindowGame extends BasicGame {
 	        					x -= DURATION_FRAME;
 	        			}
         				break;
-	        	// On veut aller à droite
+	        	// On veut aller ï¿½ droite
 	        	case 3 :
 	        			if((x < xLimit))
 	        			{ 
@@ -192,7 +192,7 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		// Calcul des futurs coordonnées désirées
+		// Calcul des futurs coordonnï¿½es dï¿½sirï¿½es
 		x = getNextX(x, delta, xLimit);
 		y = getNextY(y, delta, yLimit);
 		
@@ -200,7 +200,7 @@ public class WindowGame extends BasicGame {
 		{
 			Input listener = container.getInput();
 			
-			// On est resté appuyé sur cette touche
+			// On est restï¿½ appuyï¿½ sur cette touche
 			if(listener.isKeyDown(Input.KEY_UP)) 
 			{
 				setMoving(Input.KEY_UP);
@@ -248,7 +248,7 @@ public class WindowGame extends BasicGame {
 	    }
 	}
 	
-	// Met à jour les variables pour le mouvement
+	// Met ï¿½ jour les variables pour le mouvement
 	public void setMoving(int key)
 	{
 		switch (key) {

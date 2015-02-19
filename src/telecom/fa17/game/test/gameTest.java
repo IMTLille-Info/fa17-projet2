@@ -1,4 +1,4 @@
-package test;
+package telecom.fa17.game.test;
 
 import static org.junit.Assert.*;
 
