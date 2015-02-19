@@ -2,27 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/20005408/Desktop/laby/projet2/lib/lwjgl.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/20005408/Desktop/laby/projet2/lib/slick.jar"/>
-	<classpathentry kind="lib" path="lib/natives/jinput-dx8_64.dll"/>
-	<classpathentry kind="lib" path="lib/natives/jinput-dx8.dll"/>
-	<classpathentry kind="lib" path="lib/natives/jinput-raw_64.dll"/>
-	<classpathentry kind="lib" path="lib/natives/jinput-raw.dll"/>
-	<classpathentry kind="lib" path="lib/natives/libjinput-linux.so"/>
-	<classpathentry kind="lib" path="lib/natives/libjinput-linux64.so"/>
-	<classpathentry kind="lib" path="lib/natives/libjinput-osx.dylib"/>
-	<classpathentry kind="lib" path="lib/natives/liblwjgl.dylib"/>
-	<classpathentry kind="lib" path="lib/natives/liblwjgl.so"/>
-	<classpathentry kind="lib" path="lib/natives/liblwjgl64.so"/>
-	<classpathentry kind="lib" path="lib/natives/libopenal.so"/>
-	<classpathentry kind="lib" path="lib/natives/libopenal64.so"/>
-	<classpathentry kind="lib" path="lib/natives/lwjgl.dll"/>
-	<classpathentry kind="lib" path="lib/natives/lwjgl64.dll"/>
-	<classpathentry kind="lib" path="lib/natives/openal.dylib"/>
-	<classpathentry kind="lib" path="lib/natives/OpenAL32.dll"/>
-	<classpathentry kind="lib" path="lib/natives/OpenAL64.dll"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7"/>
-	<classpathentry kind="lib" path="C:/Users/20005408/Desktop/laby/projet2/lib/jinput.jar"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/fvitse/Documents/JavaProject/projet2/lib/jinput.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fvitse/Documents/JavaProject/projet2/lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fvitse/Documents/JavaProject/projet2/lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
