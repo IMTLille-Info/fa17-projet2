@@ -14,7 +14,7 @@ public class gameTest {
 	@Test
 	public void testGetNextX() {
 		/*
-		* CAS À TESTER
+		* CAS Ã€ TESTER
 		*
 		* 1 - ALLER A GAUCHE
 		* 2 - ALLER A DROITE
@@ -25,7 +25,7 @@ public class gameTest {
 	@Test
 	public void testGetNextY() {
 		/*
-		* CAS À TESTER
+		* CAS A TESTER
 		*
 		* 1 - ALLER EN HAUT
 		* 2 - ALLER EN BAS
@@ -35,9 +35,9 @@ public class gameTest {
 	@Test
 	public void testSetMoving() {
 		/*
-		* CAS À TESTER
+		* CAS A TESTER
 		*
-		* La bonne mise à jour des variables générales
+		* La bonne mise Ã  jour des variables gÃ©nÃ©rales
 		*/
 	}
 
