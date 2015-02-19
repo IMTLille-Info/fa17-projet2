@@ -11,7 +11,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 /**
- * @author FLORENT
+ * @author FLORENT / PE / Ã‰TIENNE
  *
  */
 public class WindowGame extends BasicGame {
@@ -19,18 +19,20 @@ public class WindowGame extends BasicGame {
     private GameContainer container;
 	private TiledMap map;
 	
-	// Taille d'une tuile du jeu
-	final int DURATION_FRAME = 2;
+	// Constantes du programme
+	final int DURATION_FRAME = 2, SLOW_ANIM = 10;
+	
+	// Constantes de la Map
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
 	
-	// Coordonnees du personnage au départ
+	// Coordonnees du personnage au dÃ©part
 	private float x = 16 * TILE_SIZE,
 				  y = 8 * TILE_SIZE;
 	
-	// Direction demandée
+	// Direction demandÃ©e
 	private int direction = 2;
 	
-	// État du personnage
+	// Ã‰tat du personnage
 	private boolean moving = false;
 	
 	// Coordonnees a atteindre
@@ -42,9 +44,13 @@ public class WindowGame extends BasicGame {
 	
 	// Image quand le personnage est fixe
 	private Image[] standings = new Image[4];
+	
+	// Pour ralentire les animations 
+	float xScale = 0, yScale = 0;
+	
 
 	/**
-     * Création de la fenetre.
+     * CrÃ©ation de la fenetre.
      *
      * @param title - Titre de la fenetre.
      */
@@ -63,7 +69,7 @@ public class WindowGame extends BasicGame {
 		if (this.moving) {
 			g.drawAnimation(animations[direction], x, y);
 		} else {
-			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
+			// Sinon, on affiche le personnage statique en fonction de sa derniÃ¨re direction
 			g.drawImage(standings[direction], x, y);
 		}
 		// Affichage de l'Avant-Plan
@@ -73,7 +79,7 @@ public class WindowGame extends BasicGame {
     }
 
 	/** 
-	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc…
+	 * Initialise le contenu du jeu, charger les graphismes, la musique, etcâ€¦
 	 */
 	@Override
 	public void init(GameContainer container) throws SlickException {
@@ -85,7 +91,7 @@ public class WindowGame extends BasicGame {
         WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
         HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
         
-        // Images du joueur correspondante à ces états statique
+        // Images du joueur correspondante Ã  ces Ã©tats statique
         standings[0] = new Image("resources/map/player/personStandUp.png");
         standings[1] = new Image("resources/map/player/personStandLeft.png");
         standings[2] = new Image("resources/map/player/personStandDown.png");
@@ -121,30 +127,50 @@ public class WindowGame extends BasicGame {
     }
 
 	/** 
-	 * Met à jour les élément de la scène en fonction du delta temps qui est survenu. 
-	 * C’est ici que la logique du jeux est renfermé.
+	 * Met Ã  jour les Ã©lÃ©ment de la scÃ¨ne en fonction du delta temps qui est survenu. 
+	 * Câ€™est ici que la logique du jeux est renfermÃ©.
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		
-		// Calcul des futurs coordonnées désirées
+		// Calcul des futurs coordonnÃ©es dÃ©sirÃ©es
 		if (this.moving) {
 	        switch (this.direction) {
 	        	// On veut monter
 	        	case 0 :
-	        			if((y > nextY)) { y -= DURATION_FRAME; }
+	        			if((y > nextY)) 
+	        			{ 
+	        				yScale--;
+	        				if(yScale % SLOW_ANIM == 0)
+	        					y -= DURATION_FRAME;
+	        			}
 	        			break;
-	        	// On veut aller à gauche
+	        	// On veut aller Ã  gauche
 	        	case 1 :
-	        			if((x > nextX)) { x -= DURATION_FRAME; }
+	        			if((x > nextX)) 
+	        			{ 
+	        				xScale--;
+	        				if(xScale % SLOW_ANIM == 0)
+	        					x -= DURATION_FRAME;
+	        			}
         				break;
 	        	// On veut descendre
 	        	case 2 :
-	        			if((y < nextY)) { y += DURATION_FRAME; }
+	        			if((y < nextY))
+	        			{ 
+	        				yScale++;
+	        				if(yScale % SLOW_ANIM == 0)
+	        					y += DURATION_FRAME;
+	        			}
     					break;
-	        	// On veut aller à droite
+	        	// On veut aller Ã  droite
 	        	case 3 :
-	        			if((x < nextX)) { x += DURATION_FRAME; }
+	        			if((x < nextX))
+	        			{ 
+	        				xScale++;	
+	        				if(xScale % SLOW_ANIM == 0)
+	        					x += DURATION_FRAME; 
+	        			}
 						break;
 	        }
 	    } 
@@ -154,7 +180,7 @@ public class WindowGame extends BasicGame {
 			
 			Input listener = container.getInput();
 			
-			// On est resté appuyé sur cette touche
+			// On est restÃ© appuyÃ© sur cette touche
 			if(listener.isKeyDown(Input.KEY_UP)) 
 			{
         		this.direction = 0;
@@ -180,16 +206,16 @@ public class WindowGame extends BasicGame {
 	}
 	
 	/** 
-	 * Démarre le jeu. 
+	 * DÃ©marre le jeu. 
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(false); // Désactivation de l'Affichage des FPS
-		container.start(); // Démarrage du jeu (lancement de la fenêtre
+		container.setShowFPS(false); // DÃ©sactivation de l'affichage des FPS
+		container.start(); // DÃ©marrage du jeu (lancement de la fenÃªtre
     }
 	
 	/** 
-	 * Méthode qui permet de savoir quand une touche est pressée.
+	 * MÃ©thode qui permet de savoir quand une touche est pressÃ©e.
 	 * 
 	 * Touche pour quitter : ESC. 
 	 */
@@ -208,22 +234,22 @@ public class WindowGame extends BasicGame {
 	        	case Input.KEY_UP:    
 	        		this.direction = 0;
 	        		this.moving = true;
-	        		if(y > 0) { nextY = y - TILE_SIZE; }
+	        		if(y > 0) { nextY = y - TILE_SIZE; yScale = y; }
 	        		break;
 	        	case Input.KEY_LEFT:
 	        		this.direction = 1;
 	        		this.moving = true;
-	        		if(x > 0) { nextX = x - TILE_SIZE; }
+	        		if(x > 0) { nextX = x - TILE_SIZE; xScale = x; }
 	        		break;
 	        	case Input.KEY_DOWN:
 	        		this.direction = 2;
 	        		this.moving = true;
-	        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; }
+	        		if(y != HEIGHT_MAX) { nextY = y + TILE_SIZE; yScale = y; }
 	        		break;
 	        	case Input.KEY_RIGHT:
 	        		this.direction = 3;
 	        		this.moving = true;
-	        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; }
+	        		if(x != WIDTH_MAX) { nextX = x + TILE_SIZE; xScale = x; }
 	        		break;
 			}
 	    }
