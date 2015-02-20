@@ -1,4 +1,4 @@
-package telecom.fa17.game.test;
+package pokeslick.game.test;
 
 import static org.junit.Assert.*;
 

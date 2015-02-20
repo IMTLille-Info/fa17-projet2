@@ -1,4 +1,4 @@
-package telecom.fa17.game;
+package pokeslick.game;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
@@ -251,26 +251,37 @@ public class WindowGame extends BasicGame {
 	// Met à jour les variables pour le mouvement
 	public void setMoving(int key)
 	{
+		
+		int layerCollision = this.map.getLayerIndex("logic");
+		
 		switch (key) {
     		case Input.KEY_UP:    
     			this.direction = 0;
-    			this.moving = true;
-    			if(y > 0) { yLimit = y - TILE_SIZE; }
+    			if((y > 0) && (this.map.getTileId((int) xLimit / TILE_SIZE, (int) (yLimit / TILE_SIZE) - 1, layerCollision) == 0)) { 
+    				yLimit = y - TILE_SIZE;
+    				this.moving = true;
+    			}
     			break;
     		case Input.KEY_LEFT:
     			this.direction = 1;
-    			this.moving = true;
-    			if(x > 0) { xLimit = x - TILE_SIZE; }
+    			if((x > 0) && (this.map.getTileId((int) (xLimit / TILE_SIZE) - 1, (int) yLimit / TILE_SIZE, layerCollision) == 0)) { 
+    				xLimit = x - TILE_SIZE;
+    				this.moving = true;
+    			}
     			break;
     		case Input.KEY_DOWN:
     			this.direction = 2;
-    			this.moving = true;
-    			if(y != HEIGHT_MAX) { yLimit = y + TILE_SIZE; }
+    			if((y != HEIGHT_MAX) && (this.map.getTileId((int) xLimit / TILE_SIZE, (int) (yLimit / TILE_SIZE) + 1, layerCollision) == 0)) {
+    				yLimit = y + TILE_SIZE;
+        			this.moving = true;
+    			}
     			break;
     		case Input.KEY_RIGHT:
     			this.direction = 3;
-    			this.moving = true;
-    			if(x != WIDTH_MAX) { xLimit = x + TILE_SIZE; }
+    			if((x != WIDTH_MAX) && (this.map.getTileId((int) (xLimit / TILE_SIZE) + 1, (int) yLimit / TILE_SIZE, layerCollision) == 0)) { 
+    				xLimit = x + TILE_SIZE;
+        			this.moving = true;
+    			}
     			break;
 		}
 	
