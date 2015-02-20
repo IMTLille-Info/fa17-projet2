@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 
 public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
@@ -55,7 +55,7 @@ public abstract class Mobile {
 	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case 1 :
-	        			if(tempScale != scale) 
+	        			if(tempScale < scale) 
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -66,7 +66,7 @@ public abstract class Mobile {
         				break;
 	        	// On veut aller à droite
 	        	case 3 :
-	        			if((tempScale != scale))
+	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -86,7 +86,7 @@ public abstract class Mobile {
 	        switch (direction) {
 	        	// On veut monter
 	        	case 0 :
-	        			if((tempScale != scale)) 
+	        			if((tempScale < scale)) 
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -97,7 +97,7 @@ public abstract class Mobile {
 	        			break;
 	        	// On veut descendre
 	        	case 2 :
-	        			if((tempScale != scale))
+	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
