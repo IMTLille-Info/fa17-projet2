@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 
 public abstract class Avatar {
 	
-	final int DURATION_FRAME = 1, SLOW_ANIM = 10;
+	final int DURATION_FRAME = 4, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
@@ -14,19 +14,18 @@ public abstract class Avatar {
 	protected Animation[] animations = new Animation[4];
 	protected Image[] standings = new Image[4];
 	
-	private int xScale, yScale;
+	private int scale, tempScale = 0;
 	
 	public Avatar(float x, float y, int tileSize) 
 	{
 		absciss = x;
 		ordinate = y;
-		xScale = yScale = tileSize * SLOW_ANIM;
+		scale = tileSize * SLOW_ANIM;
 	}
 	
 	public void setMoving()
 	{
-		xScale = 320;
-		yScale = 320;
+		tempScale = 0;
 		moving = true;
 	}
 	
@@ -45,63 +44,67 @@ public abstract class Avatar {
 		return ordinate;
 	}
 	
-	public float getNextAbsciss(int where, int xLimit, int delta)
+	public float getNextAbsciss(int where, int delta)
 	{
 		if (this.moving) {
 			this.direction = where;
 	        switch (where) {
 	        	// On veut aller à gauche
 	        	case 1 :
-	        			if(absciss > xLimit) 
+	        			if(tempScale != scale) 
 	        			{ 
-	        				xScale -= delta;
-	        				if(xScale % SLOW_ANIM == 0)
-	        					absciss -= DURATION_FRAME;
+	        				tempScale++;
+	        				if(tempScale % SLOW_ANIM == 0)
+	        					absciss--;
+	        			} else {
+	        				this.moving = false;
 	        			}
         				break;
 	        	// On veut aller à droite
 	        	case 3 :
-	        			if((absciss < xLimit))
+	        			if((tempScale != scale))
 	        			{ 
-	        				xScale -= delta;	
-	        				if(xScale % SLOW_ANIM == 0)
-	        					absciss += DURATION_FRAME; 
+	        				tempScale++;
+	        				if(tempScale % SLOW_ANIM == 0)
+	        					absciss++; 
+	        			} else {
+	        				this.moving = false;
 	        			}
 						break;
 	        }
-		} else {
-			moving = false;
-		}
+		} 
 		return absciss;
 	}
 	
-	public float getNextOrdinate(int where, int yLimit, int delta)
+	public float getNextOrdinate(int where, int delta)
 	{		
 		if (this.moving) {
 			this.direction = where;
 	        switch (where) {
 	        	// On veut monter
 	        	case 0 :
-	        			if((ordinate > yLimit)) 
+	        			if((tempScale != scale)) 
 	        			{ 
-	        				yScale -= delta;
-	        				if(yScale % SLOW_ANIM == 0)
-	        					ordinate -= DURATION_FRAME;
+	        				tempScale++;
+	        				if(tempScale % SLOW_ANIM == 0)
+	        					ordinate--;
+	        			} else {
+	        				this.moving = false;
 	        			}
 	        			break;
 	        	// On veut descendre
 	        	case 2 :
-	        			if((ordinate < yLimit))
+	        			if((tempScale != scale))
 	        			{ 
-	        				yScale -= delta;
-	        				if(yScale % SLOW_ANIM == 0)
-	        					ordinate += DURATION_FRAME;
+	        				tempScale++;
+	        				if(tempScale % SLOW_ANIM == 0)
+	        					ordinate++;
+	        			} else {
+	        				this.moving = false;
 	        			}
     					break;
 	        }
-	    } else {
-			moving = false;
-		}
+	    } 
 		return ordinate;
 	}
 	

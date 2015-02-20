@@ -9,7 +9,8 @@ public class Player extends Avatar {
 	public Player(float x, float y, int tileSize)
 	{
 		super(x, y, tileSize);
-		/* MARQUES DE COMMENTAIRES A RETIRER HORS MODE TEST
+		// MARQUES DE COMMENTAIRES A METTRE POUR MODE TEST SUR LE TRY
+		
 		try {
 			// Images du joueur correspondante à ces états statiques
 			standings[0] = new Image("resources/map/player/personStandUp.png");
@@ -20,7 +21,7 @@ public class Player extends Avatar {
 			// Marcher vers le haut
 			this.animations[0] = new Animation();
 			this.animations[0].addFrame(new Image("resources/map/player/personWalkingUp.png"), DURATION_FRAME);
-			this.animations[0].addFrame(new Image("resources/map/player/personWalkingUp2.png"), DURATION_FRAME);
+			this.animations[0].addFrame(new Image("resources/map/player/personStandUp.png"), DURATION_FRAME);
         
 			// Marcher vers la gauche
 			this.animations[1] = new Animation();
@@ -30,7 +31,7 @@ public class Player extends Avatar {
 			// Marcher vers le bas
 			this.animations[2] = new Animation();
 			this.animations[2].addFrame(new Image("resources/map/player/personWalkingDown.png"), DURATION_FRAME);
-			this.animations[2].addFrame(new Image("resources/map/player/personWalkingDown2.png"), DURATION_FRAME);
+			this.animations[2].addFrame(new Image("resources/map/player/personStandDown.png"), DURATION_FRAME);
         
 			// Marcher vers la droite
 			this.animations[3] = new Animation();
@@ -39,6 +40,6 @@ public class Player extends Avatar {
 		
 		} catch (SlickException ex) {
 			
-		}*/
+		}
 	}
 }
