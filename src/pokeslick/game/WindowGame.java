@@ -1,11 +1,9 @@
 package pokeslick.game;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
@@ -26,13 +24,7 @@ public class WindowGame extends BasicGame {
 	private float x = 320,
 				  y = 256;
 	
-	// Direction demandée
-	private int direction = 2;
-	
 	Player objPlayer;
-	
-	int nb = 0;
-	
 
 	/**
      * Création de la fenetre.
@@ -56,6 +48,7 @@ public class WindowGame extends BasicGame {
         WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
         HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
         
+        // Création d'un joueur
         objPlayer = new Player(320, 256, TILE_SIZE);
     }
 	
@@ -68,7 +61,6 @@ public class WindowGame extends BasicGame {
 		this.map.render(0, 0, 0);
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
-			nb++;
 			g.drawAnimation(objPlayer.getAnimation(), x, y);
 		} else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
@@ -91,25 +83,25 @@ public class WindowGame extends BasicGame {
 		{
 			Input listener = container.getInput();			
 			
-			// On est resté appuyé sur cette touche
+			// On est resté appuyé sur une touche - callback keyPressed
 			if(listener.isKeyDown(Input.KEY_UP)) 
 			{
-				objPlayer.setMoving();
+				keyPressed(Input.KEY_UP, ' ');
 			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
 			{
-				objPlayer.setMoving();
+				keyPressed(Input.KEY_LEFT, ' ');
 			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
 			{
-				objPlayer.setMoving();
+				keyPressed(Input.KEY_DOWN, ' ');
 			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
 			{
-				objPlayer.setMoving();
+				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
 		
 		// Calcul des futurs coordonnées désirées
-		x = objPlayer.getNextAbsciss(direction, delta);
-		y = objPlayer.getNextOrdinate(direction, delta);
+		x = objPlayer.getNextAbsciss(delta);
+		y = objPlayer.getNextOrdinate(delta);
 	}
 	
 	/** 
@@ -117,7 +109,7 @@ public class WindowGame extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(false); // Désactivation de l'affichage des FPS
+		container.setShowFPS(true); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre
     }
 	
@@ -137,18 +129,23 @@ public class WindowGame extends BasicGame {
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving())
 		{
+			boolean collision = isCollision(key);
 			switch (key) {
-    			case Input.KEY_UP:    
-    				if(objPlayer.getOrdinate() > 0) { this.direction = 0; objPlayer.setMoving(); }
+    			case Input.KEY_UP:  
+    				objPlayer.setDirection(0);
+    				if(objPlayer.getOrdinate() > 0 && !collision) { objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
-    				if(objPlayer.getAbsciss() > 0) { this.direction = 1; objPlayer.setMoving(); }
+    				objPlayer.setDirection(1);
+    				if(objPlayer.getAbsciss() > 0 && !collision) { objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX) { this.direction = 2; objPlayer.setMoving(); }
+    				objPlayer.setDirection(2);
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX && !collision) { objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
-    				if(objPlayer.getAbsciss() < WIDTH_MAX) { this.direction = 3; objPlayer.setMoving(); }
+    				objPlayer.setDirection(3);
+    				if(objPlayer.getAbsciss() < WIDTH_MAX && !collision) { objPlayer.setMoving(); }
     			break;
 			}
 	    }
@@ -161,22 +158,26 @@ public class WindowGame extends BasicGame {
 		int layerCollision = this.map.getLayerIndex("logic");
 		
 		switch (key) {
-    		case Input.KEY_UP:    
+    		case Input.KEY_UP:   
+    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
     			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_LEFT:
+    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
     			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_DOWN:
+    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
     			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
     				collision = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
+    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
     			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
     				collision = false;
     			}

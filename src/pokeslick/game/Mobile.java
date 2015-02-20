@@ -3,9 +3,9 @@ package pokeslick.game;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
-public abstract class Avatar {
+public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
@@ -16,11 +16,16 @@ public abstract class Avatar {
 	
 	private int scale, tempScale = 0;
 	
-	public Avatar(float x, float y, int tileSize) 
+	public Mobile(float x, float y, int tileSize) 
 	{
 		absciss = x;
 		ordinate = y;
 		scale = tileSize * SLOW_ANIM;
+	}
+	
+	public void setDirection(int dir)
+	{
+		direction = dir;
 	}
 	
 	public void setMoving()
@@ -44,11 +49,10 @@ public abstract class Avatar {
 		return ordinate;
 	}
 	
-	public float getNextAbsciss(int where, int delta)
+	public float getNextAbsciss(int delta)
 	{
 		if (this.moving) {
-			this.direction = where;
-	        switch (where) {
+	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case 1 :
 	        			if(tempScale != scale) 
@@ -76,11 +80,10 @@ public abstract class Avatar {
 		return absciss;
 	}
 	
-	public float getNextOrdinate(int where, int delta)
+	public float getNextOrdinate(int delta)
 	{		
 		if (this.moving) {
-			this.direction = where;
-	        switch (where) {
+	        switch (direction) {
 	        	// On veut monter
 	        	case 0 :
 	        			if((tempScale != scale)) 

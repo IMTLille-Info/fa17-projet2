@@ -17,11 +17,6 @@ public class AvatarTest {
 	}
 
 	@Test
-	public void testIsMoving() {
-		assertEquals(true, objTest.isMoving());
-	}
-
-	@Test
 	public void testGetAbsciss() {
 		assertEquals(0,0, objTest.getAbsciss());
 	}
@@ -33,20 +28,22 @@ public class AvatarTest {
 
 	@Test
 	public void testGetNextAbsciss() {
+		objTest.setDirection(1);
 		for(int i = 0; i < 320; i++)
 		{
-			objTest.getNextAbsciss(1, 1);
+			objTest.getNextAbsciss(1);
 		}
-		assertEquals(32,0, objTest.getNextAbsciss(1, 1));
+		assertEquals(32,0, objTest.getNextAbsciss(1));
 	}
 
 	@Test
 	public void testGetNextOrdinate() {
+		objTest.setDirection(0);
 		for(int j = 0; j < 320; j++)
 		{
-			objTest.getNextOrdinate(0, 1);
+			objTest.getNextOrdinate(1);
 		}
-		assertEquals(32,0, objTest.getNextOrdinate(0, 1));
+		assertEquals(32,0, objTest.getNextOrdinate(1));
 	}
 
 	@Test
