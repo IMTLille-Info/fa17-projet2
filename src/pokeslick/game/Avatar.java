@@ -3,7 +3,7 @@ package pokeslick.game;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
-public class Avatar {
+public abstract class Avatar {
 	
 	final int DURATION_FRAME = 1, SLOW_ANIM = 10;
 	
@@ -11,10 +11,10 @@ public class Avatar {
 	private float absciss, ordinate;
 	private int direction = 2;
 	
-	private Animation[] animations = new Animation[4];
-	private Image[] standings = new Image[4];
+	protected Animation[] animations = new Animation[4];
+	protected Image[] standings = new Image[4];
 	
-	private int xScale = 320, yScale = 320;
+	private int xScale, yScale;
 	
 	public Avatar(float x, float y, int tileSize) 
 	{
@@ -25,13 +25,13 @@ public class Avatar {
 	
 	public void setMoving()
 	{
+		xScale = 320;
+		yScale = 320;
 		moving = true;
 	}
 	
 	public boolean isMoving()
 	{
-		xScale = 320;
-		yScale = 320;
 		return moving;
 	}
 	

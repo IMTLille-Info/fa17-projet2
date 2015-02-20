@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import pokeslick.game.Avatar;
+import pokeslick.game.Player;
 
 public class AvatarTest {
 
-	Avatar objTest = new Avatar(64, 64, 32);
+	Player objTest = new Player(64, 64, 32);
 	
 	@Before
 	public void setUp() throws Exception {
