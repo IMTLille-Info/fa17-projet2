@@ -94,19 +94,15 @@ public class WindowGame extends BasicGame {
 			// On est resté appuyé sur cette touche
 			if(listener.isKeyDown(Input.KEY_UP)) 
 			{
-				System.out.println("TOUCHE ENFONCEE");
 				objPlayer.setMoving();
 			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
 			{
-				System.out.println("TOUCHE ENFONCEE");
 				objPlayer.setMoving();
 			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
 			{
-				System.out.println("TOUCHE ENFONCEE");
 				objPlayer.setMoving();
 			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
 			{
-				System.out.println("TOUCHE ENFONCEE");
 				objPlayer.setMoving();
 			}
 		}
@@ -141,31 +137,51 @@ public class WindowGame extends BasicGame {
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving())
 		{
-			objPlayer.setMoving();
 			switch (key) {
     			case Input.KEY_UP:    
-    				if(y > 0) { this.direction = 0; }
+    				if(objPlayer.getOrdinate() > 0) { this.direction = 0; objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
-    			if(x > 0) { this.direction = 1; }
+    				if(objPlayer.getAbsciss() > 0) { this.direction = 1; objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
-    			if(y != HEIGHT_MAX) { this.direction = 2; }
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX) { this.direction = 2; objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
-    			if(x != WIDTH_MAX) { this.direction = 3; }
+    				if(objPlayer.getAbsciss() < WIDTH_MAX) { this.direction = 3; objPlayer.setMoving(); }
     			break;
 			}
 	    }
 	}
 	
 	// Met à jour les variables pour le mouvement
-	/*public void setMoving(int key)
-	{
-		
+	public boolean isCollision(int key)
+	{	
+		boolean collision = true;
 		int layerCollision = this.map.getLayerIndex("logic");
 		
-
-	
-	}*/
+		switch (key) {
+    		case Input.KEY_UP:    
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
+    				collision = false;
+    			}
+    			break;
+    		case Input.KEY_LEFT:
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    				collision = false;
+    			}
+    			break;
+    		case Input.KEY_DOWN:
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
+    				collision = false;
+    			}
+    			break;
+    		case Input.KEY_RIGHT:
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    				collision = false;
+    			}
+    			break;
+		}
+		return collision;	
+	}
 }
