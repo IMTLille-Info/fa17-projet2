@@ -20,7 +20,7 @@ public class WindowGame extends BasicGame {
 	private TiledMap map;
 	
 	// Constantes du programme
-	final int DURATION_FRAME = 2;
+	final int DURATION_FRAME = 4;
 	
 	// Constantes de la Map
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
