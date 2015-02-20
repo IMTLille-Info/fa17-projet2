@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 
 public abstract class Avatar {
 	
-	final int DURATION_FRAME = 4, SLOW_ANIM = 5;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;

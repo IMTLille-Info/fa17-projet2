@@ -132,7 +132,6 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {

@@ -27,17 +27,16 @@ public class Player extends Avatar {
 			this.animations[1] = new Animation();
 			this.animations[1].addFrame(new Image("resources/map/player/personWalkingLeft.png"), DURATION_FRAME);
 			this.animations[1].addFrame(new Image("resources/map/player/personStandLeft.png"), DURATION_FRAME);
-        
+
 			// Marcher vers le bas
 			this.animations[2] = new Animation();
 			this.animations[2].addFrame(new Image("resources/map/player/personWalkingDown.png"), DURATION_FRAME);
 			this.animations[2].addFrame(new Image("resources/map/player/personStandDown.png"), DURATION_FRAME);
-        
+
 			// Marcher vers la droite
 			this.animations[3] = new Animation();
 			this.animations[3].addFrame(new Image("resources/map/player/personWalkingRight.png"), DURATION_FRAME);
 			this.animations[3].addFrame(new Image("resources/map/player/personStandRight.png"), DURATION_FRAME);
-		
 		} catch (SlickException ex) {
 			
 		}
