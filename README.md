@@ -1,12 +1,7 @@
-GROUPE 2
+# Application Graphique utilisant la bibliothèque Slick2D : http://slick.ninjacave.com/
 
-
-Caron Pierre-Edouard
-Vitse Florent
-Adriansen Etienne
-
-RPG (façon Pokémon) graphique vu de dessus.
-
-# Tutoriaux de Référence (Slick2D)
+# Tutoriaux de Référence en Français
 http://www.shionn.org/tutoriels-slick-2d
+
+Suivez la première leçon pour connaître la mise en place de l'environnement de développement.
 
