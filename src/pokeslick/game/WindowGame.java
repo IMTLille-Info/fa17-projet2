@@ -5,7 +5,6 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -134,11 +133,9 @@ public class WindowGame extends BasicGame {
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving())
 		{
-			boolean collision = isCollision(key);
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(0);
-<<<<<<< HEAD
     				if(objPlayer.getOrdinate() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
@@ -152,21 +149,6 @@ public class WindowGame extends BasicGame {
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(3);
     				if(objPlayer.getAbsciss() < WIDTH_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
-=======
-    				if(objPlayer.getOrdinate() > 0 && !collision) { objPlayer.setMoving(); }
-    			break;
-    		case Input.KEY_LEFT:
-    				objPlayer.setDirection(1);
-    				if(objPlayer.getAbsciss() > 0 && !collision) { objPlayer.setMoving(); }
-    			break;
-    		case Input.KEY_DOWN:
-    				objPlayer.setDirection(2);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX && !collision) { objPlayer.setMoving(); }
-    			break;
-    		case Input.KEY_RIGHT:
-    				objPlayer.setDirection(3);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX && !collision) { objPlayer.setMoving(); }
->>>>>>> 327dc6f9a7fc60e0d23889f71ddeba07c09be797
     			break;
 			}
 	    }
@@ -178,45 +160,27 @@ public class WindowGame extends BasicGame {
 		boolean collision = true;
 		
 		switch (key) {
-<<<<<<< HEAD
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
     			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
-=======
-    		case Input.KEY_UP:   
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
->>>>>>> 327dc6f9a7fc60e0d23889f71ddeba07c09be797
     				collision = false;
     			}
     			break;
     		case Input.KEY_LEFT:
     			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-<<<<<<< HEAD
     			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-=======
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
->>>>>>> 327dc6f9a7fc60e0d23889f71ddeba07c09be797
     				collision = false;
     			}
     			break;
     		case Input.KEY_DOWN:
     			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-<<<<<<< HEAD
     			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
-=======
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
->>>>>>> 327dc6f9a7fc60e0d23889f71ddeba07c09be797
     				collision = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
     			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-<<<<<<< HEAD
     			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-=======
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
->>>>>>> 327dc6f9a7fc60e0d23889f71ddeba07c09be797
     				collision = false;
     			}
     			break;
