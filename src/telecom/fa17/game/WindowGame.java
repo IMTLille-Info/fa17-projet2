@@ -50,6 +50,7 @@ public class WindowGame extends BasicGame {
         
         // Création d'un joueur
         objPlayer = new Player(320, 256, TILE_SIZE);
+        objPlayer.init();
     }
 	
 	/** 
@@ -123,23 +124,22 @@ public class WindowGame extends BasicGame {
 		
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
-			boolean collision = isCollision(key);
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(0);
-    				if(objPlayer.getOrdinate() > 0 && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getOrdinate() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(1);
-    				if(objPlayer.getAbsciss() > 0 && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getAbsciss() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(2);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(3);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getAbsciss() < WIDTH_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
 			}
 	    }
