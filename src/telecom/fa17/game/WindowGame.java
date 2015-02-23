@@ -112,7 +112,7 @@ public class WindowGame extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(true); // Désactivation de l'affichage des FPS
+		container.setShowFPS(false); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre
     }
 	
