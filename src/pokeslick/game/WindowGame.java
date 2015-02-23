@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * @author FLORENT / PE / ÉTIENNE
@@ -16,7 +15,7 @@ import org.newdawn.slick.tiled.TiledMap;
 public class WindowGame extends BasicGame {
 
     private GameContainer container;
-	private TiledMap map;
+	private Map map;
 	
 	// Constantes de la Map
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
@@ -35,7 +34,7 @@ public class WindowGame extends BasicGame {
 	public WindowGame(String title) {
 		super(title);
 	}
-
+	
 	/** 
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
 	 */
@@ -44,14 +43,14 @@ public class WindowGame extends BasicGame {
         this.container = container;
         
         // Charge la map
-        this.map = new TiledMap("resources/map/firstMap.tmx");
-        TILE_SIZE = this.map.getTileHeight();
-        WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
-        HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
+        map = new Map("firstMap");
+        TILE_SIZE = map.getTileDimension();
+        WIDTH_MAX = map.getWidth();
+        HEIGHT_MAX = map.getHeight();
         
         // Charge la musique
-        Music background = new Music("resources/music/general.ogg");
-        background.loop();
+        //Music background = new Music("resources/music/general.ogg");
+        //background.loop();
         
         // Création d'un joueur
         objPlayer = new Player(320, 256, TILE_SIZE);
@@ -64,7 +63,7 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 	    // Affichage du fond principal de la carte
-		this.map.render(0, 0, 0);
+		map.renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), x, y);
@@ -73,7 +72,7 @@ public class WindowGame extends BasicGame {
 			g.drawImage(objPlayer.getStandingImage(), x, y);
 		}
 		// Affichage de l'Avant-Plan
-	    this.map.render(0, 0, 1);
+	    map.renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
 	    
     }
@@ -160,30 +159,29 @@ public class WindowGame extends BasicGame {
 	public boolean isCollision(int key)
 	{			
 		boolean collision = true;
-		int layerCollision = this.map.getLayerIndex("logic");
 		
 		switch (key) {
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_LEFT:
     			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_DOWN:
     			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
     				collision = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
     			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
     				collision = false;
     			}
     			break;
@@ -195,30 +193,29 @@ public class WindowGame extends BasicGame {
 	public boolean isExit(int key)
 	{			
 		boolean exit = true;
-		int layerCollision = this.map.getLayerIndex("trigger");
 		
 		switch (key) {
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
     		case Input.KEY_LEFT:
     			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
     		case Input.KEY_DOWN:
     			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "trigger") == 0) {
     				exit = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
     			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
