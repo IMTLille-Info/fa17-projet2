@@ -4,7 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Player extends Avatar {
+public class Player extends Mobile {
 	
 	public Player(float x, float y, int tileSize)
 	{

@@ -3,9 +3,9 @@ package pokeslick.game;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
-public abstract class Avatar {
+public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
@@ -16,7 +16,7 @@ public abstract class Avatar {
 	
 	private int scale, tempScale = 0;
 	
-	public Avatar(float x, float y, int tileSize) 
+	public Mobile(float x, float y, int tileSize) 
 	{
 		absciss = x;
 		ordinate = y;
