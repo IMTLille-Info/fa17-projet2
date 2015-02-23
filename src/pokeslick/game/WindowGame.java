@@ -5,6 +5,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -47,6 +48,10 @@ public class WindowGame extends BasicGame {
         TILE_SIZE = this.map.getTileHeight();
         WIDTH_MAX = (this.map.getWidth() * TILE_SIZE) - TILE_SIZE;
         HEIGHT_MAX = (this.map.getHeight() * TILE_SIZE) - TILE_SIZE;
+        
+        // Charge la musique
+        Music background = new Music("resources/music/general.ogg");
+        background.loop();
         
         // Création d'un joueur
         objPlayer = new Player(320, 256, TILE_SIZE);
