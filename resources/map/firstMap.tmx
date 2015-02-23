@@ -96,6 +96,9 @@
  <tileset firstgid="31" name="collision" tilewidth="32" tileheight="32">
   <image source="tuiles/collision.png" width="32" height="32"/>
  </tileset>
+ <tileset firstgid="32" name="exit" tilewidth="32" tileheight="32">
+  <image source="tuiles/exit.png" width="32" height="32"/>
+ </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC83S3QqDMAwF4FKcf3M6Bd2q8/1f0wgJhJKkdVdefBdKzqGhHZxzU8KIUnNv0Bg8KhB9W5nWoPVZGer9ghWEC+eTMtS7gBl8ovMVEZ/IdOghZHOVrOeJamGO9uGCMFexHqvv3GcHG+71w93+7cul9cX3Gd+r9l/ra5Scht6O1sffcK5W6XuxO7+qF/ru6gDSUlTOsAQAAA==
@@ -108,7 +111,12 @@
  </layer>
  <layer name="logic" width="20" height="15" opacity="0.55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5NnYGCQpxPGBUbNI00/IUCseYNdHbGAXuaRYya145ge+XQwYwAd5/cFsAQAAA==
+   H4sIAAAAAAAAC5NnYGCQJ4BhgJA6Ys1BB6PmkaafECDWvMGujlhAL/PIMZPacUxpHhzqGAABV0ZWsAQAAA==
+  </data>
+ </layer>
+ <layer name="trigger" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgIAwUoHgUjIJRMAoGEgAA6d4G/7AEAAA=
   </data>
  </layer>
 </map>

@@ -35,18 +35,18 @@ public class AvatarTest {
 	public void testGetNextAbsciss() {
 		for(int i = 0; i < 320; i++)
 		{
-			objTest.getNextAbsciss(1, 1);
+			objTest.getNextAbsciss(1);
 		}
-		assertEquals(32,0, objTest.getNextAbsciss(1, 1));
+		assertEquals(32,0, objTest.getNextAbsciss(1));
 	}
 
 	@Test
 	public void testGetNextOrdinate() {
 		for(int j = 0; j < 320; j++)
 		{
-			objTest.getNextOrdinate(0, 1);
+			objTest.getNextOrdinate(1);
 		}
-		assertEquals(32,0, objTest.getNextOrdinate(0, 1));
+		assertEquals(32,0, objTest.getNextOrdinate(1));
 	}
 
 	@Test

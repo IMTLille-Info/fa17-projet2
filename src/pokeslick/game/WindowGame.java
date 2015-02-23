@@ -8,8 +8,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
-import sun.org.mozilla.javascript.internal.ObjToIntMap;
-
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -132,23 +130,22 @@ public class WindowGame extends BasicGame {
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving())
 		{
-			boolean collision = isCollision(key);
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(0);
-    				if(objPlayer.getOrdinate() > 0 && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getOrdinate() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(1);
-    				if(objPlayer.getAbsciss() > 0 && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getAbsciss() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(2);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(3);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX && !collision) { objPlayer.setMoving(); }
+    				if(objPlayer.getAbsciss() < WIDTH_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
 			}
 	    }
@@ -156,12 +153,12 @@ public class WindowGame extends BasicGame {
 	
 	// Met à jour les variables pour le mouvement
 	public boolean isCollision(int key)
-	{	
+	{			
 		boolean collision = true;
 		int layerCollision = this.map.getLayerIndex("logic");
 		
 		switch (key) {
-    		case Input.KEY_UP:   
+    		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
     			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
     				collision = false;
