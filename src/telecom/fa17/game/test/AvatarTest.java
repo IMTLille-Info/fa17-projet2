@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import telecom.fa17.game.Direction;
 import telecom.fa17.game.Player;
 
 public class AvatarTest {
@@ -28,7 +29,7 @@ public class AvatarTest {
 
 	@Test
 	public void testGetNextAbsciss() {
-		objTest.setDirection(1);
+		objTest.setDirection(Direction.EAST);
 		for(int i = 0; i < 320; i++)
 		{
 			objTest.getNextAbsciss(1);
@@ -38,7 +39,7 @@ public class AvatarTest {
 
 	@Test
 	public void testGetNextOrdinate() {
-		objTest.setDirection(0);
+		objTest.setDirection(Direction.NORTH);
 		for(int j = 0; j < 320; j++)
 		{
 			objTest.getNextOrdinate(1);

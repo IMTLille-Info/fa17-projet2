@@ -132,19 +132,19 @@ public class WindowGame extends BasicGame {
 		if(!objPlayer.isMoving()){
 			switch (key) {
     			case Input.KEY_UP:  
-    				objPlayer.setDirection(0);
+    				objPlayer.setDirection(Direction.NORTH);
     				if(objPlayer.getOrdinate() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
-    				objPlayer.setDirection(1);
+    				objPlayer.setDirection(Direction.EAST);
     				if(objPlayer.getAbsciss() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
-    				objPlayer.setDirection(2);
+    				objPlayer.setDirection(Direction.SOUTH);
     				if(objPlayer.getOrdinate() < HEIGHT_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
-    				objPlayer.setDirection(3);
+    				objPlayer.setDirection(Direction.WEST);
     				if(objPlayer.getAbsciss() < WIDTH_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
 			}
