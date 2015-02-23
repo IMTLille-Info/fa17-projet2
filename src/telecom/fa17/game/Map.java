@@ -16,45 +16,37 @@ public class Map {
 		   obstacles = new LinkedList<Obstacle>();
 	}
 	
-	public int getTileDimension()
-	{
+	public int getTileDimension() {
 		return this.map.getTileHeight();
 	}
 	
-	public int getWidth()
-	{
+	public int getWidth(){
 		int tileSize = this.getTileDimension();
 		return (this.map.getWidth() * tileSize) - tileSize;
 	}
 	
-	public int getHeight()
-	{
+	public int getHeight() {
 		int tileSize = getTileDimension();
 		return (this.map.getHeight() * tileSize) - tileSize;
 	}
 	
-	public void renderBackground()
-	{
+	public void renderBackground() {
 		this.map.render(0, 0, 0);
 	}
 	
-	public void renderForeground()
-	{
+	public void renderForeground() {
 		this.map.render(0, 0, 1);
 	}
 	
-	public int getTileId(int x, int y, String name)
-	{
+	public int getTileId(int x, int y, String name) {
 		return map.getTileId(x, y, this.map.getLayerIndex(name));
 	}
 	
-	public void addObstacle(Obstacle prm)
-	{
+	public void addObstacle(Obstacle prm) {
 		obstacles.add(prm);
 	}
 	
-	public void removeObstacle(int index)
-	{
+	public void removeObstacle(int index) {
 		obstacles.remove(index);
 	}
 }

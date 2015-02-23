@@ -13,8 +13,7 @@ public class Player extends Mobile {
 		this.attack = 10;
 	}
 	
-	public void init() throws SlickException
-	{
+	public void init() throws SlickException{
 		// Images du joueur correspondante à ces états statiques
 		standings[0] = new Image("resources/map/player/personStandUp.png");
 		standings[1] = new Image("resources/map/player/personStandLeft.png");
