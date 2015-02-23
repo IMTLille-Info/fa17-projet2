@@ -23,6 +23,11 @@ public abstract class Avatar {
 		scale = tileSize * SLOW_ANIM;
 	}
 	
+	public void setDirection(int dir)
+	{
+		direction = dir;
+	}
+	
 	public void setMoving()
 	{
 		tempScale = 0;
@@ -44,14 +49,13 @@ public abstract class Avatar {
 		return ordinate;
 	}
 	
-	public float getNextAbsciss(int where, int delta)
+	public float getNextAbsciss(int delta)
 	{
 		if (this.moving) {
-			this.direction = where;
-	        switch (where) {
+	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case 1 :
-	        			if(tempScale != scale) 
+	        			if(tempScale < scale) 
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -62,7 +66,7 @@ public abstract class Avatar {
         				break;
 	        	// On veut aller à droite
 	        	case 3 :
-	        			if((tempScale != scale))
+	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -76,14 +80,13 @@ public abstract class Avatar {
 		return absciss;
 	}
 	
-	public float getNextOrdinate(int where, int delta)
+	public float getNextOrdinate(int delta)
 	{		
 		if (this.moving) {
-			this.direction = where;
-	        switch (where) {
+	        switch (direction) {
 	        	// On veut monter
 	        	case 0 :
-	        			if((tempScale != scale)) 
+	        			if((tempScale < scale)) 
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
@@ -94,7 +97,7 @@ public abstract class Avatar {
 	        			break;
 	        	// On veut descendre
 	        	case 2 :
-	        			if((tempScale != scale))
+	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
 	        				if(tempScale % SLOW_ANIM == 0)
