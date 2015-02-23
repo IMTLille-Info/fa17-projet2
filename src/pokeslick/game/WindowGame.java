@@ -190,4 +190,39 @@ public class WindowGame extends BasicGame {
 		}
 		return collision;	
 	}
+	
+	// Met à jour les variables pour le mouvement
+	public boolean isExit(int key)
+	{			
+		boolean exit = true;
+		int layerCollision = this.map.getLayerIndex("trigger");
+		
+		switch (key) {
+    		case Input.KEY_UP:  
+    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, layerCollision) == 0) { 
+    				exit = false;
+    			}
+    			break;
+    		case Input.KEY_LEFT:
+    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    				exit = false;
+    			}
+    			break;
+    		case Input.KEY_DOWN:
+    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
+    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, layerCollision) == 0) {
+    				exit = false;
+    			}
+    			break;
+    		case Input.KEY_RIGHT:
+    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
+    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, layerCollision) == 0) { 
+    				exit = false;
+    			}
+    			break;
+		}
+		return exit;	
+	}
 }

@@ -1,122 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="left-up" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
- <tileset firstgid="1" name="dirt" tilewidth="32" tileheight="32">
-  <image source="tuiles/dirt.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="2" name="grass" tilewidth="32" tileheight="32">
-  <image source="tuiles/grass.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="3" name="leaf" tilewidth="32" tileheight="32">
-  <image source="tuiles/leaf.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="4" name="path" tilewidth="32" tileheight="32">
-  <image source="tuiles/path.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="5" name="cornerLeftPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerLeftPathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="6" name="cornerRightPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerRightPathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="7" name="leftBorderPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/leftBorderPathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="8" name="rightBorderPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/rightBorderPathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="9" name="topTree" tilewidth="32" tileheight="32">
-  <image source="tuiles/topTree.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="10" name="bottomTree" tilewidth="32" tileheight="32">
-  <image source="tuiles/bottomTree.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="11" name="water" tilewidth="32" tileheight="32">
-  <image source="tuiles/water.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="12" name="linePathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/linePathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="13" name="cornerBottomRightPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerBottomRightPathWater.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="14" name="cornerBottomLeftPathWater" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerBottomLeftPathWater.png" width="32" height="32"/>
-  <terraintypes>
-   <terrain name="Nouveau terrain" tile="-1"/>
-  </terraintypes>
- </tileset>
- <tileset firstgid="15" name="cornerLeftCave" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerLeftCave.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="16" name="cornerRightCave" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerRightCave.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="17" name="enterCave" tilewidth="32" tileheight="32">
-  <image source="tuiles/enterCave.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="18" name="wallCave" tilewidth="32" tileheight="32">
-  <image source="tuiles/wallCave.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="19" name="dirt" tilewidth="32" tileheight="32">
-  <image source="tuiles/dirt.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="20" name="cornerHighLeftCave" tilewidth="32" tileheight="32">
-  <image source="tuiles/cornerHighLeftCave.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="21" name="houseDoor" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseDoor.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="22" name="houseLeft" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseLeft.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="23" name="houseRight" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseRight.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="24" name="houseRoofLeft" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseRoofLeft.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="25" name="houseRoofRight" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseRoofRight.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="26" name="houseRoof" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseRoof.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="27" name="houseOneWindow" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseOneWindow.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="28" name="houseOneWindow2" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseOneWindow2.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="29" name="houseTwoWindows" tilewidth="32" tileheight="32">
-  <image source="tuiles/houseTwoWindows.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="30" name="leafWithoutGrass" tilewidth="32" tileheight="32">
-  <image source="tuiles/leafWithoutGrass.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="31" name="collision" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="collision" tilewidth="32" tileheight="32">
   <image source="tuiles/collision.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="32" name="exit" tilewidth="32" tileheight="32">
+ <tileset firstgid="2" name="exit" tilewidth="32" tileheight="32">
   <image source="tuiles/exit.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/allTiles.png" width="684" height="776"/>
+ </tileset>
+ <tileset firstgid="443" name="leafWithoutGrass" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/leafWithoutGrass.png" width="32" height="32"/>
  </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC83S3QqDMAwF4FKcf3M6Bd2q8/1f0wgJhJKkdVdefBdKzqGhHZxzU8KIUnNv0Bg8KhB9W5nWoPVZGer9ghWEC+eTMtS7gBl8ovMVEZ/IdOghZHOVrOeJamGO9uGCMFexHqvv3GcHG+71w93+7cul9cX3Gd+r9l/ra5Scht6O1sffcK5W6XuxO7+qF/ru6gDSUlTOsAQAAA==
+   H4sIAAAAAAAAC83SsQ3CMBCF4bNSABO4ACQadkBiBRBjeAgTBmGHQEFBA3TpETMg5uCQLuLp8DlBNBRfkcT+k5NTE1Eteo6orwzZSIwTzwfuvf8lgAOrgBeFaK5DRgQzaE0zvZiBbezNM72KZ9yJvbO/b8GWYqVa2Fyzkm3ZRjXO4pLY29UJOkdxM9bibM18es0VOm09nK2U+X7poYlx3+p5+jzTouWez/SCsTcF/22rF9V7u4hG7wFn/q17ovevnpvlAB2wBAAA
   </data>
  </layer>
  <layer name="leaves" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgoB+Qg2Jc/OFoHjFio4A2AFf8kSqOroYU+4lRQwoe6QAAufZiVbAEAAA=
+   H4sIAAAAAAAAC2NgoB/YzQjBuPjD0TxixEYBbQAs/tDDHJ8YofghNk2Qqo5YPNIBAOR8J5ywBAAA
   </data>
  </layer>
  <layer name="logic" width="20" height="15" opacity="0.55">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5NnYGCQJ4BhgJA6Ys1BB6PmkaafECDWvMGujlhAL/PIMZPacUxpHhzqGAABV0ZWsAQAAA==
+   H4sIAAAAAAAAC2NkYGBgJIBhgJA6fHrxAXLMw2f2QJpHjN+pGXakmE+s2sFkHro+Yu2kRfiRYya145jctDhcMAAz/0Q1sAQAAA==
   </data>
  </layer>
- <layer name="trigger" width="20" height="15">
+ <layer name="trigger" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIAwUoHgUjIJRMAoGEgAA6d4G/7AEAAA=
+   H4sIAAAAAAAAC2NgIAyYoHgUjIJRMAoGEgAAIcN6A7AEAAA=
   </data>
  </layer>
 </map>
