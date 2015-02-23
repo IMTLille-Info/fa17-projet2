@@ -2,6 +2,7 @@
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public abstract class Mobile {
 	
@@ -33,6 +34,8 @@ public abstract class Mobile {
 		ordinate = y;
 		scale = tileSize * SLOW_ANIM;
 	}
+	
+	public abstract void init() throws SlickException;
 	
 	public void setDirection(int dir){
 		direction = dir;
