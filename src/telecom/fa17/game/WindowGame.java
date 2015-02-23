@@ -79,22 +79,17 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 				
-		if(!objPlayer.isMoving())
-		{
+		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
 			
 			// On est resté appuyé sur une touche - callback keyPressed
-			if(listener.isKeyDown(Input.KEY_UP)) 
-			{
+			if(listener.isKeyDown(Input.KEY_UP)) {
 				keyPressed(Input.KEY_UP, ' ');
-			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_LEFT)) {
 				keyPressed(Input.KEY_LEFT, ' ');
-			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_DOWN)) {
 				keyPressed(Input.KEY_DOWN, ' ');
-			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_RIGHT)) {
 				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
@@ -127,8 +122,7 @@ public class WindowGame extends BasicGame {
         }
 		
 	    // Si l'on a fini le mouvement
-		if(!objPlayer.isMoving())
-		{
+		if(!objPlayer.isMoving()){
 			boolean collision = isCollision(key);
 			switch (key) {
     			case Input.KEY_UP:  
@@ -152,8 +146,7 @@ public class WindowGame extends BasicGame {
 	}
 	
 	// Met à jour les variables pour le mouvement
-	public boolean isCollision(int key)
-	{	
+	public boolean isCollision(int key) {	
 		boolean collision = true;
 		int layerCollision = this.map.getLayerIndex("logic");
 		

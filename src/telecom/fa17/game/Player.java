@@ -6,9 +6,11 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Mobile {
 	
-	public Player(float x, float y, int tileSize)
-	{
+	public Player(float x, float y, int tileSize){
 		super(x, y, tileSize);
+		this.life = 50;
+		this.isMobile = true;
+		this.attack = 10;
 		// MARQUES DE COMMENTAIRES A METTRE POUR MODE TEST SUR LE TRY
 		
 		try {
