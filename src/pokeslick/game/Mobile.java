@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 
 public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 6;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
