@@ -68,69 +68,49 @@ public abstract class Mobile {
 		ordinate = prmOrd;
 	}
 	
-	public float getNextAbsciss(int delta)
+	public float getNextAbsciss()
 	{
 		if (this.moving) {
 	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			if(tempScale < scale) { 
-	        				tempScale++;
-	        				if(tempScale % SLOW_ANIM == 0){
-	        					absciss--;
-	        				}
-	        			} else {
-	        				this.moving = false;
-	        			}
+	        			getNext('a', -1);
         				break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			if((tempScale < scale)) { 
-	        				tempScale++;
-	        				if(tempScale % SLOW_ANIM == 0){
-	        					absciss++; 
-	        				}
-	        			} else {
-	        				this.moving = false;
-	        			}
+	        			getNext('a', 1);
 						break;
-	        	default:
-	        			break;
 	        }
 		} 
 		return absciss;
 	}
 	
-	public float getNextOrdinate(int delta){		
+	public float getNextOrdinate(){		
 		if (this.moving){
 	        switch (direction){
 	        	// On veut monter
 	        	case NORTH :
-	        			if((tempScale < scale)) { 
-	        				tempScale++;
-	        				if(tempScale % SLOW_ANIM == 0) {
-	        					ordinate--;
-	        				}
-	        			} else {
-	        				this.moving = false;
-	        			}
+	        			getNext('o', -1);
 	        			break;
 	        	// On veut descendre
 	        	case SOUTH :
-	        			if((tempScale < scale)) { 
-	        				tempScale++;
-	        				if(tempScale % SLOW_ANIM == 0) {
-	        					ordinate++;
-	        				}
-	        			} else {
-	        				this.moving = false;
-	        			}
+	        			getNext('o', 1);
     					break;
-	        	default:
-	        			break;
 	        }
 	    } 
 		return ordinate;
+	}
+	
+	public void getNext(char axe, int move){
+		if((tempScale < scale)) { 
+			tempScale++;
+			if(tempScale % SLOW_ANIM == 0) {
+				if(axe == 'o'){ordinate += move;}
+				else{absciss += move;}				
+			}
+		} else {
+			this.moving = false;
+		}
 	}
 	
 	

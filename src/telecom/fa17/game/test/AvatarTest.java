@@ -33,9 +33,9 @@ public class AvatarTest {
 		player.setDirection(Direction.EAST);
 		for(int i = 0; i < 320; i++)
 		{
-			player.getNextAbsciss(1);
+			player.getNextAbsciss();
 		}
-		assertEquals(32,0, player.getNextAbsciss(1));
+		assertEquals(32,0, player.getNextAbsciss());
 	}
 
 	@Test
@@ -43,9 +43,9 @@ public class AvatarTest {
 		player.setDirection(Direction.NORTH);
 		for(int j = 0; j < 320; j++)
 		{
-			player.getNextOrdinate(1);
+			player.getNextOrdinate();
 		}
-		assertEquals(32,0, player.getNextOrdinate(1));
+		assertEquals(32,0, player.getNextOrdinate());
 	}
 
 	@Test
