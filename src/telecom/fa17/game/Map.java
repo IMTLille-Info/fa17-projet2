@@ -52,7 +52,7 @@ public class Map {
 		obstacles.remove(prm);
 	}
 	
-	// Return an Exit object if the next Cooridnate of the player are an Exit
+	// Return an Exit object if the next Coordinate of the player are an Exit
 	public Exit getExitByCoordinate(float x, float y){
 		int i = 0;
 		boolean found = false;

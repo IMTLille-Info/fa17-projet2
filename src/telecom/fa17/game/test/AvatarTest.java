@@ -11,6 +11,7 @@ import telecom.fa17.game.Player;
 public class AvatarTest {
 
 	Player player = new Player(64, 64, 32);
+	Player PNG = new Player(64,64,32);
 	
 	@Before
 	public void setUp() throws Exception {
@@ -56,5 +57,12 @@ public class AvatarTest {
 	public void testGetAnimation() {
 		assertEquals(null, player.getAnimation());
 	}
-
+	
+	//test l'action attaquer 
+	@Test
+	public void testAttaquer() {
+		int pvBefore = PNG.getLife();
+		player.attack();
+		assertEquals(pvBefore - player.getAttack(), PNG.getLife());
+	}
 }
