@@ -190,30 +190,22 @@ public class WindowGame extends BasicGame {
 		switch (key) {
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(0,-1);
     		case Input.KEY_LEFT:
-    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(-1,0);
     		case Input.KEY_DOWN:
-    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(0,1);
     		case Input.KEY_RIGHT:
-    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(1,0);
 		}
 		return collision;	
+	}
+	
+	public boolean collisionNextCase(int x , int y){
+		if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic") == 0) { 
+			return false;
+		}
+		return true;
 	}
 	
 	// Met à jour les variables pour le mouvement
