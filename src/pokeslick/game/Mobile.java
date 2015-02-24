@@ -10,7 +10,7 @@ public abstract class Mobile {
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
-	private int direction = 2;
+	private Direction direction = Direction.SOUTH;
 	
 	protected Animation[] animations = new Animation[4];
 	protected Image[] standings = new Image[4];
@@ -26,7 +26,7 @@ public abstract class Mobile {
 	
 	public abstract void init() throws SlickException;
 	
-	public void setDirection(int dir)
+	public void setDirection(Direction dir)
 	{
 		direction = dir;
 	}
@@ -57,7 +57,7 @@ public abstract class Mobile {
 		if (this.moving) {
 	        switch (direction) {
 	        	// On veut aller à gauche
-	        	case 1 :
+	        	case EAST :
 	        			if(tempScale < scale) 
 	        			{ 
 	        				tempScale++;
@@ -68,7 +68,7 @@ public abstract class Mobile {
 	        			}
         				break;
 	        	// On veut aller à droite
-	        	case 3 :
+	        	case WEST :
 	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
@@ -78,6 +78,8 @@ public abstract class Mobile {
 	        				this.moving = false;
 	        			}
 						break;
+			default:
+				break;
 	        }
 		} 
 		return absciss;
@@ -88,7 +90,7 @@ public abstract class Mobile {
 		if (this.moving) {
 	        switch (direction) {
 	        	// On veut monter
-	        	case 0 :
+	        	case NORTH :
 	        			if((tempScale < scale)) 
 	        			{ 
 	        				tempScale++;
@@ -99,7 +101,7 @@ public abstract class Mobile {
 	        			}
 	        			break;
 	        	// On veut descendre
-	        	case 2 :
+	        	case SOUTH :
 	        			if((tempScale < scale))
 	        			{ 
 	        				tempScale++;
@@ -109,6 +111,8 @@ public abstract class Mobile {
 	        				this.moving = false;
 	        			}
     					break;
+			default:
+				break;
 	        }
 	    } 
 		return ordinate;
@@ -117,11 +121,11 @@ public abstract class Mobile {
 	
 	public Image getStandingImage()
 	{
-		return standings[direction];
+		return standings[direction.index];
 	}
 	
 	public Animation getAnimation()
 	{
-		return animations[direction];
+		return animations[direction.index];
 	}
 }

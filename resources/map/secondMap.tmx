@@ -9,25 +9,22 @@
  <tileset firstgid="442" name="exit" tilewidth="32" tileheight="32" spacing="2">
   <image source="tuiles/exit.png" width="32" height="32"/>
  </tileset>
- <tileset firstgid="443" name="pokeball" tilewidth="32" tileheight="32" spacing="2">
-  <image source="tuiles/pokeball.png" width="32" height="32"/>
- </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC62TwQ2AIAxFYSB1BxJHQGZAohso0cnlYtL8/BpQD+/U8krbNFlj3I+kQtfAorASny9MhCByDoWT+GJhJsicln5rfdos0LcVdkImPpxNUPbRw//ZH1gvCXye1NJ6qvFFEmOutz5t/rU+uYts9T4d5I/izZv7cA810Kft9KsPYTtx4Llh94oMDbELSHMsC7AEAAA=
   </data>
  </layer>
- <layer name="avantplan" width="20" height="15">
+ <layer name="avantplan" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjADfYzUhd87KobN4ooA2gdrxTCwAA44K1vrAEAAA=
+   H4sIAAAAAAAAC2NgGAWjgH4gi3GgXTAKhjIAAB4jnvKwBAAA
   </data>
  </layer>
- <layer name="logic" width="20" height="15">
+ <layer name="logic" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5toaR6hsCDVv8Sq1QWy9QjEFbJ52NyGzz58fifGPFzhgE2cVPOwsUl1HynhRopefABXXKPbgY1PLfPwuR+bHDF5hlg96HIAKpMZ7rAEAAA=
   </data>
  </layer>
- <layer name="trigger" width="20" height="15">
+ <layer name="trigger" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMgoEDuxiJlwMA7SvhMbAEAAA=
   </data>

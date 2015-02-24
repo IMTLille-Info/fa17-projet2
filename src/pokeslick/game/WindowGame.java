@@ -1,5 +1,4 @@
 package pokeslick.game;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -14,10 +13,12 @@ import org.newdawn.slick.SlickException;
 public class WindowGame extends BasicGame {
 
     private GameContainer container;
-	private Map map;
+	private Map[] map;
 	
 	// Constantes de la Map
 	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
+	// Map en cours d'affichage
+	int indexMap = 0;
 	
 	// Coordonnees du personnage au départ
 	private float x = 320,
@@ -42,10 +43,12 @@ public class WindowGame extends BasicGame {
         this.container = container;
         
         // Charge la map
-        map = new Map("firstMap");
-        TILE_SIZE = map.getTileDimension();
-        WIDTH_MAX = map.getWidth();
-        HEIGHT_MAX = map.getHeight();
+        map = new Map[2];
+        map[0] = new Map("firstMap");
+        map[1] = new Map("secondMap");
+        TILE_SIZE = map[0].getTileDimension();
+        WIDTH_MAX = map[0].getWidth();
+        HEIGHT_MAX = map[0].getHeight();
         
         // Charge la musique
         //Music background = new Music("resources/music/general.ogg");
@@ -62,7 +65,7 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 	    // Affichage du fond principal de la carte
-		map.renderBackground();
+		map[indexMap].renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), x, y);
@@ -71,7 +74,7 @@ public class WindowGame extends BasicGame {
 			g.drawImage(objPlayer.getStandingImage(), x, y);
 		}
 		// Affichage de l'Avant-Plan
-	    map.renderForeground();
+		map[indexMap].renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
 	    
     }
@@ -83,22 +86,17 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 				
-		if(!objPlayer.isMoving())
-		{
+		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
 			
 			// On est resté appuyé sur une touche - callback keyPressed
-			if(listener.isKeyDown(Input.KEY_UP)) 
-			{
+			if(listener.isKeyDown(Input.KEY_UP)) {
 				keyPressed(Input.KEY_UP, ' ');
-			} else if(listener.isKeyDown(Input.KEY_LEFT)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_LEFT)) {
 				keyPressed(Input.KEY_LEFT, ' ');
-			} else if(listener.isKeyDown(Input.KEY_DOWN)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_DOWN)) {
 				keyPressed(Input.KEY_DOWN, ' ');
-			} else if(listener.isKeyDown(Input.KEY_RIGHT)) 
-			{
+			} else if(listener.isKeyDown(Input.KEY_RIGHT)) {
 				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
@@ -113,7 +111,7 @@ public class WindowGame extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(true); // Désactivation de l'affichage des FPS
+		container.setShowFPS(false); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre
     }
 	
@@ -131,23 +129,22 @@ public class WindowGame extends BasicGame {
         }
 		
 	    // Si l'on a fini le mouvement
-		if(!objPlayer.isMoving())
-		{
+		if(!objPlayer.isMoving()){
 			switch (key) {
     			case Input.KEY_UP:  
-    				objPlayer.setDirection(0);
+    				objPlayer.setDirection(Direction.NORTH);
     				if(objPlayer.getOrdinate() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_LEFT:
-    				objPlayer.setDirection(1);
+    				objPlayer.setDirection(Direction.EAST);
     				if(objPlayer.getAbsciss() > 0) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_DOWN:
-    				objPlayer.setDirection(2);
+    				objPlayer.setDirection(Direction.SOUTH);
     				if(objPlayer.getOrdinate() < HEIGHT_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
     		case Input.KEY_RIGHT:
-    				objPlayer.setDirection(3);
+    				objPlayer.setDirection(Direction.WEST);
     				if(objPlayer.getAbsciss() < WIDTH_MAX) { if(!isCollision(key)) objPlayer.setMoving(); }
     			break;
 			}
@@ -155,32 +152,31 @@ public class WindowGame extends BasicGame {
 	}
 	
 	// Met à jour les variables pour le mouvement
-	public boolean isCollision(int key)
-	{			
+	public boolean isCollision(int key)	{			
 		boolean collision = true;
 		
 		switch (key) {
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
+    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_LEFT:
     			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
+    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
     				collision = false;
     			}
     			break;
     		case Input.KEY_DOWN:
     			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
+    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
     				collision = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
     			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
+    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
     				collision = false;
     			}
     			break;
@@ -189,32 +185,31 @@ public class WindowGame extends BasicGame {
 	}
 	
 	// Met à jour les variables pour le mouvement
-	public boolean isExit(int key)
-	{			
+	public boolean isExit(int key){			
 		boolean exit = true;
 		
 		switch (key) {
     		case Input.KEY_UP:  
     			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "trigger") == 0) { 
+    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
     		case Input.KEY_LEFT:
     			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
+    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
     		case Input.KEY_DOWN:
     			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "trigger") == 0) {
+    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "trigger") == 0) {
     				exit = false;
     			}
     			break;
     		case Input.KEY_RIGHT:
     			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
+    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
     				exit = false;
     			}
     			break;
