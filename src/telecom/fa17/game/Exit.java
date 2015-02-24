@@ -5,36 +5,30 @@ public class Exit extends Obstacle {
 					  nextOrdinate;
 		private int nextMapNumber;
 
-		public Exit(float abs, float ord, float nextAbs, float nextOrd, int nextMapNb)
-		{
+		public Exit(float abs, float ord, float nextAbs, float nextOrd, int nextMapNb){
 				super(abs, ord);
 				this.nextAbsciss = nextAbs;
 				this.nextOrdinate = nextOrd;
 				this.nextMapNumber = nextMapNb;
 		}
 
-		public float getAbsciss()
-		{
+		public float getAbsciss(){
 				return super.getAbsciss();
 		}
 
-		public float getOrdinate()
-		{
+		public float getOrdinate(){
 				return super.getOrdinate();
 		}
 
-		public float getNextAbsciss()
-		{
+		public float getNextAbsciss(){
 				return nextAbsciss;
 		}
 
-		public float getNextOrdinate()
-		{
+		public float getNextOrdinate(){
 				return nextOrdinate;
 		}
 
-		public int getMapNumber()
-		{
+		public int getMapNumber(){
 			return nextMapNumber;
 		}
 }
