@@ -12,7 +12,6 @@ public enum Direction {
     /**
      * Indice.
      *
-     * @see Room
      */
     public final int index;
     
