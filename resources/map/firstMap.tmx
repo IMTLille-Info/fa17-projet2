@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
  <tileset firstgid="1" name="collision" tilewidth="32" tileheight="32">
   <image source="tuiles/collision.png" width="32" height="32"/>
  </tileset>
@@ -27,13 +27,4 @@
    H4sIAAAAAAAAC2NkYGBgJIBhgJA6fHrxAXLMw2f2QJpHjN+pGXakmE+s2sFkHro+Yu2kRfiRYya145jctDhcMAAz/0Q1sAQAAA==
   </data>
  </layer>
- <objectgroup name="trigger" width="20" height="15">
-  <object name="go-desert" type="change-map" x="292" y="3" width="57" height="33">
-   <properties>
-    <property name="dest-map" value="secondMap.tmx"/>
-    <property name="dest-x" value="10"/>
-    <property name="dest-y" value="13"/>
-   </properties>
-  </object>
- </objectgroup>
 </map>
