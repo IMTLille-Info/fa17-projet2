@@ -77,13 +77,4 @@ public class Map {
 		}
 		return (found) ? (Exit) obstacles.get(i) : null;
 	}
-	
-	public TiledMap getMap() {
-		return map;
-	}
-
-	public void setMap(TiledMap map) {
-		this.map = map;
-	}
-
 }

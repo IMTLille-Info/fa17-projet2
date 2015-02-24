@@ -58,6 +58,16 @@ public abstract class Mobile {
 		return ordinate;
 	}
 	
+	public void setAbsciss(float prmAbs)
+	{
+		absciss = prmAbs;
+	}
+	
+	public void setOrdinate(float prmOrd)
+	{
+		ordinate = prmOrd;
+	}
+	
 	public float getNextAbsciss(int delta)
 	{
 		if (this.moving) {

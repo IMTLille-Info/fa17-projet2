@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
  <tileset firstgid="1" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
   <image source="tuiles/allTiles.png" width="684" height="776"/>
  </tileset>
@@ -16,21 +16,12 @@
  </layer>
  <layer name="avantplan" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjgH4gi3GgXTAKhjIAAB4jnvKwBAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
   </data>
  </layer>
  <layer name="logic" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5toaR6hsCDVv8Sq1QWy9QjEFbJ52NyGzz58fifGPFzhgE2cVPOwsUl1HynhRopefABXXKPbgY1PLfPwuR+bHDF5hlg96HIAKpMZ7rAEAAA=
+   H4sIAAAAAAAAC7VTQQ4AIAiy/7+o33VnYLDMrS0DiXTtVbWHVxKJ3iuHcZWnn3q3XqTvdblMV3lFDGvcuSd6qg/sPNVj+9Rf0rektgs1a7yD5VN6nX+GOX/GrUHsAI62G5ewBAAA
   </data>
  </layer>
- <objectgroup name="trigger" width="20" height="15">
-  <object name="go-firstmap" type="change-map" x="289" y="447" width="28" height="31">
-   <properties>
-    <property name="dest-map" value="firstMap.tmx"/>
-    <property name="dest-x" value="10"/>
-    <property name="dest-y" value="2"/>
-   </properties>
-  </object>
- </objectgroup>
 </map>
