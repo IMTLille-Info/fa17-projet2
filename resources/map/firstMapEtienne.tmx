@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="collision" tilewidth="32" tileheight="32">
+  <image source="tuiles/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="exit" tilewidth="32" tileheight="32">
+  <image source="tuiles/exit.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/allTiles.png" width="684" height="776"/>
+ </tileset>
+ <tileset firstgid="443" name="leafWithoutGrass" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/leafWithoutGrass.png" width="32" height="32"/>
+ </tileset>
+ <layer name="general" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC83SsQ3CMBCF4bNSABO4ACQadkBiBRBjeAgTBmGHQEFBA3TpETMg5uCQLuLp8DlBNBRfkcT+k5NTE1Eteo6orwzZSIwTzwfuvf8lgAOrgBeFaK5DRgQzaE0zvZiBbezNM72KZ9yJvbO/b8GWYqVa2Fyzkm3ZRjXO4pLY29UJOkdxM9bibM18es0VOm09nK2U+X7poYlx3+p5+jzTouWez/SCsTcF/22rF9V7u4hG7wFn/q17ovevnpvlAB2wBAAA
+  </data>
+ </layer>
+ <layer name="leaves" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoB/YzQjBuPjD0TxixEYBbQAs/tDDHJ8YofghNk2Qqo5YPNIBAOR8J5ywBAAA
+  </data>
+ </layer>
+ <layer name="logic" width="20" height="15" opacity="0.55">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkYGBgJIBhgJA6fHrxAXLMw2f2QJpHjN+pGXakmE+s2sFkHro+Yu2kRfiRYya145jctDhcMAAz/0Q1sAQAAA==
+  </data>
+ </layer>
+ <objectgroup name="trigger" width="20" height="15">
+  <object name="go-desert" type="change-map" x="292" y="3" width="57" height="33">
+   <properties>
+    <property name="dest-map" value="secondMap.tmx"/>
+    <property name="dest-x" value="10"/>
+    <property name="dest-y" value="12"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
