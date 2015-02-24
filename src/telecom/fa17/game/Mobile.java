@@ -74,11 +74,11 @@ public abstract class Mobile {
 	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(true, -1);
+	        			getNext(false, -1);
         				break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(true, 1);
+	        			getNext(false, 1);
 						break;
 	        }
 		} 
@@ -90,11 +90,11 @@ public abstract class Mobile {
 	        switch (direction){
 	        	// On veut monter
 	        	case NORTH :
-	        			getNext(false, -1);
+	        			getNext(true, -1);
 	        			break;
 	        	// On veut descendre
 	        	case SOUTH :
-	        			getNext(false, 1);
+	        			getNext(true, 1);
     					break;
 	        }
 	    } 
