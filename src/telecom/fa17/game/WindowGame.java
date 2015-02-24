@@ -144,10 +144,8 @@ public class WindowGame extends BasicGame {
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
-    				if(objPlayer.getOrdinate() > 0) 
-    				{ 
-    					if(exit != null)
-    					{
+    				if(objPlayer.getOrdinate() > 0){ 
+    					if(exit != null){
     						indexMap = exit.getMapNumber();
     						objPlayer.setAbsciss(exit.getNextAbsciss());
     						objPlayer.setOrdinate(exit.getNextOrdinate());
@@ -158,10 +156,8 @@ public class WindowGame extends BasicGame {
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
-    				if(objPlayer.getAbsciss() > 0) 
-    				{ 
-    					if(exit != null)
-    					{
+    				if(objPlayer.getAbsciss() > 0){ 
+    					if(exit != null){
     						indexMap = exit.getMapNumber();
     						objPlayer.setAbsciss(exit.getNextAbsciss());
     						objPlayer.setOrdinate(exit.getNextOrdinate());
@@ -172,10 +168,8 @@ public class WindowGame extends BasicGame {
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX)
-    				{ 
-    					if(exit != null)
-    					{
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
+    					if(exit != null){
     						indexMap = exit.getMapNumber();
     						objPlayer.setAbsciss(exit.getNextAbsciss());
     						objPlayer.setOrdinate(exit.getNextOrdinate());
@@ -186,10 +180,8 @@ public class WindowGame extends BasicGame {
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX) 
-    				{ 
-    					if(exit != null)
-    					{
+    				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
+    					if(exit != null){
     						indexMap = exit.getMapNumber();
     						objPlayer.setAbsciss(exit.getNextAbsciss());
     						objPlayer.setOrdinate(exit.getNextOrdinate());
