@@ -110,10 +110,11 @@ public class WindowGame extends BasicGame {
 	    teleport(objectID);
 	    String newMap = this.map[indexMap].getMap().getObjectProperty(0, objectID, "dest-map", "undefined");
 	    if (!"undefined".equals(newMap)) {
-	    	if(indexMap+1>=map.length){
-	    		indexMap=0;
+	    	int newindexMap = indexMap+1;
+	    	if(newindexMap>=map.length){
+	    		newindexMap=0;
 	    	}
-	        this.map[indexMap].setMap(map[indexMap+1].getMap());
+	        this.map[indexMap].setMap(map[newindexMap].getMap());
 	    }
 	}
 	
