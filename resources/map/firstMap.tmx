@@ -32,7 +32,7 @@
    <properties>
     <property name="dest-map" value="secondMap.tmx"/>
     <property name="dest-x" value="10"/>
-    <property name="dest-y" value="12"/>
+    <property name="dest-y" value="13"/>
    </properties>
   </object>
  </objectgroup>
