@@ -24,6 +24,7 @@ public abstract class Mobile {
 		scale = tileSize * SLOW_ANIM;
 	}
 	
+	// Cette méthode doit être redéfinie pour ajouter les images
 	public abstract void init() throws SlickException;
 	
 	public void setDirection(Direction dir)
@@ -50,6 +51,16 @@ public abstract class Mobile {
 	public float getOrdinate()
 	{
 		return ordinate;
+	}
+	
+	public void setAbsciss(float prmAbs)
+	{
+		absciss = prmAbs;
+	}
+	
+	public void setOrdinate(float prmOrd)
+	{
+		ordinate = prmOrd;
 	}
 	
 	public float getNextAbsciss(int delta)
@@ -117,7 +128,6 @@ public abstract class Mobile {
 	    } 
 		return ordinate;
 	}
-	
 	
 	public Image getStandingImage()
 	{
