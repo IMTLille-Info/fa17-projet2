@@ -161,4 +161,8 @@ public abstract class Mobile {
 		//certains monstres peuvent être non mobile / ou effet immobilisant temporaire sur joueur
 		return isMobile;
 	}
+	
+	public void attack(){
+		
+	}
 }
