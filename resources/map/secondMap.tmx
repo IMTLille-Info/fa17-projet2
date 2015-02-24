@@ -19,9 +19,9 @@
    H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
   </data>
  </layer>
- <layer name="logic" width="20" height="15" visible="0">
+ <layer name="logic" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC7VTQQ4AIAiy/7+o33VnYLDMrS0DiXTtVbWHVxKJ3iuHcZWnn3q3XqTvdblMV3lFDGvcuSd6qg/sPNVj+9Rf0rektgs1a7yD5VN6nX+GOX/GrUHsAI62G5ewBAAA
+   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5sGi3mkqMEVrtjcQ6ocujix8U6Keehy+Mwi1TxsbEr8i81tuNRRM3/gM48Y88kxj9hwx5c2CKVlYuUAWcAZO7AEAAA=
   </data>
  </layer>
 </map>
