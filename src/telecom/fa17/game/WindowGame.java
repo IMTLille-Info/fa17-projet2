@@ -115,8 +115,8 @@ public class WindowGame extends BasicGame {
 		}
 		
 		// Calcul des futurs coordonnées désirées
-		x = objPlayer.getNextAbsciss(delta);
-		y = objPlayer.getNextOrdinate(delta);
+		x = objPlayer.getNextAbsciss();
+		y = objPlayer.getNextOrdinate();
 	}
 	
 	/** 
