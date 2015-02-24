@@ -49,4 +49,13 @@ public class Map {
 	public void removeObstacle(int index) {
 		obstacles.remove(index);
 	}
+	
+	public TiledMap getMap() {
+		return map;
+	}
+
+	public void setMap(TiledMap map) {
+		this.map = map;
+	}
+
 }
