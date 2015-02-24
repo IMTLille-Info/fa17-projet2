@@ -8,12 +8,13 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class Map {
 	private TiledMap map;
-	
 	private List<Exit> exits;
+	private String musicFilename;
 	
-	public Map(String name) throws SlickException {
+	public Map(String name, String mscFile) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   exits = new LinkedList<Exit>();
+		   musicFilename = mscFile;
 	}
 	
 	public int getTileDimension()
@@ -74,5 +75,10 @@ public class Map {
 			}
 		}
 		return (found) ? exits.get(i) : null;
+	}
+	
+	public String getMusicFilename()
+	{
+		return musicFilename;
 	}
 }

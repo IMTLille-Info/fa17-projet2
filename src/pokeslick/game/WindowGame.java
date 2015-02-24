@@ -28,6 +28,8 @@ public class WindowGame extends BasicGame {
 	private float x = 320,
 				  y = 256;
 	
+	Music background;
+	
 	Player objPlayer;
 
 	/**
@@ -48,20 +50,24 @@ public class WindowGame extends BasicGame {
         
         // Charge la map
         map = new LinkedList<Map>();
-        map.add(new Map("firstMap"));
+        map.add(new Map("firstMap", "townMap.ogg"));
         TILE_SIZE = map.get(0).getTileDimension();
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
         map.get(0).addExit(new Exit(9, 0, 9 * TILE_SIZE, 14 * TILE_SIZE, 1));
         map.get(0).addExit(new Exit(10, 0, 16 * TILE_SIZE, 14 * TILE_SIZE, 1));
         
-        map.add(new Map("secondMap"));
+        map.add(new Map("secondMap", "caveMap.ogg"));
         map.get(1).addExit(new Exit(9, 14, 9 * TILE_SIZE, 0, 0));
         map.get(1).addExit(new Exit(16, 14, 10 * TILE_SIZE, 0, 0)); 
+        map.get(1).addExit(new Exit(4, 6, 5 * TILE_SIZE, 7 * TILE_SIZE, 2)); 
+        
+        map.add(new Map("thirdMap", "caveMap.ogg"));
+        map.get(2).addExit(new Exit(5, 7, 4 * TILE_SIZE, 6 * TILE_SIZE, 1));
         
         // Charge la musique
-        //Music background = new Music("resources/music/general.ogg");
-        //background.loop();
+        background = new Music("resources/music/" + map.get(0).getMusicFilename());
+        background.loop();        
         
         // Création d'un joueur
         objPlayer = new Player(320, 256, TILE_SIZE);
