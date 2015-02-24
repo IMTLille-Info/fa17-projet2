@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
   <image source="tuiles/allTiles.png" width="684" height="776"/>
  </tileset>
@@ -14,7 +14,7 @@
    H4sIAAAAAAAAC8WTQQqAIBBF80DVHYSOYJ7BpG5QUifPjTB8/kBa0OKtHN+Mfo2m6+yHxExfwaqwEZ/LzAQvak6Fi/hCZiHIGvujb88chER8eDdeyWOAvDCP4sOzRPA50ovl+9QXyBpztfqko2U+mUUyfDbpK/WT2NPyP+R7wR7o0zJ960NYJhZ8BfZfkbFi7QazhQD9sAQAAA==
   </data>
  </layer>
- <layer name="avantplan" width="20" height="15">
+ <layer name="avantPlan" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
   </data>

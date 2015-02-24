@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="collision" tilewidth="32" tileheight="32">
   <image source="tuiles/collision.png" width="32" height="32"/>
  </tileset>
@@ -17,7 +17,7 @@
    H4sIAAAAAAAAC83SsQ3CMBCF4bNSABO4ACQadkBiBRBjeAgTBmGHQEFBA3TpETMg5uCQLuLp8DlBNBRfkcT+k5NTE1Eteo6orwzZSIwTzwfuvf8lgAOrgBeFaK5DRgQzaE0zvZiBbezNM72KZ9yJvbO/b8GWYqVa2Fyzkm3ZRjXO4pLY29UJOkdxM9bibM18es0VOm09nK2U+X7poYlx3+p5+jzTouWez/SCsTcF/22rF9V7u4hG7wFn/q17ovevnpvlAB2wBAAA
   </data>
  </layer>
- <layer name="leaves" width="20" height="15">
+ <layer name="avantPlan" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgoB/YzQjBuPjD0TxixEYBbQAs/tDDHJ8YofghNk2Qqo5YPNIBAOR8J5ywBAAA
   </data>
