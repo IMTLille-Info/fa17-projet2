@@ -210,26 +210,20 @@ public class WindowGame extends BasicGame {
 	
 	// Met à jour les variables pour le mouvement
 	public Exit isExit(int key){			
-		Exit exit = null;
-		
 		switch (key) {
     		case Input.KEY_UP:  
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1);
-    			break;
+    			return findExit(0, -1);
     		case Input.KEY_LEFT:
-    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE);
-    			break;
+    			return findExit(-1, 0);
     		case Input.KEY_DOWN:
-    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1);
-    			break;
+    			return findExit(0, 1);
     		case Input.KEY_RIGHT:
-    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE);
-    			break;
+    			return findExit(1,0);
 		}
-		return exit;	
+		return null;
+	}
+	
+	public Exit findExit(int x, int y){		
+		return map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE + x, (int) (objPlayer.getOrdinate() / TILE_SIZE) + y);
 	}
 }
