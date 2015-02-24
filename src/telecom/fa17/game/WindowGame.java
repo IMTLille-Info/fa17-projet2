@@ -5,6 +5,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.tiled.TiledMap;
 
 /**
  * @author FLORENT / PE / ÉTIENNE
@@ -79,13 +80,53 @@ public class WindowGame extends BasicGame {
 	    
     }
 	
+	private boolean isInTrigger(int id) {
+	    return x > map[indexMap].getMap().getObjectX(0, id)
+	            && x < map[indexMap].getMap().getObjectX(0, id) + map[indexMap].getMap().getObjectWidth(0, id)
+	            && y > map[indexMap].getMap().getObjectY(0, id)
+	            && y < map[indexMap].getMap().getObjectY(0, id) + map[indexMap].getMap().getObjectHeight(0, id);
+	}
+
+	private void teleport(int id) {
+	    this.x = Float.parseFloat(this.map[indexMap].getMap().getObjectProperty(0, id, "dest-x", Float.toString(this.x)));
+	    this.y = Float.parseFloat(this.map[indexMap].getMap().getObjectProperty(0, id, "dest-y", Float.toString(this.y)));
+	}
+	
+	void updateTrigger() throws SlickException {
+
+	    for (int objectID = 0; objectID < this.map[indexMap].getMap().getObjectCount(0); objectID++) {
+	        if (isInTrigger(objectID)) {
+	            String type = this.map[indexMap].getMap().getObjectType(0, objectID);
+	            if ("teleport".equals(type)) {
+	                teleport(objectID);
+	            } else if ("change-map".equals(type)) {
+	                changeMap(objectID);
+	            }
+	        }
+	    }
+	}
+	
+	private void changeMap(int objectID) throws SlickException {
+	    teleport(objectID);
+	    String newMap = this.map[indexMap].getMap().getObjectProperty(0, objectID, "dest-map", "undefined");
+	    if (!"undefined".equals(newMap)) {
+	    	int newindexMap = indexMap+1;
+	    	if(newindexMap>=map.length){
+	    		newindexMap=0;
+	    	}
+	        this.map[indexMap].setMap(map[newindexMap].getMap());
+	    }
+	}
+	
 	/** 
 	 * Met à jour les élément de la scène en fonction du delta temps qui est survenu. 
 	 * C’est ici que la logique du jeux est renfermé.
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-				
+
+		updateTrigger();
+		
 		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
 			
@@ -182,38 +223,5 @@ public class WindowGame extends BasicGame {
     			break;
 		}
 		return collision;	
-	}
-	
-	// Met à jour les variables pour le mouvement
-	public boolean isExit(int key){			
-		boolean exit = true;
-		
-		switch (key) {
-    		case Input.KEY_UP:  
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "trigger") == 0) { 
-    				exit = false;
-    			}
-    			break;
-    		case Input.KEY_LEFT:
-    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
-    				exit = false;
-    			}
-    			break;
-    		case Input.KEY_DOWN:
-    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map[indexMap].getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "trigger") == 0) {
-    				exit = false;
-    			}
-    			break;
-    		case Input.KEY_RIGHT:
-    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map[indexMap].getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "trigger") == 0) { 
-    				exit = false;
-    			}
-    			break;
-		}
-		return exit;	
 	}
 }

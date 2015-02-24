@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="left-up" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
   <image source="tuiles/allTiles.png" width="684" height="776"/>
  </tileset>
@@ -24,9 +24,13 @@
    H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5toaR6hsCDVv8Sq1QWy9QjEFbJ52NyGzz58fifGPFzhgE2cVPOwsUl1HynhRopefABXXKPbgY1PLfPwuR+bHDF5hlg96HIAKpMZ7rAEAAA=
   </data>
  </layer>
- <layer name="trigger" width="20" height="15">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgoEDuxiJlwMA7SvhMbAEAAA=
-  </data>
- </layer>
+ <objectgroup name="trigger" width="20" height="15">
+  <object name="go-firstmap" type="change-map" x="289" y="447" width="28" height="31">
+   <properties>
+    <property name="dest-map" value="firstMap.tmx"/>
+    <property name="dest-x" value="10"/>
+    <property name="dest-y" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
