@@ -7,6 +7,7 @@ import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -51,12 +52,12 @@ public class WindowGame extends BasicGame {
         TILE_SIZE = map.get(0).getTileDimension();
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
-        map.get(0).addExit(new Exit(9, 0, 9 * TILE_SIZE, 13 * TILE_SIZE, 1));
-        map.get(0).addExit(new Exit(10, 0, 16 * TILE_SIZE, 13 * TILE_SIZE, 1));
+        map.get(0).addExit(new Exit(9, 0, 9 * TILE_SIZE, 14 * TILE_SIZE, 1));
+        map.get(0).addExit(new Exit(10, 0, 16 * TILE_SIZE, 14 * TILE_SIZE, 1));
         
         map.add(new Map("secondMap"));
-        map.get(1).addExit(new Exit(9, 14, 9 * TILE_SIZE, 1, 0));
-        map.get(1).addExit(new Exit(16, 14, 10 * TILE_SIZE, 1, 0)); 
+        map.get(1).addExit(new Exit(9, 14, 9 * TILE_SIZE, 0, 0));
+        map.get(1).addExit(new Exit(16, 14, 10 * TILE_SIZE, 0, 0)); 
         
         // Charge la musique
         //Music background = new Music("resources/music/general.ogg");

@@ -40,6 +40,5 @@ public class Exit {
 	public int getMapNumber()
 	{
 		return nextMapNumber;
-	}
-	
+	}	
 }

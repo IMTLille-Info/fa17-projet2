@@ -16,11 +16,6 @@ public class Map {
 		   exits = new LinkedList<Exit>();
 	}
 	
-	public void chargeMap(String name) throws SlickException 
-	{
-		this.map = new TiledMap("resources/map/" + name + ".tmx");
-	}
-	
 	public int getTileDimension()
 	{
 		return this.map.getTileHeight();

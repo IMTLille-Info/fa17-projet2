@@ -16,15 +16,15 @@
  </layer>
  <layer name="avantplan" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjgH4gi3GgXTAKhjIAAB4jnvKwBAAA
+   H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
   </data>
  </layer>
  <layer name="logic" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5toaR6hsCDVv8Sq1QWy9QjEFbJ52NyGzz58fifGPFzhgE2cVPOwsUl1HynhRopefABXXKPbgY1PLfPwuR+bHDF5hlg96HIAKpMZ7rAEAAA=
+   H4sIAAAAAAAAC7VTQQ4AIAiy/7+o33VnYLDMrS0DiXTtVbWHVxKJ3iuHcZWnn3q3XqTvdblMV3lFDGvcuSd6qg/sPNVj+9Rf0rektgs1a7yD5VN6nX+GOX/GrUHsAI62G5ewBAAA
   </data>
  </layer>
- <layer name="trigger" width="20" height="15" visible="0">
+ <layer name="trigger" width="20" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NgGAWjYBSMgoEDuxiJlwMA7SvhMbAEAAA=
   </data>
