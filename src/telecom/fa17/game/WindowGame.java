@@ -149,55 +149,40 @@ public class WindowGame extends BasicGame {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
     				if(objPlayer.getOrdinate() > 0){ 
-    					if(exit != null){
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    					move(exit , key);
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
     				if(objPlayer.getAbsciss() > 0){ 
-    					if(exit != null){
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    					move(exit , key);
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
     				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
-    					if(exit != null){
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    					move(exit , key);
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
     				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
-    					if(exit != null){
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    					move(exit , key);
     				}
     			break;
 			}
 	    }
 	}
 	
+	public void move(Exit exit, int direction){
+		if(exit != null){
+			indexMap = exit.getMapNumber();
+			objPlayer.setAbsciss(exit.getNextAbsciss());
+			objPlayer.setOrdinate(exit.getNextOrdinate());
+		} else {
+			if(!isCollision(direction)) { objPlayer.setMoving(); }
+		}
+	}
 	// Met à jour les variables pour le mouvement
 	public boolean isCollision(int key)	{			
 		boolean collision = true;
