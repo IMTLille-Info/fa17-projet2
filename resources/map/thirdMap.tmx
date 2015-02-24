@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="left-up" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/allTiles.png" width="684" height="776"/>
+ </tileset>
+ <tileset firstgid="441" name="collision" tilewidth="32" tileheight="32" spacing="2">
+  <image source="tuiles/collision.png" width="32" height="32"/>
+ </tileset>
+ <layer name="general" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC62T3Q2DMAyEyUAskYoRIDP0BzaAFCbvISWSZS6JkfrwPdg6LpYPB9d13sAKtgYRvEGfyN/2CtZjeOVX0+k3Pamzn6xHMIGQ9NY6906/D5jBAp7gJea21rl38gU7OMTeY9Jba5mH9LPsvZWH9nsYsyn5sczknmsE4sfekXuuof/ff/l54te6r4H0omvPx/ZvucPSfHdzlZrorjeosw1EU+IHNYYhbrAEAAA=
+  </data>
+ </layer>
+ <layer name="avantPlan" width="20" height="15" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
+  </data>
+ </layer>
+ <layer name="logic" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9vJyMCwk8oYBtD5yOLEAFz68ZmH7g5S3Y2Nj40mxmx8+ikxj1g+vrghB5BjHj41xPiRWumNlDRHC/PwuZfY+CbWv7jsxyWHyzx85hMb99TGAFJLjQewBAAA
+  </data>
+ </layer>
+</map>
