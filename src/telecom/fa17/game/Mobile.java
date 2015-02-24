@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 
 public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 4;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
 	
 	private boolean moving = false;
 	private float absciss, ordinate;
@@ -74,11 +74,11 @@ public abstract class Mobile {
 	        switch (direction) {
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext('a', -1);
+	        			getNext(true, -1);
         				break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext('a', 1);
+	        			getNext(true, 1);
 						break;
 	        }
 		} 
@@ -90,23 +90,26 @@ public abstract class Mobile {
 	        switch (direction){
 	        	// On veut monter
 	        	case NORTH :
-	        			getNext('o', -1);
+	        			getNext(false, -1);
 	        			break;
 	        	// On veut descendre
 	        	case SOUTH :
-	        			getNext('o', 1);
+	        			getNext(false, 1);
     					break;
 	        }
 	    } 
 		return ordinate;
 	}
 	
-	public void getNext(char axe, int move){
+	public void getNext(boolean NORTHSOUTH, int move){
 		if((tempScale < scale)) { 
 			tempScale++;
 			if(tempScale % SLOW_ANIM == 0) {
-				if(axe == 'o'){ordinate += move;}
-				else{absciss += move;}				
+				if(NORTHSOUTH){
+					ordinate += move;
+				} else {
+					absciss += move;
+				}				
 			}
 		} else {
 			this.moving = false;
@@ -123,7 +126,7 @@ public abstract class Mobile {
 	}
 	
 	public boolean isAlive() {
-		if(getLife()==0){
+		if(getLife() == 0){
 			return false;
 		}
 		return true;

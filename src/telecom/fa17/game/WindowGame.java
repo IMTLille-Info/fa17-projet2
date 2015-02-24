@@ -149,25 +149,25 @@ public class WindowGame extends BasicGame {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
     				if(objPlayer.getOrdinate() > 0){ 
-    					move(exit , key);
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
     				if(objPlayer.getAbsciss() > 0){ 
-    					move(exit , key);
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
     				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
-    					move(exit , key);
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
     				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
-    					move(exit , key);
+    					move(exit, key);
     				}
     			break;
 			}
@@ -189,19 +189,18 @@ public class WindowGame extends BasicGame {
 		
 		switch (key) {
     		case Input.KEY_UP:  
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			return collisionNextCase(0,-1);
+    			return collisionNextCase(0, -1);
     		case Input.KEY_LEFT:
-    			return collisionNextCase(-1,0);
+    			return collisionNextCase(-1, 0);
     		case Input.KEY_DOWN:
-    			return collisionNextCase(0,1);
+    			return collisionNextCase(0, 1);
     		case Input.KEY_RIGHT:
-    			return collisionNextCase(1,0);
+    			return collisionNextCase(1, 0);
 		}
 		return collision;	
 	}
 	
-	public boolean collisionNextCase(int x , int y){
+	public boolean collisionNextCase(int x, int y){
 		if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic") == 0) { 
 			return false;
 		}
@@ -218,7 +217,7 @@ public class WindowGame extends BasicGame {
     		case Input.KEY_DOWN:
     			return findExit(0, 1);
     		case Input.KEY_RIGHT:
-    			return findExit(1,0);
+    			return findExit(1, 0);
 		}
 		return null;
 	}
