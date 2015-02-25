@@ -12,14 +12,6 @@ public class Exit extends Obstacle {
 				this.nextMapNumber = nextMapNb;
 		}
 
-		public float getAbsciss(){
-				return super.getAbsciss();
-		}
-
-		public float getOrdinate(){
-				return super.getOrdinate();
-		}
-
 		public float getNextAbsciss(){
 				return nextAbsciss;
 		}
