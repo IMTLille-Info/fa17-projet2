@@ -225,4 +225,9 @@ public class WindowGame extends BasicGame {
 	public Exit findExit(int x, int y){		
 		return map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE + x, (int) (objPlayer.getOrdinate() / TILE_SIZE) + y);
 	}
+	
+	public void displayText(Graphics g, String text, float absOrigi, float ordOrigin)
+	{
+		g.drawString(text, absOrigi, ordOrigin);
+	}
 }
