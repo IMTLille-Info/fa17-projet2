@@ -1,5 +1,6 @@
 package pokeslick.game.test;
 
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -10,51 +11,51 @@ import pokeslick.game.Player;
 
 public class AvatarTest {
 
-	Player objTest = new Player(64, 64, 32);
+	Player player = new Player(64, 64, 32);
+	Player PNG = new Player(64, 64, 32);
 	
 	@Before
 	public void setUp() throws Exception {
-		objTest.setMoving();
+		player.setMoving();
 	}
 
 	@Test
 	public void testGetAbsciss() {
-		assertEquals(0,0, objTest.getAbsciss());
+		assertEquals(0,0, player.getAbsciss());
 	}
 
 	@Test
 	public void testGetOrdinate() {
-		assertEquals(0,0, objTest.getOrdinate());
+		assertEquals(0,0, player.getOrdinate());
 	}
 
 	@Test
 	public void testGetNextAbsciss() {
-		objTest.setDirection(Direction.EAST);
+		player.setDirection(Direction.EAST);
 		for(int i = 0; i < 320; i++)
 		{
-			objTest.getNextAbsciss(1);
+			player.getNextAbsciss();
 		}
-		assertEquals(32,0, objTest.getNextAbsciss(1));
+		assertEquals(32,0, player.getNextAbsciss());
 	}
 
 	@Test
 	public void testGetNextOrdinate() {
-		objTest.setDirection(Direction.NORTH);
+		player.setDirection(Direction.NORTH);
 		for(int j = 0; j < 320; j++)
 		{
-			objTest.getNextOrdinate(1);
+			player.getNextOrdinate();
 		}
-		assertEquals(32,0, objTest.getNextOrdinate(1));
+		assertEquals(32,0, player.getNextOrdinate());
 	}
 
 	@Test
 	public void testGetStandingImage() {
-		assertEquals(null, objTest.getStandingImage());
+		assertEquals(null, player.getStandingImage());
 	}
 
 	@Test
 	public void testGetAnimation() {
-		assertEquals(null, objTest.getAnimation());
+		assertEquals(null, player.getAnimation());
 	}
-
 }

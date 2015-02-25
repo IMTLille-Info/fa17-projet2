@@ -1,4 +1,5 @@
 package pokeslick.game;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
-
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -117,8 +117,8 @@ public class WindowGame extends BasicGame {
 		}
 		
 		// Calcul des futurs coordonnées désirées
-		x = objPlayer.getNextAbsciss(delta);
-		y = objPlayer.getNextOrdinate(delta);
+		x = objPlayer.getNextAbsciss();
+		y = objPlayer.getNextOrdinate();
 	}
 	
 	/** 
@@ -127,7 +127,7 @@ public class WindowGame extends BasicGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
 		container.setShowFPS(false); // Désactivation de l'affichage des FPS
-		container.start(); // Démarrage du jeu (lancement de la fenêtre
+		container.start(); // Démarrage du jeu (lancement de la fenêtre)
     }
 	
 	/** 
@@ -150,119 +150,95 @@ public class WindowGame extends BasicGame {
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
-    				if(objPlayer.getOrdinate() > 0) 
-    				{ 
-    					if(exit != null)
-    					{
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    				if(objPlayer.getOrdinate() > 0){ 
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
-    				if(objPlayer.getAbsciss() > 0) 
-    				{ 
-    					if(exit != null)
-    					{
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    				if(objPlayer.getAbsciss() > 0){ 
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX)
-    				{ 
-    					if(exit != null)
-    					{
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
+    					move(exit, key);
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX) 
-    				{ 
-    					if(exit != null)
-    					{
-    						indexMap = exit.getMapNumber();
-    						objPlayer.setAbsciss(exit.getNextAbsciss());
-    						objPlayer.setOrdinate(exit.getNextOrdinate());
-    					} else {
-    						if(!isCollision(key)) { objPlayer.setMoving(); }
-    					}
+    				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
+    					move(exit, key);
     				}
     			break;
 			}
 	    }
 	}
 	
+	public void setMusic(String filename) throws SlickException
+	{
+		background.stop();
+		background = new Music("resources/music/" + filename);
+		background.loop();
+	}
+	
+	public void move(Exit exit, int direction) 
+	{
+		if(exit != null){
+			indexMap = exit.getMapNumber();
+			objPlayer.setAbsciss(exit.getNextAbsciss());
+			objPlayer.setOrdinate(exit.getNextOrdinate());
+			try {
+				setMusic(map.get(indexMap).getMusicFilename());
+			} catch (SlickException e) {
+				// Load FAIL
+				e.printStackTrace();
+			}
+		} else {
+			if(!isCollision(direction)) { objPlayer.setMoving(); }
+		}
+	}
 	// Met à jour les variables pour le mouvement
 	public boolean isCollision(int key)	{			
 		boolean collision = true;
 		
 		switch (key) {
     		case Input.KEY_UP:  
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(0, -1);
     		case Input.KEY_LEFT:
-    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(-1, 0);
     		case Input.KEY_DOWN:
-    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1, "logic") == 0) {
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(0, 1);
     		case Input.KEY_RIGHT:
-    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE, "logic") == 0) { 
-    				collision = false;
-    			}
-    			break;
+    			return collisionNextCase(1, 0);
 		}
 		return collision;	
 	}
 	
+	public boolean collisionNextCase(int x, int y){
+		if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic") == 0) { 
+			return false;
+		}
+		return true;
+	}
+	
 	// Met à jour les variables pour le mouvement
 	public Exit isExit(int key){			
-		Exit exit = null;
-		
 		switch (key) {
     		case Input.KEY_UP:  
-    			// Vérification tuile (X, Y - 1) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) - 1);
-    			break;
+    			return findExit(0, -1);
     		case Input.KEY_LEFT:
-    			// Vérification tuile (X - 1, Y) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) (objPlayer.getAbsciss() / TILE_SIZE) - 1, (int) objPlayer.getOrdinate() / TILE_SIZE);
-    			break;
+    			return findExit(-1, 0);
     		case Input.KEY_DOWN:
-    			// Vérification tuile (X, Y + 1) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE, (int) (objPlayer.getOrdinate() / TILE_SIZE) + 1);
-    			break;
+    			return findExit(0, 1);
     		case Input.KEY_RIGHT:
-    			// Vérification tuile (X + 1, Y) par rapport à l'actuel
-    			exit = map.get(indexMap).getExitByCoordinate((int) (objPlayer.getAbsciss() / TILE_SIZE) + 1, (int) objPlayer.getOrdinate() / TILE_SIZE);
-    			break;
+    			return findExit(1, 0);
 		}
-		return exit;	
+		return null;
+	}
+	
+	public Exit findExit(int x, int y){		
+		return map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE + x, (int) (objPlayer.getOrdinate() / TILE_SIZE) + y);
 	}
 }
