@@ -29,6 +29,7 @@ public class WindowGame extends BasicGame {
 				  y = 256;
 	
 	Music background;
+	String control = "AUCUNE";
 	
 	Player objPlayer;
 
@@ -91,7 +92,8 @@ public class WindowGame extends BasicGame {
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
-	    
+		g.drawString("© Copyright : Florent 2015", (WIDTH_MAX / 2) - 3 * TILE_SIZE, HEIGHT_MAX);
+		g.drawString(control, WIDTH_MAX - 2 * TILE_SIZE, HEIGHT_MAX);
     }
 	
 	/** 
@@ -151,25 +153,25 @@ public class WindowGame extends BasicGame {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
     				if(objPlayer.getOrdinate() > 0){ 
-    					move(exit, key);
+    					move(exit, key); control = "HAUT";
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
     				if(objPlayer.getAbsciss() > 0){ 
-    					move(exit, key);
+    					move(exit, key); control = "GAUCHE";
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
     				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
-    					move(exit, key);
+    					move(exit, key); control = "BAS";
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
     				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
-    					move(exit, key);
+    					move(exit, key); control = "DROITE";
     				}
     			break;
 			}
