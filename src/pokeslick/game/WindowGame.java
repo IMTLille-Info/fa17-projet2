@@ -92,8 +92,8 @@ public class WindowGame extends BasicGame {
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
-		g.drawString("© Copyright : Florent 2015", (WIDTH_MAX / 2) - 3 * TILE_SIZE, HEIGHT_MAX);
-		g.drawString(control, WIDTH_MAX - 2 * TILE_SIZE, HEIGHT_MAX);
+		displayText(g, "© Copyright : Florent 2015", (WIDTH_MAX / 2) - 3 * TILE_SIZE, HEIGHT_MAX);
+		displayText(g, control, WIDTH_MAX - 2 * TILE_SIZE, HEIGHT_MAX);
     }
 	
 	/** 
@@ -242,5 +242,10 @@ public class WindowGame extends BasicGame {
 	
 	public Exit findExit(int x, int y){		
 		return map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE + x, (int) (objPlayer.getOrdinate() / TILE_SIZE) + y);
+	}
+	
+	public void displayText(Graphics g, String text, float absOrigi, float ordOrigin)
+	{
+		g.drawString(text, absOrigi, ordOrigin);
 	}
 }
