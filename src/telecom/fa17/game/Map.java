@@ -12,10 +12,12 @@ public class Map {
 	private TiledMap map;
 	
 	private List<Obstacle> obstacles;
+	private List<Mobile> mobiles;
 	
 	public Map(String name) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   obstacles = new LinkedList<Obstacle>();
+		   mobiles = new LinkedList<Mobile>();
 	}
 	
 	public int getTileDimension(){
@@ -50,6 +52,10 @@ public class Map {
 	
 	public void removeExit(int prm){
 		obstacles.remove(prm);
+	}
+	
+	public void addMobile(Mobile mobile){
+		this.mobiles.add(mobile);
 	}
 	
 	// Return an Exit object if the next Coordinate of the player are an Exit

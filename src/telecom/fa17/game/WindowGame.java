@@ -177,6 +177,7 @@ public class WindowGame extends BasicGame {
 	public void move(Exit exit, int direction){
 		if(exit != null){
 			indexMap = exit.getMapNumber();
+			map.get(indexMap).addMobile(objPlayer);
 			objPlayer.setAbsciss(exit.getNextAbsciss());
 			objPlayer.setOrdinate(exit.getNextOrdinate());
 		} else {
