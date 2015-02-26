@@ -129,7 +129,6 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-		Exit exit = null;
 		boolean collision = false;
 		
 		// Touche ESC on termine le programme
@@ -154,12 +153,10 @@ public class WindowGame extends BasicGame {
     			break;
 			}
 			
-			exit = map.get(indexMap).findExit(key, objPlayer.getPosition());
 			collision = map.get(indexMap).findCollision(key, objPlayer.getPosition());
-			
 			if((!objPlayer.isOnEdge(WIDTH_MAX, HEIGHT_MAX) && !collision))
 			{
-				move(exit, key);
+				move(map.get(indexMap).findExit(key, objPlayer.getPosition()), key);
 			}
 	    }
 	}

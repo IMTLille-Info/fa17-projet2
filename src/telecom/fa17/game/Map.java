@@ -73,6 +73,8 @@ public class Map {
 	public boolean findCollision(int key, Position pos) 
 	{		
 		Position nextPos = getNextPosition(key, pos);
+		System.out.println("NEXTX = " + nextPos.getAbsciss() + "| NEXTY = " + nextPos);
+		
 		return (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0) 
 			? false : true;	
 	}
