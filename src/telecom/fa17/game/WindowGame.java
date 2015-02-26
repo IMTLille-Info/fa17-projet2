@@ -19,7 +19,7 @@ public class WindowGame extends BasicGame {
     private GameContainer container;
 	private List<Map> map;
 	
-	// Constantes de la Map
+	// Constantes de Map
 	int WIDTH_MAX, HEIGHT_MAX;
 	// Map en cours d'affichage
 	int indexMap = 0;
