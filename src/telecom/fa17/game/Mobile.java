@@ -146,6 +146,6 @@ public abstract class Mobile {
 	}
 	
 	public void attack(){
-		
+//		this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic")
 	}
 }
