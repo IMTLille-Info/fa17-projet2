@@ -9,14 +9,15 @@ public abstract class Obstacle {
 	protected boolean isCrossable;
 	protected Image img;
 	
-	public Obstacle(float absciss, float ordinate)
+	public Obstacle(float absciss, float ordinate, boolean isCrossable)
 	{
 		this.absciss = absciss;
 		this.ordinate = ordinate;
+		this.isCrossable = isCrossable;
 	}
 	
-	public Obstacle(float absciss, float ordinate, Image image){
-		this(absciss, ordinate);
+	public Obstacle(float absciss, float ordinate,boolean isCrossable, Image image){
+		this(absciss, ordinate, isCrossable);
 		this.img = image;
 	}
 	

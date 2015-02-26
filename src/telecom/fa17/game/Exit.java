@@ -6,7 +6,7 @@ public class Exit extends Obstacle {
 		private int nextMapNumber;
 
 		public Exit(float abs, float ord, float nextAbs, float nextOrd, int nextMapNb){
-				super(abs, ord);
+				super(abs, ord,true);
 				this.nextAbsciss = nextAbs;
 				this.nextOrdinate = nextOrd;
 				this.nextMapNumber = nextMapNb;
