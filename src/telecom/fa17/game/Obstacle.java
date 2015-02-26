@@ -4,33 +4,33 @@ import org.newdawn.slick.Image;
 
 public abstract class Obstacle {
 	
-	private float absciss,
-				  ordinate; //a revoir mais je reprends le meme systeme que joueur
+	private Position position;
 	protected boolean isCrossable;
 	protected Image img;
 	
-	public Obstacle(float absciss, float ordinate)
+	public Obstacle(float x, float y)
 	{
-		this.absciss = absciss;
-		this.ordinate = ordinate;
+		position = new Position(x, y);
 	}
 	
-	public Obstacle(float absciss, float ordinate, Image image){
-		this(absciss, ordinate);
-		this.img = image;
-	}
+	public abstract void init();
 	
 	public boolean isCrossable(){
 		return isCrossable;
 	}
 	
-	public float getAbsciss()
-	{
-			return absciss;
+	public Position getPosition(){
+		return position;
 	}
-
-	public float getOrdinate()
+	
+	public void setPosition(Position pos)
 	{
-			return ordinate;
+		position = pos;
+	}
+	
+	public void setPosition(float x, float y)
+	{
+		position.setAbsciss(x);
+		position.setOrdinate(y);
 	}
 }
