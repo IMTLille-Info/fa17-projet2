@@ -3,6 +3,7 @@ package telecom.fa17.game;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -10,7 +11,6 @@ import telecom.fa17.game.Exit;
 
 public class Map {
 	private TiledMap map;
-	
 	private List<Obstacle> obstacles;
 	
 	public Map(String name) throws SlickException {
@@ -51,14 +51,45 @@ public class Map {
 	public void removeExit(int prm){
 		obstacles.remove(prm);
 	}
+		
+	public Position getNextPosition(int key, Position pos)
+	{
+		float x = 0, y = 0;
+		
+		switch (key) {
+    		case Input.KEY_UP:  
+    			y = -getTileDimension();
+    			break;
+    		case Input.KEY_LEFT:
+    			x = -getTileDimension();
+    			break;
+    		case Input.KEY_DOWN:
+    			y = getTileDimension();
+    			break;
+    		case Input.KEY_RIGHT:
+    			x = getTileDimension();
+    			break;
+		}
+		return new Position(pos.getAbsciss() + x, pos.getOrdinate() + y);
+	}
 	
-	// Return an Exit object if the next Coordinate of the player are an Exit
-	public Exit getExitByCoordinate(float x, float y){
+	// Met à jour les variables pour le mouvement
+	public boolean findCollision(int key, Position pos) 
+	{		
+		Position nextPos = getNextPosition(key, pos);
+
+		return (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0) 
+			? false : true;	
+	}
+	
+	public Exit findExit(int key, Position pos)
+	{	
+		Position nextPos = getNextPosition(key, pos);
 		int i = 0;
 		boolean found = false;
 		
 		while((i < obstacles.size() && !found)){
-			if((obstacles.get(i).getAbsciss() == x) && (obstacles.get(i).getOrdinate() == y)){
+			if(Position.equals(obstacles.get(i).getPosition(), nextPos)){
 				found = true;
 			} else {
 				i++;

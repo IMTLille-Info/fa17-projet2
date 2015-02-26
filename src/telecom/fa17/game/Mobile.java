@@ -6,10 +6,11 @@ import org.newdawn.slick.SlickException;
 
 public abstract class Mobile {
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
-	private float absciss, ordinate;
+	private Position position;
+	
 	private Direction direction = Direction.SOUTH;
 	protected int life;
 	protected boolean isMobile;
@@ -30,8 +31,7 @@ public abstract class Mobile {
 	}
 
 	public Mobile(float x, float y, int tileSize){
-		absciss = x;
-		ordinate = y;
+		position = new Position(x, y);
 		scale = tileSize * SLOW_ANIM;
 	}
 	
@@ -42,7 +42,6 @@ public abstract class Mobile {
 	}
 	
 	public void setMoving(){
-		tempScale = 0;
 		moving = true;
 	}
 	
@@ -50,13 +49,10 @@ public abstract class Mobile {
 		return moving;
 	}
 	
-	public float getAbsciss(){
-		return absciss;
+	public Position getPosition(){
+		return position;
 	}
-	
-	public float getOrdinate(){
-		return ordinate;
-	}
+<<<<<<< HEAD
 	
 	public void setAbsciss(float prmAbs){
 		absciss = prmAbs;
@@ -68,18 +64,44 @@ public abstract class Mobile {
 	
 	public float getNextAbsciss(){
 		if (this.moving) {
+=======
+
+	public void setPosition(Position pos)
+	{
+		position = pos;
+	}
+	
+	public void setPosition(float x, float y)
+	{
+		position.setAbsciss(x);
+		position.setOrdinate(y);
+	}
+	
+	public void getNextPosition()
+	{
+		if (moving) {
+>>>>>>> RefactoringMethod
 	        switch (direction) {
+        		// On veut monter
+        		case NORTH :
+        			getNext(false, true);
+        			break;
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(false, -1);
+	        			getNext(true, false);
         				break;
+        	        	// On veut descendre
+        	    case SOUTH :
+        	        	getNext(false, false);
+            			break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(false, 1);
+	        			getNext(true, true);
 						break;
 	        	default:
 	        			break;
 	        }
+<<<<<<< HEAD
 		} 
 		return absciss;
 	}
@@ -98,25 +120,30 @@ public abstract class Mobile {
 	        	default:
 	        			break;
 	        }
+=======
+>>>>>>> RefactoringMethod
 	    } 
-		return ordinate;
 	}
 	
-	public void getNext(boolean NORTHSOUTH, int move){
+	public void getNext(boolean HORIZONTAL, boolean UP)
+	{			
+		int x = 0, y = 0;
 		if((tempScale < scale)) { 
 			tempScale++;
 			if(tempScale % SLOW_ANIM == 0) {
-				if(NORTHSOUTH){
-					ordinate += move;
-				} else {
-					absciss += move;
-				}				
-			}
+				if(HORIZONTAL)
+				{ 
+					x = (UP) ? 1 : -1; 
+				} else { 
+					y = (UP) ? -1 : 1; 			
+				}
+				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
+			} 
 		} else {
-			this.moving = false;
+			moving = false;
+			tempScale = 0;
 		}
 	}
-	
 	
 	public Image getStandingImage()	{
 		return standings[direction.index];
