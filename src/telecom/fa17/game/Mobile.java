@@ -58,18 +58,15 @@ public abstract class Mobile {
 		return ordinate;
 	}
 	
-	public void setAbsciss(float prmAbs)
-	{
+	public void setAbsciss(float prmAbs){
 		absciss = prmAbs;
 	}
 	
-	public void setOrdinate(float prmOrd)
-	{
+	public void setOrdinate(float prmOrd){
 		ordinate = prmOrd;
 	}
 	
-	public float getNextAbsciss()
-	{
+	public float getNextAbsciss(){
 		if (this.moving) {
 	        switch (direction) {
 	        	// On veut aller à gauche
@@ -80,6 +77,8 @@ public abstract class Mobile {
 	        	case WEST :
 	        			getNext(false, 1);
 						break;
+	        	default:
+	        			break;
 	        }
 		} 
 		return absciss;
@@ -96,6 +95,8 @@ public abstract class Mobile {
 	        	case SOUTH :
 	        			getNext(true, 1);
     					break;
+	        	default:
+	        			break;
 	        }
 	    } 
 		return ordinate;

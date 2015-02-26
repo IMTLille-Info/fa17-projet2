@@ -9,8 +9,7 @@ public abstract class Obstacle {
 	protected boolean isCrossable;
 	protected Image img;
 	
-	public Obstacle(float absciss, float ordinate, boolean isCrossable)
-	{
+	public Obstacle(float absciss, float ordinate, boolean isCrossable){
 		this.absciss = absciss;
 		this.ordinate = ordinate;
 		this.isCrossable = isCrossable;
@@ -25,13 +24,11 @@ public abstract class Obstacle {
 		return isCrossable;
 	}
 	
-	public float getAbsciss()
-	{
+	public float getAbsciss(){
 			return absciss;
 	}
 
-	public float getOrdinate()
-	{
+	public float getOrdinate(){
 			return ordinate;
 	}
 }

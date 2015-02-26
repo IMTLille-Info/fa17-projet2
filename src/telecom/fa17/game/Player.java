@@ -6,16 +6,14 @@ import org.newdawn.slick.SlickException;
 
 public class Player extends Mobile {
 	
-	public Player(float x, float y, int tileSize)
-	{
+	public Player(float x, float y, int tileSize){
 		super(x, y, tileSize);
 		attack = 10;
 		life = 50;
 		// MARQUES DE COMMENTAIRES A METTRE POUR MODE TEST SUR LE TRY
 	}
 	
-	public void init() throws SlickException
-	{
+	public void init() throws SlickException{
 		// Images du joueur correspondante à ces états statiques
 		standings[Direction.NORTH.index] = new Image("resources/map/player/personStandUp.png");
 		standings[Direction.EAST.index] = new Image("resources/map/player/personStandLeft.png");
