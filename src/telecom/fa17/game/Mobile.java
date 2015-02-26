@@ -66,8 +66,7 @@ public abstract class Mobile {
 	
 	public void getNextPosition()
 	{
-		System.out.println();
-		if (this.moving) {
+		if (moving) {
 	        switch (direction) {
         		// On veut monter
         		case NORTH :
@@ -89,8 +88,8 @@ public abstract class Mobile {
 	    } 
 	}
 	
-	public void getNext(boolean HORIZONTAL, boolean UP){
-			
+	public void getNext(boolean HORIZONTAL, boolean UP)
+	{			
 		int x = 0, y = 0;
 		if((tempScale < scale)) { 
 			tempScale++;
@@ -107,16 +106,6 @@ public abstract class Mobile {
 			moving = false;
 			tempScale = 0;
 		}
-	}
-	
-	public boolean isOnEdge(int width, int height)
-	{
-		if((position.getOrdinate() > 0) &&
-		   (position.getAbsciss() > 0) &&
-		   (position.getOrdinate() < height) &&
-		   (position.getAbsciss() < width)) 
-		{ return false; } else { return true; }
-
 	}
 	
 	public Image getStandingImage()	{

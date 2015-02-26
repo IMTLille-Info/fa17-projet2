@@ -52,19 +52,23 @@ public class Map {
 		obstacles.remove(prm);
 	}
 		
-	private Position getNextPosition(int key, Position pos)
+	public Position getNextPosition(int key, Position pos)
 	{
-		int x = 0, y = 0;
+		float x = 0, y = 0;
 		
 		switch (key) {
     		case Input.KEY_UP:  
     			y = -getTileDimension();
+    			break;
     		case Input.KEY_LEFT:
     			x = -getTileDimension();
+    			break;
     		case Input.KEY_DOWN:
     			y = getTileDimension();
+    			break;
     		case Input.KEY_RIGHT:
     			x = getTileDimension();
+    			break;
 		}
 		return new Position(pos.getAbsciss() + x, pos.getOrdinate() + y);
 	}
@@ -73,8 +77,7 @@ public class Map {
 	public boolean findCollision(int key, Position pos) 
 	{		
 		Position nextPos = getNextPosition(key, pos);
-		System.out.println("NEXTX = " + nextPos.getAbsciss() + "| NEXTY = " + nextPos);
-		
+
 		return (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0) 
 			? false : true;	
 	}
@@ -86,7 +89,7 @@ public class Map {
 		boolean found = false;
 		
 		while((i < obstacles.size() && !found)){
-			if((obstacles.get(i).getPosition() == nextPos)){
+			if(Position.equals(obstacles.get(i).getPosition(), nextPos)){
 				found = true;
 			} else {
 				i++;

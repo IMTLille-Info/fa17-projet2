@@ -47,23 +47,19 @@ public class WindowGame extends BasicGame {
         map.add(new Map("firstMap"));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
-        map.get(0).addExit(new Exit(9, 0, 9 * 32, 14 * 32, 1));
-        map.get(0).addExit(new Exit(10, 0, 16 * 32, 14 * 32, 1));
+        map.get(0).addExit(new Exit(9 * 32, 0, 9 * 32, 14 * 32, 1));
+        map.get(0).addExit(new Exit(10 * 32, 0, 16 * 32, 14 * 32, 1));
         
         map.add(new Map("secondMap"));
-        map.get(1).addExit(new Exit(9, 14, 9 * 32, 0, 0));
-        map.get(1).addExit(new Exit(16, 14, 10 * 32, 0, 0)); 
-        map.get(1).addExit(new Exit(4, 6, 5 * 32, 7 * 32, 2)); 
+        map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
+        map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
+        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 5 * 32, 7 * 32, 2)); 
         
         map.add(new Map("thirdMap"));
-        map.get(2).addExit(new Exit(5, 7, 4 * 32, 6 * 32, 1));
-        
-        // Charge la musique
-        //Music background = new Music("resources/music/general.ogg");
-        //background.loop();
+        map.get(2).addExit(new Exit(5 * 32, 7 * 32, 4 * 32, 6 * 32, 1));
         
         // Création d'un joueur
-        objPlayer = new Player(320, 256, this.map.get(indexMap).getTileDimension());
+        objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
     }
 	
@@ -129,7 +125,8 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-		boolean collision = false;
+		
+		boolean isOnEdge = true;
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
@@ -141,38 +138,56 @@ public class WindowGame extends BasicGame {
 			switch (key) {
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
+    				if(objPlayer.getPosition().getOrdinate() > 0)
+    				{
+    					isOnEdge = false;
+    				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
+       				if(objPlayer.getPosition().getAbsciss() > 0)
+    				{
+    					isOnEdge = false;
+    				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
+       				if(objPlayer.getPosition().getOrdinate() < HEIGHT_MAX)
+    				{
+    					isOnEdge = false;
+    				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
+       				if(objPlayer.getPosition().getAbsciss() < WIDTH_MAX)
+    				{
+    					isOnEdge = false;
+    				}
     			break;
 			}
-			
-			collision = map.get(indexMap).findCollision(key, objPlayer.getPosition());
-			if((!objPlayer.isOnEdge(WIDTH_MAX, HEIGHT_MAX) && !collision))
-			{
-				move(map.get(indexMap).findExit(key, objPlayer.getPosition()), key);
+
+			// Il n'est pas sur le bord de la fenêtre
+			if(!isOnEdge)
+			{ 
+				// La prochaine case n'est pas une collision
+				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition()))
+				{
+					Exit exit = map.get(indexMap).findExit(key, objPlayer.getPosition());
+					// Pas de collision, on vérifie si ce n'est pas une sortie
+					if(exit != null)
+					{
+						indexMap = exit.getMapNumber();
+						objPlayer.setPosition(exit.getNextPosition());
+					} else {
+						objPlayer.setMoving();
+					}
+				}
 			}
 	    }
-	}
+	}	
 	
-	public void move(Exit exit, int direction){
-		if(exit != null){
-			indexMap = exit.getMapNumber();
-			objPlayer.setPosition(exit.getNextPosition());
-		} else {
-			objPlayer.setMoving();
-		}
-	}
-		
-	
-	public void displayText(Graphics g, String text, float absOrigi, float ordOrigin)
+	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin)
 	{
-		g.drawString(text, absOrigi, ordOrigin);
+		g.drawString(text, absOrigin, ordOrigin);
 	}
 }

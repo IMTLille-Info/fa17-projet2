@@ -29,4 +29,14 @@ public class Position {
 	{
 		ordinate = ord;
 	}
+	
+	public static boolean equals(Position arg0, Position arg1)
+	{
+		boolean equals = true;
+		if((arg0.getAbsciss() != arg1.getAbsciss()) || (arg0.getOrdinate() != arg1.getOrdinate()))
+		{
+			equals = false;
+		}
+		return equals;
+	}
 }
