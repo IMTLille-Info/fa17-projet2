@@ -4,16 +4,9 @@ public class Exit extends Obstacle {
 		private Position nextPosition;
 		private int nextMapNumber;
 
-<<<<<<< HEAD
-		public Exit(float abs, float ord, float nextAbs, float nextOrd, int nextMapNb){
-				super(abs, ord,true);
-				this.nextAbsciss = nextAbs;
-				this.nextOrdinate = nextOrd;
-=======
 		public Exit(float x, float y, float nextAbs, float nextOrd, int nextMapNb){
-				super(x, y);
+				super(x, y, true);
 				nextPosition = new Position(nextAbs, nextOrd);
->>>>>>> RefactoringMethod
 				this.nextMapNumber = nextMapNb;
 		}
 

@@ -8,38 +8,18 @@ public abstract class Obstacle {
 	protected boolean isCrossable;
 	protected Image img;
 	
-<<<<<<< HEAD
-	public Obstacle(float absciss, float ordinate, boolean isCrossable){
-		this.absciss = absciss;
-		this.ordinate = ordinate;
+	public Obstacle(float x, float y, boolean isCrossable)
+	{
+		position = new Position(x, y);
 		this.isCrossable = isCrossable;
 	}
 	
-	public Obstacle(float absciss, float ordinate,boolean isCrossable, Image image){
-		this(absciss, ordinate, isCrossable);
-		this.img = image;
-	}
-=======
-	public Obstacle(float x, float y)
-	{
-		position = new Position(x, y);
-	}
-	
 	public abstract void init();
->>>>>>> RefactoringMethod
 	
 	public boolean isCrossable(){
 		return isCrossable;
 	}
 	
-<<<<<<< HEAD
-	public float getAbsciss(){
-			return absciss;
-	}
-
-	public float getOrdinate(){
-			return ordinate;
-=======
 	public Position getPosition(){
 		return position;
 	}
@@ -53,6 +33,5 @@ public abstract class Obstacle {
 	{
 		position.setAbsciss(x);
 		position.setOrdinate(y);
->>>>>>> RefactoringMethod
 	}
 }

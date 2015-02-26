@@ -52,19 +52,6 @@ public abstract class Mobile {
 	public Position getPosition(){
 		return position;
 	}
-<<<<<<< HEAD
-	
-	public void setAbsciss(float prmAbs){
-		absciss = prmAbs;
-	}
-	
-	public void setOrdinate(float prmOrd){
-		ordinate = prmOrd;
-	}
-	
-	public float getNextAbsciss(){
-		if (this.moving) {
-=======
 
 	public void setPosition(Position pos)
 	{
@@ -80,7 +67,6 @@ public abstract class Mobile {
 	public void getNextPosition()
 	{
 		if (moving) {
->>>>>>> RefactoringMethod
 	        switch (direction) {
         		// On veut monter
         		case NORTH :
@@ -101,28 +87,7 @@ public abstract class Mobile {
 	        	default:
 	        			break;
 	        }
-<<<<<<< HEAD
-		} 
-		return absciss;
-	}
-	
-	public float getNextOrdinate(){		
-		if (this.moving){
-	        switch (direction){
-	        	// On veut monter
-	        	case NORTH :
-	        			getNext(true, -1);
-	        			break;
-	        	// On veut descendre
-	        	case SOUTH :
-	        			getNext(true, 1);
-    					break;
-	        	default:
-	        			break;
-	        }
-=======
->>>>>>> RefactoringMethod
-	    } 
+		}
 	}
 	
 	public void getNext(boolean HORIZONTAL, boolean UP)
