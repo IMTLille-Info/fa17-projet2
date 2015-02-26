@@ -9,20 +9,20 @@ public class Sounds {
 	
 	public Sounds(){}
 	
-	//////////////////////// Monsters & Players Sounds
-	// Peut être utilisée 
-	// Lorsqu'un joueur/monstre meurt
-	// Lorsqu'un joueur/ monstre attaque - différent selon arme
-	// Lorsqu'un joueur ramasse un objet
-	// Sons différents possibles selon monstres
-	//
-	// format String play : "resources/music/exemple.ogg"
+	/********************** Monsters & Players Sounds
+	** Peut être utilisée 
+	** Lorsqu'un joueur/monstre meurt
+	** Lorsqu'un joueur/ monstre attaque - différent selon arme
+	** Lorsqu'un joueur ramasse un objet
+	** Sons différents possibles selon monstres
+	**
+	** format String play : "resources/music/exemple.ogg"*/
 	public void playSound(String play) throws SlickException {
 		Music playSound = new Music(play);
 		playSound.play();
 	}
 	
-	//////////////////////// Winner/Loser Sounds
+	/********************** Winner/Loser Sounds */
 		public void  WinSound() throws SlickException {
 		StopBackgroundMusic(this.backgroundMusic);
 		Music WinSound = new Music("resources/music/exemple.ogg");
@@ -35,7 +35,7 @@ public class Sounds {
  		GameOverSound.play();
 	}
 	
-	//////////////////////// Background Music
+	/********************** Background Music */
 		public void StopBackgroundMusic(Music currentMusic) {
 		if(currentMusic.playing()){
 			currentMusic.stop();
