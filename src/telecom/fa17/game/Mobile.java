@@ -16,27 +16,21 @@ public abstract class Mobile {
 	protected boolean isMobile;
 	protected int attack;
 	
-	protected Animation[] animations = new Animation[4];
-	protected Image[] standings = new Image[4];
+	protected Animation[] animations;
+	protected Image[] standings;
 	
 	private int scale, tempScale = 0;
 	
-	public int getAttack() {
-		return attack;
-	}
-
-	public void setAttack(int attack) {
-		//objet récupéré peut augmenter l'attaque du joueur
-		this.attack = attack;
-	}
-
 	public Mobile(float x, float y, int tileSize){
 		position = new Position(x, y);
 		scale = tileSize * SLOW_ANIM;
+		
+		animations = new Animation[4];
+		standings = new Image[4];
 	}
 	
 	public abstract void init() throws SlickException;
-	
+		
 	public void setDirection(Direction dir){
 		direction = dir;
 	}
@@ -140,5 +134,14 @@ public abstract class Mobile {
 	
 	public void attack(){
 		
+	}
+	
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		//objet récupéré peut augmenter l'attaque du joueur
+		this.attack = attack;
 	}
 }
