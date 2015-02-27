@@ -1,6 +1,6 @@
 package telecom.fa17.game;
 
-public abstract class Item extends Object{
+public abstract class Item extends Element{
 
 	int LifeBonus;// peut etre positif ou negatif
 	int attackBonus;//peut etre positif ou negatif

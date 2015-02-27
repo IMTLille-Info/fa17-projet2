@@ -1,11 +1,11 @@
 package telecom.fa17.game;
 
-public abstract class Object {
+public abstract class Element {
 	
 	protected Position position;
 	protected boolean isCrossable;
 		
-	public Object(float x, float y, boolean isCrossable){
+	public Element(float x, float y, boolean isCrossable){
 		position = new Position(x, y);
 		this.isCrossable = isCrossable;
 	}

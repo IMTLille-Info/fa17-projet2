@@ -4,7 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile extends Object{
+public abstract class Mobile extends Element{
 	
 	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
