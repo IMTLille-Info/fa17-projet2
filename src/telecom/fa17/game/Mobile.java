@@ -84,7 +84,7 @@ public abstract class Mobile {
 		}
 	}
 	
-	public void getNext(boolean HORIZONTAL, boolean UP)
+	private void getNext(boolean HORIZONTAL, boolean UP)
 	{			
 		int x = 0, y = 0;
 		if((tempScale < scale)) { 

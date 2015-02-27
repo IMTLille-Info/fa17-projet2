@@ -14,8 +14,7 @@ public class PNJ extends Mobile {
 
 	@Override
 	public void init() throws SlickException {
-		int result = 1 + new Random().nextInt(3);
-		switch(result)
+		switch(new Random().nextInt(3))
 		{
 			case 0 :
 					standings[Direction.SOUTH.index] = new Image("resources/map/monster/monsterOne.png");;
