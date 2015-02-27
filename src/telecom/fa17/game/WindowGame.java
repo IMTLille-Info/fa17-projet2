@@ -53,13 +53,13 @@ public class WindowGame extends BasicGame {
         map.add(new Map("secondMap"));
         map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
-        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 5 * 32, 7 * 32, 2));
+        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 1 * 32, 13 * 32, 2));
         PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension());
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap"));
-        map.get(2).addExit(new Exit(5 * 32, 7 * 32, 4 * 32, 6 * 32, 1));
+        map.get(2).addExit(new Exit(1 * 32, 13 * 32, 4 * 32, 6 * 32, 1));
         
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
@@ -86,6 +86,7 @@ public class WindowGame extends BasicGame {
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
+		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
 
     }
 	

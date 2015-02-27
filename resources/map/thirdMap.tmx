@@ -8,7 +8,7 @@
  </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC62T3Q2DMAyEyUAskYoRIDP0BzaAFCbvISWSZS6JkfrwPdg6LpYPB9d13sAKtgYRvEGfyN/2CtZjeOVX0+k3Pamzn6xHMIGQ9NY6906/D5jBAp7gJea21rl38gU7OMTeY9Jba5mH9LPsvZWH9nsYsyn5sczknmsE4sfekXuuof/ff/l54te6r4H0omvPx/ZvucPSfHdzlZrorjeosw1EU+IHNYYhbrAEAAA=
+   H4sIAAAAAAAAC62T3Q2DMAyEyUAskaojQGagP2wAaTs5FymWLPeaGKkP34Ot42L5cArDEB1sYO+QwR2MFfl2NLAeIxq/ls6+GUktfrqewAxS1Xtr6RW/B3iCFSzgpub21tIrvMAbfNTec9V7a52H9vPsvZfHGb9W1iwP6es9t0jEj72j99zC/r//8ovEr3dfV9LLoT8f27/nDsXvYuY7m6vW5PB9gzbbRDS/OADBQtUssAQAAA==
   </data>
  </layer>
  <layer name="avantPlan" width="20" height="15" visible="0">
@@ -16,7 +16,7 @@
    H4sIAAAAAAAAC2NgGAWjYBSMgqEBAGlKTgywBAAA
   </data>
  </layer>
- <layer name="logic" width="20" height="15">
+ <layer name="logic" width="20" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC9vJyMCwk8oYBtD5yOLEAFz68ZmH7g5S3Y2Nj40mxmx8+ikxj1g+vrghB5BjHj41xPiRWumNlDRHC/PwuZfY+CbWv7jsxyWHyzx85hMb99TGAFJLjQewBAAA
   </data>
