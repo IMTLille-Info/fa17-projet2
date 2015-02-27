@@ -82,7 +82,7 @@ public class Map {
 			int i =0;
 			if(!adversaries.isEmpty()){
 				while(i < adversaries.size()){
-					if(Position.equals(adversaries.get(i).getPosition(), nextPos)){
+					if(Position.equals(adversaries.get(i).getPosition(), nextPos)&&adversaries.get(i).isCrossable==false){
 						return true;
 					}
 					i++;
