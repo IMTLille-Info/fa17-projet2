@@ -53,13 +53,18 @@ public class WindowGame extends BasicGame {
         map.add(new Map("secondMap"));
         map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
-        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 1 * 32, 13 * 32, 2));
+        map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
+        map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
         PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension());
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap"));
-        map.get(2).addExit(new Exit(1 * 32, 13 * 32, 4 * 32, 6 * 32, 1));
+        map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
+        map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
+        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension());
+        monster2.init();
+        map.get(2).addAdversary(monster2);
         
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
