@@ -18,10 +18,4 @@ public class Exit extends Obstacle {
 		public int getMapNumber(){
 			return nextMapNumber;
 		}
-
-		@Override
-		public void init() {
-			// TODO Auto-generated method stub
-			
-		}
 }

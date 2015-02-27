@@ -8,13 +8,10 @@ public abstract class Obstacle {
 	protected boolean isCrossable;
 	protected Image img;
 	
-	public Obstacle(float x, float y, boolean isCrossable)
-	{
+	public Obstacle(float x, float y, boolean isCrossable){
 		position = new Position(x, y);
 		this.isCrossable = isCrossable;
 	}
-	
-	public abstract void init();
 	
 	public boolean isCrossable(){
 		return isCrossable;
@@ -24,13 +21,11 @@ public abstract class Obstacle {
 		return position;
 	}
 	
-	public void setPosition(Position pos)
-	{
+	public void setPosition(Position pos){
 		position = pos;
 	}
 	
-	public void setPosition(float x, float y)
-	{
+	public void setPosition(float x, float y){
 		position.setAbsciss(x);
 		position.setOrdinate(y);
 	}
