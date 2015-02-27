@@ -11,7 +11,7 @@
  </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC8WTQQqAIBBF60DVHYSOYJ7BpG5QUifPRcLw+QNpQYu3muGN+p3QNo35kJDoClgUVuKziYngRM+hcBKfT8wE2WN+9G2JnRDvXunDt3FKHj3khXlkH94lgM+SWSzfpz5PasxV65OOmvPJLKJyNunL/SNkVrof8r/gDPRpmb71ISwTA74M21dkKKhdVdIIarAEAAA=
+   H4sIAAAAAAAAC62TUQ6DIBBE8UDaO2zjEZQzlE17g2r05N0PSCaTJVX044UE4S3ugHYhyI2o0Z/gDXxg/un4JmN2iLBmA3aqxb6XkYAhj0p7Wn3pgE9yXc/3NRZjzGNhzWvRx72Jf/IQcPD85vyLgk+oXqy4jvq4d1rxyQUfOlrOV7Io/ffOhj7Obu3a3gfeF67BvlqmV32Ml4mQr+C9V+Zx4tsPkgJ+5bAEAAA=
   </data>
  </layer>
  <layer name="avantPlan" width="20" height="15" visible="0">
@@ -21,7 +21,7 @@
  </layer>
  <layer name="logic" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5sGi3mE1OEKd3zxQY4cPnvxxTsp5qHL4TOLVPOwsSnxLza34VJHzfyBzzxizCfHPGLDHV/aICUd45MDACK/UGKwBAAA
+   H4sIAAAAAAAAC9vJyMCwk8qYFIBPL7oYMXaSah4uN9HLPGxy2Pi49JEbH7jkCPmVXHvwmYcrjPCZRap52Nikug+fX/Gpo3b+IDb9UMs8YsOdlDRJrB50OQBnYYZesAQAAA==
   </data>
  </layer>
 </map>
