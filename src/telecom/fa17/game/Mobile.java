@@ -72,8 +72,7 @@ public abstract class Mobile extends Object{
 		if((tempScale < scale)) { 
 			tempScale++;
 			if(tempScale % SLOW_ANIM == 0) {
-				if(HORIZONTAL)
-				{ 
+				if(HORIZONTAL){ 
 					x = (UP) ? 1 : -1; 
 				} else { 
 					y = (UP) ? -1 : 1; 			
