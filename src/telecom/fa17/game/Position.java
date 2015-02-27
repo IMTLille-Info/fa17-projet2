@@ -32,10 +32,10 @@ public class Position {
 	
 	public static boolean equals(Position arg0, Position arg1)
 	{
-		boolean equals = true;
-		if((arg0.getAbsciss() != arg1.getAbsciss()) || (arg0.getOrdinate() != arg1.getOrdinate()))
+		boolean equals = false;
+		if((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate()))
 		{
-			equals = false;
+			equals = true;
 		}
 		return equals;
 	}
