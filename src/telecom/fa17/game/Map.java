@@ -78,8 +78,19 @@ public class Map {
 	public boolean findCollision(int key, Position pos){		
 		Position nextPos = getNextPosition(key, pos);
 
-		return (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0) 
-			? false : true;	
+		if (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0){
+			int i =0;
+			if(!adversaries.isEmpty()){
+				while(i < adversaries.size()){
+					if(Position.equals(adversaries.get(i).getPosition(), nextPos)){
+						return true;
+					}
+					i++;
+				}
+			}
+			return false;
+		}
+		return true;
 	}
 	
 	public Exit findExit(int key, Position pos){	
