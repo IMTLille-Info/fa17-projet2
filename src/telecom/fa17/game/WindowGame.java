@@ -81,12 +81,7 @@ public class WindowGame extends BasicGame {
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
 		
-		List<PNJ> monsters = new LinkedList<PNJ>();
-		monsters.addAll(map.get(indexMap).getAdversaries());
-		for(PNJ monster : monsters)
-		{
-			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
-		}
+		displayMonsters(g, map.get(indexMap).getAdversaries());
 		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
@@ -115,7 +110,6 @@ public class WindowGame extends BasicGame {
 				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
-		
 		// Calcul des futurs coordonnées désirées
 		objPlayer.getNextPosition();
 	}
@@ -200,5 +194,13 @@ public class WindowGame extends BasicGame {
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin)
 	{
 		g.drawString(text, absOrigin, ordOrigin);
+	}
+	
+	private void displayMonsters(Graphics g, List<PNJ> monsters)
+	{
+		for(PNJ monster : monsters)
+		{
+			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
+		}
 	}
 }
