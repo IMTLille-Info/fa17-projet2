@@ -54,8 +54,7 @@ public class Map {
 		obstacles.remove(prm);
 	}
 		
-	public Position getNextPosition(int key, Position pos)
-	{
+	public Position getNextPosition(int key, Position pos){
 		float x = 0, y = 0;
 		
 		switch (key) {
@@ -76,16 +75,14 @@ public class Map {
 	}
 	
 	// Met à jour les variables pour le mouvement
-	public boolean findCollision(int key, Position pos) 
-	{		
+	public boolean findCollision(int key, Position pos){		
 		Position nextPos = getNextPosition(key, pos);
 
 		return (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0) 
 			? false : true;	
 	}
 	
-	public Exit findExit(int key, Position pos)
-	{	
+	public Exit findExit(int key, Position pos){	
 		Position nextPos = getNextPosition(key, pos);
 		int i = 0;
 		boolean found = false;
@@ -104,15 +101,12 @@ public class Map {
 		adversaries.add(prm);
 	}
 	
-	public List<PNJ> getAdversaries()
-	{
+	public List<PNJ> getAdversaries(){
 		List<PNJ> retour = new LinkedList<PNJ>();
 		int i = 0;
 		
-		while(i < adversaries.size())
-		{
-			if(adversaries.get(i).isAlive())
-			{
+		while(i < adversaries.size()){
+			if(adversaries.get(i).isAlive()){
 				retour.add(adversaries.get(i));
 			}
 			i++;

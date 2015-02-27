@@ -146,47 +146,40 @@ public class WindowGame extends BasicGame {
 		
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
-			switch (key) {
+			switch (key){
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
-    				if(objPlayer.getPosition().getOrdinate() > 0)
-    				{
+    				if(objPlayer.getPosition().getOrdinate() > 0){
     					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
-       				if(objPlayer.getPosition().getAbsciss() > 0)
-    				{
+       				if(objPlayer.getPosition().getAbsciss() > 0){
     					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
-       				if(objPlayer.getPosition().getOrdinate() < HEIGHT_MAX)
-    				{
+       				if(objPlayer.getPosition().getOrdinate() < HEIGHT_MAX){
     					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
-       				if(objPlayer.getPosition().getAbsciss() < WIDTH_MAX)
-    				{
+       				if(objPlayer.getPosition().getAbsciss() < WIDTH_MAX){
     					isOnEdge = false;
     				}
     			break;
 			}
 
 			// Il n'est pas sur le bord de la fenêtre
-			if(!isOnEdge)
-			{ 
+			if(!isOnEdge){ 
 				// La prochaine case n'est pas une collision
-				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition()))
-				{
+				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition())){
 					Exit exit = map.get(indexMap).findExit(key, objPlayer.getPosition());
 					// Pas de collision, on vérifie si ce n'est pas une sortie
-					if(exit != null)
-					{
+					if(exit != null){
 						indexMap = exit.getMapNumber();
 						objPlayer.setPosition(exit.getNextPosition());
 					} else {
@@ -197,15 +190,12 @@ public class WindowGame extends BasicGame {
 	    }
 	}	
 	
-	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin)
-	{
+	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
 		g.drawString(text, absOrigin, ordOrigin);
 	}
 	
-	private void displayMonsters(Graphics g, List<PNJ> monsters)
-	{
-		for(PNJ monster : monsters)
-		{
+	private void displayMonsters(Graphics g, List<PNJ> monsters){
+		for(PNJ monster : monsters){
 			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
 		}
 	}
