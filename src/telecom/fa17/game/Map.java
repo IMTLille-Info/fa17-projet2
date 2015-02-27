@@ -12,10 +12,12 @@ import telecom.fa17.game.Exit;
 public class Map {
 	private TiledMap map;
 	private List<Obstacle> obstacles;
+	private List<PNJ> adversaries;
 	
 	public Map(String name) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   obstacles = new LinkedList<Obstacle>();
+		   adversaries = new LinkedList<PNJ>();
 	}
 	
 	public int getTileDimension(){
@@ -96,5 +98,24 @@ public class Map {
 			}
 		}
 		return (found) ? (Exit) obstacles.get(i) : null;
+	}
+	
+	public void addPNJ(PNJ prm){
+		adversaries.add(prm);
+	}
+	
+	public List<PNJ> getAdversaries()
+	{
+		List<PNJ> retour = new LinkedList<PNJ>();
+		int i = 0;
+		
+		while(i < adversaries.size())
+		{
+			if(adversaries.get(i).isAlive())
+			{
+				retour.add(adversaries.get(i));
+			}
+		}
+		return retour;
 	}
 }
