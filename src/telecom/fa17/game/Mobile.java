@@ -9,7 +9,6 @@ public abstract class Mobile extends Obstacle{
 	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
-	private Position position;
 	
 	private Direction direction = Direction.SOUTH;
 	protected int life;

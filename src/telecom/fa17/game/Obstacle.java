@@ -1,13 +1,10 @@
 package telecom.fa17.game;
 
-import org.newdawn.slick.Image;
-
 public abstract class Obstacle {
 	
-	private Position position;
+	protected Position position;
 	protected boolean isCrossable;
-	protected Image img;
-	
+		
 	public Obstacle(float x, float y, boolean isCrossable){
 		position = new Position(x, y);
 		this.isCrossable = isCrossable;

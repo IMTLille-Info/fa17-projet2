@@ -14,7 +14,6 @@ public class Exit extends Obstacle {
 				return nextPosition;
 		}
 
-
 		public int getMapNumber(){
 			return nextMapNumber;
 		}
