@@ -100,7 +100,7 @@ public class Map {
 		return (found) ? (Exit) obstacles.get(i) : null;
 	}
 	
-	public void addPNJ(PNJ prm){
+	public void addAdversary(PNJ prm){
 		adversaries.add(prm);
 	}
 	
@@ -115,6 +115,7 @@ public class Map {
 			{
 				retour.add(adversaries.get(i));
 			}
+			i++;
 		}
 		return retour;
 	}

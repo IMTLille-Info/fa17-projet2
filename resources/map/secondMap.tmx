@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
  <tileset firstgid="1" name="allTiles" tilewidth="32" tileheight="32" spacing="2">
   <image source="tuiles/allTiles.png" width="684" height="776"/>
  </tileset>
@@ -11,7 +11,7 @@
  </tileset>
  <layer name="general" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC8WTQQqAIBBF80DVHYSOYJ7BpG5QUifPjTB8/kBa0OKtHN+Mfo2m6+yHxExfwaqwEZ/LzAQvak6Fi/hCZiHIGvujb88chER8eDdeyWOAvDCP4sOzRPA50ovl+9QXyBpztfqko2U+mUUyfDbpK/WT2NPyP+R7wR7o0zJ960NYJhZ8BfZfkbFi7QazhQD9sAQAAA==
+   H4sIAAAAAAAAC8WTQQqAIBBF60DVHYSOYJ7BpG5QUifPRcLw+QNpQYu3muGN+p3QNo35kJDoClgUVuKziYngRM+hcBKfT8wE2WN+9G2JnRDvXunDt3FKHj3khXlkH94lgM+SWSzfpz5PasxV65OOmvPJLKJyNunL/SNkVrof8r/gDPRpmb71ISwTA74M21dkKKhdVdIIarAEAAA=
   </data>
  </layer>
  <layer name="avantPlan" width="20" height="15" visible="0">
@@ -21,7 +21,7 @@
  </layer>
  <layer name="logic" width="20" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5sGi3mkqMEVrtjcQ6ocujix8U6Keehy+Mwi1TxsbEr8i81tuNRRM3/gM48Y88kxj9hwx5c2CKVlYuUAWcAZO7AEAAA=
+   H4sIAAAAAAAAC9vJyMCwk8qYFECKeZSqwaYWl5sGi3mE1OEKd3zxQY4cPnvxxTsp5qHL4TOLVPOwsSnxLza34VJHzfyBzzxizCfHPGLDHV/aICUd45MDACK/UGKwBAAA
   </data>
  </layer>
 </map>

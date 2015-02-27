@@ -113,13 +113,10 @@ public abstract class Mobile {
 	}
 	
 	public boolean isAlive() {
-		if(getLife() == 0){
-			return false;
-		}
-		return true;
+		return (getLife() == 0) ? false : true;
 	}
 
-	public int getLife() {
+	private int getLife() {
 		return life;
 	}
 

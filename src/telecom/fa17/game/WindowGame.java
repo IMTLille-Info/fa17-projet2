@@ -53,7 +53,10 @@ public class WindowGame extends BasicGame {
         map.add(new Map("secondMap"));
         map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
-        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 5 * 32, 7 * 32, 2)); 
+        map.get(1).addExit(new Exit(4 * 32, 6 * 32, 5 * 32, 7 * 32, 2));
+        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension());
+        monster.init();
+        map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap"));
         map.get(2).addExit(new Exit(5 * 32, 7 * 32, 4 * 32, 6 * 32, 1));
@@ -77,6 +80,14 @@ public class WindowGame extends BasicGame {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
+		
+		List<PNJ> monsters = new LinkedList<PNJ>();
+		monsters.addAll(map.get(indexMap).getAdversaries());
+		for(PNJ monster : monsters)
+		{
+			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
+		}
+		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
