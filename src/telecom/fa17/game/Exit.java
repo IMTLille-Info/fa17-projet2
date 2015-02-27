@@ -1,6 +1,6 @@
 package telecom.fa17.game;
 
-public class Exit extends Obstacle {
+public class Exit extends Object {
 		private Position nextPosition;
 		private int nextMapNumber;
 

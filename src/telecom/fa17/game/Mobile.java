@@ -4,7 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile extends Obstacle{
+public abstract class Mobile extends Object{
 	
 	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
@@ -41,20 +41,7 @@ public abstract class Mobile extends Obstacle{
 	public boolean isMoving(){
 		return moving;
 	}
-	
-	public Position getPosition(){
-		return position;
-	}
 
-	public void setPosition(Position pos){
-		position = pos;
-	}
-	
-	public void setPosition(float x, float y){
-		position.setAbsciss(x);
-		position.setOrdinate(y);
-	}
-	
 	public void getNextPosition(){
 		if (moving) {
 	        switch (direction) {
