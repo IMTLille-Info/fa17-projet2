@@ -4,7 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile {
+public abstract class Mobile extends Obstacle{
 	
 	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
@@ -22,7 +22,7 @@ public abstract class Mobile {
 	private int scale, tempScale = 0;
 	
 	public Mobile(float x, float y, int tileSize){
-		position = new Position(x, y);
+		super(x, y, false);
 		scale = tileSize * SLOW_ANIM;
 		
 		animations = new Animation[4];
@@ -47,19 +47,16 @@ public abstract class Mobile {
 		return position;
 	}
 
-	public void setPosition(Position pos)
-	{
+	public void setPosition(Position pos){
 		position = pos;
 	}
 	
-	public void setPosition(float x, float y)
-	{
+	public void setPosition(float x, float y){
 		position.setAbsciss(x);
 		position.setOrdinate(y);
 	}
 	
-	public void getNextPosition()
-	{
+	public void getNextPosition(){
 		if (moving) {
 	        switch (direction) {
         		// On veut monter
@@ -84,8 +81,7 @@ public abstract class Mobile {
 		}
 	}
 	
-	private void getNext(boolean HORIZONTAL, boolean UP)
-	{			
+	private void getNext(boolean HORIZONTAL, boolean UP){			
 		int x = 0, y = 0;
 		if((tempScale < scale)) { 
 			tempScale++;
