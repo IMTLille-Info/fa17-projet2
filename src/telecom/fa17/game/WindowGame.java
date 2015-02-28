@@ -1,4 +1,4 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import java.util.LinkedList;
 import java.util.List;

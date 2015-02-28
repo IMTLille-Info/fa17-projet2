@@ -1,4 +1,4 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;

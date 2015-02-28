@@ -1,5 +1,6 @@
-GROUPE 2
+# GROUPE 2
 
+[![Build Status](https://travis-ci.org/TL1-fa17/projet2.svg?branch=master)](https://travis-ci.org/TL1-fa17/projet2)
 
 Caron Pierre-Edouard
 Vitse Florent
