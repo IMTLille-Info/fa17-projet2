@@ -98,7 +98,7 @@ public abstract class Mobile extends Element{
 			//image mort / cadavre loot item ou disparait
 			this.isCrossable = true;
 			return false;
-		}else{
+		} else {
 			return true;
 		}
 	}
@@ -126,6 +126,6 @@ public abstract class Mobile extends Element{
 
 	public void setAttack(int attack) {
 		//objet récupéré peut augmenter l'attaque du joueur
-		this.attack = attack;
+		this.attack += attack;
 	}
 }
