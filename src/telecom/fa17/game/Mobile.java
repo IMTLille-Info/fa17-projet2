@@ -94,9 +94,9 @@ public abstract class Mobile extends Element{
 	}
 	
 	public boolean isAlive() {
-		if (getLife()<=0){
+		if (!(getLife() > 0)){
 			//image mort / cadavre loot item ou disparait
-			this.isCrossable=true;
+			this.isCrossable = true;
 			return false;
 		}else{
 			return true;
