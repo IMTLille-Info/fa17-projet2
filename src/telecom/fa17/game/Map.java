@@ -10,7 +10,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import telecom.fa17.game.Exit;
 
 public class Map {
-	private TiledMap map;
+	private TiledMap map;	
 	private List<Element> obstacles;
 	private List<PNJ> adversaries;
 	
@@ -92,6 +92,7 @@ public class Map {
 		}
 		return true;
 	}
+	
 	
 	public Exit findExit(int key, Position pos){	
 		Position nextPos = getNextPosition(key, pos);

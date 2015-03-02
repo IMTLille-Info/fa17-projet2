@@ -4,6 +4,8 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import sun.net.www.content.image.png;
+
 public abstract class Mobile extends Element{
 	
 	final int DURATION_FRAME = 100;
@@ -105,8 +107,8 @@ public abstract class Mobile extends Element{
 		return life;
 	}
 
-	public void setLife(int life) {
-		this.life = life;
+	public void hurt(int attack) {
+		this.life -= attack;
 	}
 	
 	public boolean isMobile() {
@@ -114,8 +116,34 @@ public abstract class Mobile extends Element{
 		return isMobile;
 	}
 	
-	public void attack(){
+	public Position getNearPosition(Map map){
+		switch (direction) {
+			case NORTH :
+				return new Position(position.absciss , position.ordinate - map.getTileDimension());
 		
+			case EAST :
+				return new Position(position.absciss + map.getTileDimension() , position.ordinate);
+	        
+			case SOUTH :
+				return new Position(position.absciss , position.ordinate +map.getTileDimension());
+    
+			case WEST :
+				return new Position(position.absciss - map.getTileDimension() , position.ordinate);
+			
+			default:
+				return position;
+				
+		}
+	}
+	
+	public void attack(Map map){
+		Position target = getNearPosition(map);
+		System.out.println(target.toString());
+		for (PNJ pnj : map.getAdversaries()){
+			if (Position.equals(pnj.getPosition() , target)){
+				pnj.hurt(attack);
+			}
+		}
 	}
 	
 	public int getAttack() {

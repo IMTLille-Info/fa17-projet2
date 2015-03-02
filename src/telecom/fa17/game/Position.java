@@ -1,6 +1,11 @@
 package telecom.fa17.game;
 
 public class Position {
+	@Override
+	public String toString() {
+		return "Position [absciss=" + absciss + ", ordinate=" + ordinate + "]";
+	}
+
 	protected float absciss,
 		  ordinate;
 	

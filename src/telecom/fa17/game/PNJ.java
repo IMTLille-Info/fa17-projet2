@@ -9,7 +9,7 @@ public class PNJ extends Mobile {
 
 	public PNJ(float x, float y, int tileSize) {
 		super(x, y, tileSize);
-		setLife(50);
+		this.life = 50;
 	}
 
 	@Override
@@ -26,5 +26,6 @@ public class PNJ extends Mobile {
 					break;
 		}
 	}
+
 
 }
