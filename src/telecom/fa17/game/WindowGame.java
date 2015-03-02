@@ -187,7 +187,8 @@ public class WindowGame extends BasicGame {
 					}
 				}
 			}
-	    }
+		}
+	}
 	
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
 		g.drawString(text, absOrigin, ordOrigin);

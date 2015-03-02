@@ -10,17 +10,7 @@ import org.newdawn.slick.tiled.TiledMap;
 import telecom.fa17.game.Exit;
 
 public class Map {
-	private TiledMap map;
-<<<<<<< HEAD
-	
-	private List<Obstacle> obstacles;
-	private List<Mobile> mobiles;
-	
-	public Map(String name) throws SlickException {
-		   this.map = new TiledMap("resources/map/" + name + ".tmx");
-		   obstacles = new LinkedList<Obstacle>();
-		   mobiles = new LinkedList<Mobile>();
-=======
+	private TiledMap map;	
 	private List<Element> obstacles;
 	private List<PNJ> adversaries;
 	
@@ -28,7 +18,6 @@ public class Map {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   obstacles = new LinkedList<Element>();
 		   adversaries = new LinkedList<PNJ>();
->>>>>>> origin/master
 	}
 	
 	public int getTileDimension(){
@@ -104,17 +93,9 @@ public class Map {
 		return true;
 	}
 	
-<<<<<<< HEAD
-	public void addMobile(Mobile mobile){
-		this.mobiles.add(mobile);
-	}
 	
-	// Return an Exit object if the next Coordinate of the player are an Exit
-	public Exit getExitByCoordinate(float x, float y){
-=======
 	public Exit findExit(int key, Position pos){	
 		Position nextPos = getNextPosition(key, pos);
->>>>>>> origin/master
 		int i = 0;
 		boolean found = false;
 		
