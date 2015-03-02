@@ -1,4 +1,4 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,14 +19,10 @@ public class WindowGame extends BasicGame {
     private GameContainer container;
 	private List<Map> map;
 	
-	// Constantes de la Map
-	int TILE_SIZE, WIDTH_MAX, HEIGHT_MAX;
+	// Constantes de Map
+	int WIDTH_MAX, HEIGHT_MAX;
 	// Map en cours d'affichage
 	int indexMap = 0;
-	
-	// Coordonnees du personnage au départ
-	private float x = 320,
-				  y = 256;
 	
 	Player objPlayer;
 
@@ -49,26 +45,29 @@ public class WindowGame extends BasicGame {
         // Charge la map
         map = new LinkedList<Map>();
         map.add(new Map("firstMap"));
-        TILE_SIZE = map.get(0).getTileDimension();
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
-        map.get(0).addExit(new Exit(9, 0, 9 * TILE_SIZE, 14 * TILE_SIZE, 1));
-        map.get(0).addExit(new Exit(10, 0, 16 * TILE_SIZE, 14 * TILE_SIZE, 1));
+        map.get(0).addExit(new Exit(9 * 32, 0, 9 * 32, 14 * 32, 1));
+        map.get(0).addExit(new Exit(10 * 32, 0, 16 * 32, 14 * 32, 1));
         
         map.add(new Map("secondMap"));
-        map.get(1).addExit(new Exit(9, 14, 9 * TILE_SIZE, 0, 0));
-        map.get(1).addExit(new Exit(16, 14, 10 * TILE_SIZE, 0, 0)); 
-        map.get(1).addExit(new Exit(4, 6, 5 * TILE_SIZE, 7 * TILE_SIZE, 2)); 
+        map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
+        map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
+        map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
+        map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
+        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension());
+        monster.init();
+        map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap"));
-        map.get(2).addExit(new Exit(5, 7, 4 * TILE_SIZE, 6 * TILE_SIZE, 1));
-        
-        // Charge la musique
-        //Music background = new Music("resources/music/general.ogg");
-        //background.loop();
+        map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
+        map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
+        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension());
+        monster2.init();
+        map.get(2).addAdversary(monster2);
         
         // Création d'un joueur
-        objPlayer = new Player(320, 256, TILE_SIZE);
+        objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
     }
 	
@@ -81,15 +80,19 @@ public class WindowGame extends BasicGame {
 		map.get(indexMap).renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
-			g.drawAnimation(objPlayer.getAnimation(), x, y);
+			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		} else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
-			g.drawImage(objPlayer.getStandingImage(), x, y);
+			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
+		
+		displayMonsters(g, map.get(indexMap).getAdversaries());
+		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    // On affiche pas la couche de collision qui serait la prochaine
-	    
+		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
+
     }
 	
 	/** 
@@ -113,10 +116,8 @@ public class WindowGame extends BasicGame {
 				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
-		
 		// Calcul des futurs coordonnées désirées
-		x = objPlayer.getNextAbsciss();
-		y = objPlayer.getNextOrdinate();
+		objPlayer.getNextPosition();
 	}
 	
 	/** 
@@ -135,7 +136,8 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-		Exit exit = null;
+		
+		boolean isOnEdge = true;
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
@@ -144,91 +146,56 @@ public class WindowGame extends BasicGame {
 		
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
-			exit = isExit(key);
-			switch (key) {
+			switch (key){
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
-    				if(objPlayer.getOrdinate() > 0){ 
-    					move(exit, key);
+    				if(objPlayer.getPosition().getOrdinate() > 0){
+    					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_LEFT:
     				objPlayer.setDirection(Direction.EAST);
-    				if(objPlayer.getAbsciss() > 0){ 
-    					move(exit, key);
+       				if(objPlayer.getPosition().getAbsciss() > 0){
+    					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_DOWN:
     				objPlayer.setDirection(Direction.SOUTH);
-    				if(objPlayer.getOrdinate() < HEIGHT_MAX){ 
-    					move(exit, key);
+       				if(objPlayer.getPosition().getOrdinate() < HEIGHT_MAX){
+    					isOnEdge = false;
     				}
     			break;
     		case Input.KEY_RIGHT:
     				objPlayer.setDirection(Direction.WEST);
-    				if(objPlayer.getAbsciss() < WIDTH_MAX){ 
-    					move(exit, key);
+       				if(objPlayer.getPosition().getAbsciss() < WIDTH_MAX){
+    					isOnEdge = false;
     				}
     			break;
 			}
+
+			// Il n'est pas sur le bord de la fenêtre
+			if(!isOnEdge){ 
+				// La prochaine case n'est pas une collision
+				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition())){
+					Exit exit = map.get(indexMap).findExit(key, objPlayer.getPosition());
+					// Pas de collision, on vérifie si ce n'est pas une sortie
+					if(exit != null){
+						indexMap = exit.getMapNumber();
+						objPlayer.setPosition(exit.getNextPosition());
+					} else {
+						objPlayer.setMoving();
+					}
+				}
+			}
 	    }
+	
+	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
+		g.drawString(text, absOrigin, ordOrigin);
 	}
 	
-	public void move(Exit exit, int direction){
-		if(exit != null){
-			indexMap = exit.getMapNumber();
-			map.get(indexMap).addMobile(objPlayer);
-			objPlayer.setAbsciss(exit.getNextAbsciss());
-			objPlayer.setOrdinate(exit.getNextOrdinate());
-		} else {
-			if(!isCollision(direction)) { objPlayer.setMoving(); }
+	private void displayMonsters(Graphics g, List<PNJ> monsters){
+		for(PNJ monster : monsters){
+			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
 		}
-	}
-	// Met à jour les variables pour le mouvement
-	public boolean isCollision(int key)	{			
-		boolean collision = true;
-		
-		switch (key) {
-    		case Input.KEY_UP:  
-    			return collisionNextCase(0, -1);
-    		case Input.KEY_LEFT:
-    			return collisionNextCase(-1, 0);
-    		case Input.KEY_DOWN:
-    			return collisionNextCase(0, 1);
-    		case Input.KEY_RIGHT:
-    			return collisionNextCase(1, 0);
-		}
-		return collision;	
-	}
-	
-	public boolean collisionNextCase(int x, int y){
-		if(this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic") == 0) { 
-			return false;
-		}
-		return true;
-	}
-	
-	// Met à jour les variables pour le mouvement
-	public Exit isExit(int key){			
-		switch (key) {
-    		case Input.KEY_UP:  
-    			return findExit(0, -1);
-    		case Input.KEY_LEFT:
-    			return findExit(-1, 0);
-    		case Input.KEY_DOWN:
-    			return findExit(0, 1);
-    		case Input.KEY_RIGHT:
-    			return findExit(1, 0);
-		}
-		return null;
-	}
-	
-	public Exit findExit(int x, int y){		
-		return map.get(indexMap).getExitByCoordinate((int) objPlayer.getAbsciss() / TILE_SIZE + x, (int) (objPlayer.getOrdinate() / TILE_SIZE) + y);
-	}
-	
-	public void displayText(Graphics g, String text, float absOrigi, float ordOrigin)
-	{
-		g.drawString(text, absOrigi, ordOrigin);
 	}
 }

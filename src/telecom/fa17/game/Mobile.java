@@ -1,121 +1,89 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile {
+public abstract class Mobile extends Element{
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 1;
+	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
 	
 	private boolean moving = false;
-	private float absciss, ordinate;
+	
 	private Direction direction = Direction.SOUTH;
 	protected int life;
 	protected boolean isMobile;
 	protected int attack;
 	
-	protected Animation[] animations = new Animation[4];
-	protected Image[] standings = new Image[4];
+	protected Animation[] animations;
+	protected Image[] standings;
 	
 	private int scale, tempScale = 0;
 	
-	public int getAttack() {
-		return attack;
-	}
-
-	public void setAttack(int attack) {
-		//objet récupéré peut augmenter l'attaque du joueur
-		this.attack = attack;
-	}
-
 	public Mobile(float x, float y, int tileSize){
-		absciss = x;
-		ordinate = y;
+		super(x, y, false);
 		scale = tileSize * SLOW_ANIM;
+		
+		animations = new Animation[4];
+		standings = new Image[4];
 	}
 	
 	public abstract void init() throws SlickException;
-	
+		
 	public void setDirection(Direction dir){
 		direction = dir;
 	}
 	
 	public void setMoving(){
-		tempScale = 0;
 		moving = true;
 	}
 	
 	public boolean isMoving(){
 		return moving;
 	}
-	
-	public float getAbsciss(){
-		return absciss;
-	}
-	
-	public float getOrdinate(){
-		return ordinate;
-	}
-	
-	public void setAbsciss(float prmAbs)
-	{
-		absciss = prmAbs;
-	}
-	
-	public void setOrdinate(float prmOrd)
-	{
-		ordinate = prmOrd;
-	}
-	
-	public float getNextAbsciss()
-	{
-		if (this.moving) {
+
+	public void getNextPosition(){
+		if (moving) {
 	        switch (direction) {
+        		// On veut monter
+        		case NORTH :
+        			getNext(false, true);
+        			break;
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(false, -1);
+	        			getNext(true, false);
         				break;
+        	        	// On veut descendre
+        	    case SOUTH :
+        	        	getNext(false, false);
+            			break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(false, 1);
+	        			getNext(true, true);
 						break;
-	        }
-		} 
-		return absciss;
-	}
-	
-	public float getNextOrdinate(){		
-		if (this.moving){
-	        switch (direction){
-	        	// On veut monter
-	        	case NORTH :
-	        			getNext(true, -1);
+	        	default:
 	        			break;
-	        	// On veut descendre
-	        	case SOUTH :
-	        			getNext(true, 1);
-    					break;
 	        }
-	    } 
-		return ordinate;
-	}
-	
-	public void getNext(boolean NORTHSOUTH, int move){
-		if((tempScale < scale)) { 
-			tempScale++;
-			if(tempScale % SLOW_ANIM == 0) {
-				if(NORTHSOUTH){
-					ordinate += move;
-				} else {
-					absciss += move;
-				}				
-			}
-		} else {
-			this.moving = false;
 		}
 	}
 	
+	private void getNext(boolean HORIZONTAL, boolean UP){			
+		int x = 0, y = 0;
+		if((tempScale < scale)) { 
+			tempScale++;
+			if(tempScale % SLOW_ANIM == 0) {
+				if(HORIZONTAL){ 
+					x = (UP) ? 1 : -1; 
+				} else { 
+					y = (UP) ? -1 : 1; 			
+				}
+				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
+			} 
+		} else {
+			moving = false;
+			tempScale = 0;
+		}
+	}
 	
 	public Image getStandingImage()	{
 		return standings[direction.index];
@@ -126,13 +94,16 @@ public abstract class Mobile {
 	}
 	
 	public boolean isAlive() {
-		if(getLife() == 0){
+		if (!(getLife() > 0)){
+			//image mort / cadavre loot item ou disparait
+			this.isCrossable = true;
 			return false;
+		} else {
+			return true;
 		}
-		return true;
 	}
 
-	public int getLife() {
+	private int getLife() {
 		return life;
 	}
 
@@ -147,5 +118,14 @@ public abstract class Mobile {
 	
 	public void attack(){
 //		this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic")
+	}
+	
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		//objet récupéré peut augmenter l'attaque du joueur
+		this.attack += attack;
 	}
 }

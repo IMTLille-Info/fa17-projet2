@@ -1,23 +1,17 @@
 package telecom.fa17.game;
 
-public class Exit extends Obstacle {
-		private float nextAbsciss,
-					  nextOrdinate;
+public class Exit extends Element {
+		private Position nextPosition;
 		private int nextMapNumber;
 
-		public Exit(float abs, float ord, float nextAbs, float nextOrd, int nextMapNb){
-				super(abs, ord);
-				this.nextAbsciss = nextAbs;
-				this.nextOrdinate = nextOrd;
+		public Exit(float x, float y, float nextAbs, float nextOrd, int nextMapNb){
+				super(x, y, true);
+				nextPosition = new Position(nextAbs, nextOrd);
 				this.nextMapNumber = nextMapNb;
 		}
 
-		public float getNextAbsciss(){
-				return nextAbsciss;
-		}
-
-		public float getNextOrdinate(){
-				return nextOrdinate;
+		public Position getNextPosition(){
+				return nextPosition;
 		}
 
 		public int getMapNumber(){
