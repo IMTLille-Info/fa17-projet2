@@ -107,8 +107,8 @@ public abstract class Mobile extends Element{
 		return life;
 	}
 
-	public void setLife(int life) {
-		this.life = life;
+	public void hurt(int attack) {
+		this.life -= attack;
 	}
 	
 	public boolean isMobile() {
@@ -139,8 +139,8 @@ public abstract class Mobile extends Element{
 	public void attack(Map map){
 		Position target = getNearPosition();
 		for (PNJ pnj : map.getAdversaries()){
-			if (pnj.getPosition().equals(target)){
-				
+			if (Position.equals(pnj.getPosition() , target)){
+				pnj.hurt(attack);
 			}
 		}
 	}
