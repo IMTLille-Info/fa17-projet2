@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 
 public abstract class Mobile extends Element{
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
+	final int DURATION_FRAME = 100;
 	
 	private boolean moving = false;
 	
@@ -22,7 +22,7 @@ public abstract class Mobile extends Element{
 	
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);
-		scale = tileSize * SLOW_ANIM;
+		scale = tileSize;
 		
 		animations = new Animation[4];
 		standings = new Image[4];
@@ -71,14 +71,12 @@ public abstract class Mobile extends Element{
 		int x = 0, y = 0;
 		if((tempScale < scale)) { 
 			tempScale++;
-			if(tempScale % SLOW_ANIM == 0) {
-				if(HORIZONTAL){ 
-					x = (UP) ? 1 : -1; 
-				} else { 
-					y = (UP) ? -1 : 1; 			
-				}
-				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
-			} 
+			if(HORIZONTAL){ 
+				x = (UP) ? 1 : -1; 
+			} else { 
+				y = (UP) ? -1 : 1; 			
+			}
+			setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
 		} else {
 			moving = false;
 			tempScale = 0;
