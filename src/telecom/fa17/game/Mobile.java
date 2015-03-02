@@ -116,8 +116,33 @@ public abstract class Mobile extends Element{
 		return isMobile;
 	}
 	
-	public void attack(){
-//		this.map.get(indexMap).getTileId((int) (objPlayer.getAbsciss() / TILE_SIZE) + x, (int) objPlayer.getOrdinate() / TILE_SIZE + y, "logic")
+	public Position getNearPosition(){
+		switch (direction) {
+			case NORTH :
+				return new Position(position.absciss , position.ordinate -1);
+		
+			case EAST :
+				return new Position(position.absciss +1 , position.ordinate);
+	        
+			case SOUTH :
+				return new Position(position.absciss , position.ordinate +1);
+    
+			case WEST :
+				return new Position(position.absciss -1 , position.ordinate);
+			
+			default:
+				return position;
+				
+		}
+	}
+	
+	public void attack(Map map){
+		Position target = getNearPosition();
+		for (PNJ pnj : map.getAdversaries()){
+			if (pnj.getPosition().equals(target)){
+				
+			}
+		}
 	}
 	
 	public int getAttack() {
