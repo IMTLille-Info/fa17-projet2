@@ -144,6 +144,10 @@ public class WindowGame extends BasicGame {
             container.exit();
         }
 		
+		if(key == Input.KEY_SPACE){
+			objPlayer.attack(map.get(indexMap));
+		}
+		
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
 			switch (key){
