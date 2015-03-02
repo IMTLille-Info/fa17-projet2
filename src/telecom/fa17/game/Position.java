@@ -26,9 +26,6 @@ public class Position {
 	}
 	
 	public static boolean equals(Position arg0, Position arg1){
-		if((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate())){
-			return true;
-		}
-		return false;
+		return ((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate()));
 	}
 }
