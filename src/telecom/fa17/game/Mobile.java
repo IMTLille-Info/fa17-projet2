@@ -18,7 +18,9 @@ public abstract class Mobile extends Element{
 	protected Animation[] animations;
 	protected Image[] standings;
 	
-	private int scale, tempScale = 0;
+	protected int scale;
+
+	private int tempScale = 0;
 	private int moveAnim = 0;
 	
 	public Mobile(float x, float y, int tileSize){
@@ -134,6 +136,8 @@ public abstract class Mobile extends Element{
 					break;
 			case WEST :
 					x = scale;
+					break;
+			default:
 					break;				
 		}
 		return new Position(position.getAbsciss() + x, position.getOrdinate() + y);
