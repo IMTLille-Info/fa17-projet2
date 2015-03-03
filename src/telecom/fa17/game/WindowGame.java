@@ -69,6 +69,9 @@ public class WindowGame extends BasicGame {
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
+               
+		@SuppressWarnings("unused")
+		Sounds background = new Sounds("resources/music/sample.ogg");
     }
 	
 	/** 
