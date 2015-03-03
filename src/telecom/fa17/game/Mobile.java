@@ -19,6 +19,7 @@ public abstract class Mobile extends Element{
 	protected Image[] standings;
 	
 	private int scale, tempScale = 0;
+	private int moveAnim = 0;;
 	
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);
@@ -42,24 +43,24 @@ public abstract class Mobile extends Element{
 		return moving;
 	}
 
-	public void getNextPosition(){
+	public void getNextPosition(int delta){
 		if (moving) {
 	        switch (direction) {
         		// On veut monter
         		case NORTH :
-        			getNext(false, true);
+        			getNext(false, true, delta);
         			break;
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(true, false);
+	        			getNext(true, false, delta);
         				break;
         	        	// On veut descendre
         	    case SOUTH :
-        	        	getNext(false, false);
+        	        	getNext(false, false, delta);
             			break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(true, true);
+	        			getNext(true, true, delta);
 						break;
 	        	default:
 	        			break;
@@ -67,16 +68,22 @@ public abstract class Mobile extends Element{
 		}
 	}
 	
-	private void getNext(boolean HORIZONTAL, boolean UP){			
+	private void getNext(boolean HORIZONTAL, boolean UP, int delta){			
 		int x = 0, y = 0;
-		if((tempScale < scale)) { 
-			tempScale++;
-			if(HORIZONTAL){ 
-				x = (UP) ? 1 : -1; 
-			} else { 
-				y = (UP) ? -1 : 1; 			
+		if((tempScale < scale)) {
+			moveAnim += delta;
+			// Toutes les 5ms, on bouge le personnage d'un pixel
+			if(moveAnim > 5)
+			{
+				tempScale++;
+				if(HORIZONTAL){ 
+					x = (UP) ? 1 : -1; 
+				} else { 
+					y = (UP) ? -1 : 1; 			
+				}
+				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
+				moveAnim = 0;
 			}
-			setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
 		} else {
 			moving = false;
 			tempScale = 0;

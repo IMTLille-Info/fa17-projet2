@@ -117,7 +117,7 @@ public class WindowGame extends BasicGame {
 			}
 		}
 		// Calcul des futurs coordonnées désirées
-		objPlayer.getNextPosition();
+		objPlayer.getNextPosition(delta);
 	}
 	
 	/** 
@@ -126,7 +126,6 @@ public class WindowGame extends BasicGame {
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
 		container.setShowFPS(true); // Désactivation de l'affichage des FPS
-		container.setTargetFrameRate(160); // On fixe le framerate (identique sur chaque PC)
 		container.start(); // Démarrage du jeu (lancement de la fenêtre)
     }
 	
