@@ -19,7 +19,7 @@ public abstract class Mobile extends Element{
 	protected Image[] standings;
 	
 	private int scale, tempScale = 0;
-	private int moveAnim = 0;;
+	private int moveAnim = 0;
 	
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);

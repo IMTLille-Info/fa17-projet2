@@ -11,5 +11,4 @@ public abstract class Item extends Element{
 		this.LifeBonus = life;
 		this.attackBonus = attack;
 	}
-
 }

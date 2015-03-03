@@ -7,9 +7,10 @@ import org.newdawn.slick.SlickException;
 
 public class PNJ extends Mobile {
 
-	public PNJ(float x, float y, int tileSize) {
+	public PNJ(float x, float y, int tileSize, int attack) {
 		super(x, y, tileSize);
 		this.life = 50;
+		this.attack=attack;
 	}
 
 	@Override
