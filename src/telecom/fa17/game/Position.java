@@ -8,7 +8,7 @@ public class Position {
 	}
 
 	protected float absciss,
-		  ordinate;
+		  			ordinate;
 	
 	public Position(float abs, float ord){
 		absciss = abs;
