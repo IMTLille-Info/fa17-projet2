@@ -13,11 +13,15 @@ public class Map {
 	private TiledMap map;	
 	private List<Element> obstacles;
 	private List<PNJ> adversaries;
+	private Position hitPosition;
+	private boolean playerHit;
 	
 	public Map(String name) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   obstacles = new LinkedList<Element>();
 		   adversaries = new LinkedList<PNJ>();
+		   hitPosition = new Position(0,0);
+		   playerHit = false;
 	}
 	
 	public int getTileDimension(){
@@ -124,5 +128,18 @@ public class Map {
 			i++;
 		}
 		return retour;
+	}
+	
+	public void setHitZone(Position position){
+		hitPosition = position;
+		playerHit = true;
+	}
+	
+	public Position getHitZone(){
+		return hitPosition;
+	}
+
+	public boolean playerHit() {
+		return playerHit;
 	}
 }

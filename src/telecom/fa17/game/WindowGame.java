@@ -3,6 +3,7 @@ package telecom.fa17.game;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -25,6 +26,9 @@ public class WindowGame extends BasicGame {
 	int indexMap = 0;
 	
 	Player objPlayer;
+	boolean playerHit;
+	Animation hit;
+	
 
 	/**
      * Création de la fenetre.
@@ -41,6 +45,7 @@ public class WindowGame extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
         this.container = container;
+        this.playerHit = false;
         
         // Charge la map
         map = new LinkedList<Map>();
@@ -69,6 +74,8 @@ public class WindowGame extends BasicGame {
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
+        
+        hit = new Animation();
     }
 	
 	/** 
@@ -93,6 +100,10 @@ public class WindowGame extends BasicGame {
 	    // On affiche pas la couche de collision qui serait la prochaine
 		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
 
+		if(map.get(indexMap).playerHit()){
+			//g.drawAnimation(hit, map.get(indexMap).getHitZone().getAbsciss(), map.get(indexMap).getHitZone().getAbsciss());
+			System.out.println("touché a " + map.get(indexMap).getHitZone().toString());
+		}
     }
 	
 	/** 
