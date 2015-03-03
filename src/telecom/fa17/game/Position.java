@@ -1,8 +1,14 @@
 package telecom.fa17.game;
 
 public class Position {
+	
+	@Override
+	public String toString() {
+		return "Position [absciss=" + absciss + ", ordinate=" + ordinate + "]";
+	}
+
 	protected float absciss,
-		  ordinate;
+		  			ordinate;
 	
 	public Position(float abs, float ord){
 		absciss = abs;
@@ -26,10 +32,6 @@ public class Position {
 	}
 	
 	public static boolean equals(Position arg0, Position arg1){
-		boolean equals = false;
-		if((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate())){
-			equals = true;
-		}
-		return equals;
+		return ((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate()));
 	}
 }

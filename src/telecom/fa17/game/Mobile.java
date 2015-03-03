@@ -1,12 +1,12 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile extends Object{
+public abstract class Mobile extends Element{
 	
-	final int DURATION_FRAME = 100, SLOW_ANIM = 5;
+	final int DURATION_FRAME = 100;
 	
 	private boolean moving = false;
 	
@@ -18,11 +18,14 @@ public abstract class Mobile extends Object{
 	protected Animation[] animations;
 	protected Image[] standings;
 	
-	private int scale, tempScale = 0;
+	protected int scale;
+
+	private int tempScale = 0;
+	private int moveAnim = 0;
 	
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);
-		scale = tileSize * SLOW_ANIM;
+		scale = tileSize;
 		
 		animations = new Animation[4];
 		standings = new Image[4];
@@ -42,24 +45,24 @@ public abstract class Mobile extends Object{
 		return moving;
 	}
 
-	public void getNextPosition(){
+	public void getNextPosition(int delta){
 		if (moving) {
 	        switch (direction) {
         		// On veut monter
         		case NORTH :
-        			getNext(false, true);
+        			getNext(false, true, delta);
         			break;
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(true, false);
+	        			getNext(true, false, delta);
         				break;
         	        	// On veut descendre
         	    case SOUTH :
-        	        	getNext(false, false);
+        	        	getNext(false, false, delta);
             			break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(true, true);
+	        			getNext(true, true, delta);
 						break;
 	        	default:
 	        			break;
@@ -67,18 +70,21 @@ public abstract class Mobile extends Object{
 		}
 	}
 	
-	private void getNext(boolean HORIZONTAL, boolean UP){			
+	private void getNext(boolean HORIZONTAL, boolean UP, int delta){			
 		int x = 0, y = 0;
-		if((tempScale < scale)) { 
-			tempScale++;
-			if(tempScale % SLOW_ANIM == 0) {
+		if((tempScale < scale)) {
+			moveAnim += delta;
+			// Toutes les 5ms, on bouge le personnage d'un pixel
+			if(moveAnim > 5){
+				tempScale++;
 				if(HORIZONTAL){ 
 					x = (UP) ? 1 : -1; 
 				} else { 
 					y = (UP) ? -1 : 1; 			
 				}
 				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
-			} 
+				moveAnim = 0;
+			}
 		} else {
 			moving = false;
 			tempScale = 0;
@@ -94,15 +100,21 @@ public abstract class Mobile extends Object{
 	}
 	
 	public boolean isAlive() {
-		return (getLife() == 0) ? false : true;
+		if (getLife() <= 0){
+			//image mort / cadavre loot item ou disparait
+			this.isCrossable = true;
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private int getLife() {
 		return life;
 	}
 
-	public void setLife(int life) {
-		this.life = life;
+	public void hurt(int attack) {
+		this.life -= attack;
 	}
 	
 	public boolean isMobile() {
@@ -110,8 +122,35 @@ public abstract class Mobile extends Object{
 		return isMobile;
 	}
 	
-	public void attack(){
-		
+	public Position getNearPosition(){
+		float x = 0, y = 0;
+		switch (direction) {
+			case NORTH :
+					y = -scale;
+					break;
+			case EAST :
+					x = -scale;
+					break;
+			case SOUTH :
+					y = scale;
+					break;
+			case WEST :
+					x = scale;
+					break;
+			default:
+					break;				
+		}
+		return new Position(position.getAbsciss() + x, position.getOrdinate() + y);
+	}
+	
+	public void attack(Map map){
+		Position target = getNearPosition();
+		System.out.println(target.toString());
+		for (PNJ pnj : map.getAdversaries()){
+			if (Position.equals(pnj.getPosition() , target)){
+				pnj.hurt(attack);
+			}
+		}
 	}
 	
 	public int getAttack() {
@@ -120,6 +159,6 @@ public abstract class Mobile extends Object{
 
 	public void setAttack(int attack) {
 		//objet récupéré peut augmenter l'attaque du joueur
-		this.attack = attack;
+		this.attack += attack;
 	}
 }

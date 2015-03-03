@@ -10,13 +10,13 @@ import org.newdawn.slick.tiled.TiledMap;
 import telecom.fa17.game.Exit;
 
 public class Map {
-	private TiledMap map;
-	private List<Object> obstacles;
+	private TiledMap map;	
+	private List<Element> obstacles;
 	private List<PNJ> adversaries;
 	
 	public Map(String name) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
-		   obstacles = new LinkedList<Object>();
+		   obstacles = new LinkedList<Element>();
 		   adversaries = new LinkedList<PNJ>();
 	}
 	
@@ -82,7 +82,7 @@ public class Map {
 			int i =0;
 			if(!adversaries.isEmpty()){
 				while(i < adversaries.size()){
-					if(Position.equals(adversaries.get(i).getPosition(), nextPos)){
+					if(Position.equals(adversaries.get(i).getPosition(), nextPos)&&adversaries.get(i).isCrossable==false){
 						return true;
 					}
 					i++;
@@ -92,6 +92,7 @@ public class Map {
 		}
 		return true;
 	}
+	
 	
 	public Exit findExit(int key, Position pos){	
 		Position nextPos = getNextPosition(key, pos);

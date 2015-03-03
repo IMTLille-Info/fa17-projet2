@@ -1,4 +1,4 @@
-﻿package telecom.fa17.game;
+package telecom.fa17.game;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -55,20 +55,23 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
         map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
         map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
-        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension());
+        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(),5,50);
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap"));
         map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
         map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
-        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension());
+        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension(),10,50);
         monster2.init();
         map.get(2).addAdversary(monster2);
         
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
+               
+		@SuppressWarnings("unused")
+		Sounds background = new Sounds("resources/music/sample.ogg");
     }
 	
 	/** 
@@ -101,7 +104,7 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-				
+
 		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
 			
@@ -117,7 +120,7 @@ public class WindowGame extends BasicGame {
 			}
 		}
 		// Calcul des futurs coordonnées désirées
-		objPlayer.getNextPosition();
+		objPlayer.getNextPosition(delta);
 	}
 	
 	/** 
@@ -125,7 +128,7 @@ public class WindowGame extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(false); // Désactivation de l'affichage des FPS
+		container.setShowFPS(true); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre)
     }
 	
@@ -143,6 +146,10 @@ public class WindowGame extends BasicGame {
 		if (key == Input.KEY_ESCAPE) {
             container.exit();
         }
+		
+		if(key == Input.KEY_SPACE){
+			objPlayer.attack(map.get(indexMap));
+		}
 		
 	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
@@ -187,8 +194,8 @@ public class WindowGame extends BasicGame {
 					}
 				}
 			}
-	    }
-	}	
+		}
+	}
 	
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
 		g.drawString(text, absOrigin, ordOrigin);

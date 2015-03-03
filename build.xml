@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="test" basedir=".">
+  <property name="src.dir" location="src" />
+  <property name="lib.dir" location="lib" />
+  <property name="build.dir" location="bin" />
+  <property name="test.dir" location="test-report" />
+  
+
+  <path id="build.classpath">
+    <pathelement location="${build.dir}" />
+    <fileset dir="${lib.dir}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+    
+  <target name="clean">
+    <delete dir="${build.dir}" />
+    <delete dir="${test.dir}" />
+  </target>
+
+  <target name="makedirs">
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${test.dir}" />
+  </target>
+
+  <target name="compile" depends="clean, makedirs">
+    <javac srcdir="${src.dir}" destdir="${build.dir}">
+      <classpath refid="build.classpath" />
+    </javac>
+  </target>
+
+  <target name="test" depends="compile">
+    <junit printsummary="on" haltonfailure="yes">
+      <classpath refid="build.classpath" />
+      <formatter type="plain" />
+      <batchtest todir="${test.dir}">
+        <fileset dir="${src.dir}">
+          <include name="**/*Test*.java" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+</project> 
