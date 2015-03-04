@@ -7,7 +7,10 @@ public class Sounds {
 
 	Music backgroundMusic;
 	
-	public Sounds(){}
+	public Sounds(String pathtoMusic) throws SlickException{
+		backgroundMusic = new Music(pathtoMusic);
+		this.backgroundMusic.loop();
+	}
 	
 	/********************** Monsters & Players Sounds
 	** Peut être utilisée 

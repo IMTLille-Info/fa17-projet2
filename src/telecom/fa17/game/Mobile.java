@@ -18,8 +18,10 @@ public abstract class Mobile extends Element{
 	protected Animation[] animations;
 	protected Image[] standings;
 	
-	private int scale, tempScale = 0;
-	private int moveAnim = 0;;
+	protected int scale;
+
+	private int tempScale = 0;
+	private int moveAnim = 0;
 	
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);
@@ -73,8 +75,7 @@ public abstract class Mobile extends Element{
 		if((tempScale < scale)) {
 			moveAnim += delta;
 			// Toutes les 5ms, on bouge le personnage d'un pixel
-			if(moveAnim > 5)
-			{
+			if(moveAnim > 5){
 				tempScale++;
 				if(HORIZONTAL){ 
 					x = (UP) ? 1 : -1; 
@@ -99,7 +100,7 @@ public abstract class Mobile extends Element{
 	}
 	
 	public boolean isAlive() {
-		if (!(getLife() > 0)){
+		if (getLife() <= 0){
 			//image mort / cadavre loot item ou disparait
 			this.isCrossable = true;
 			return false;
@@ -121,8 +122,7 @@ public abstract class Mobile extends Element{
 		return isMobile;
 	}
 	
-	public Position getNearPosition()
-	{
+	public Position getNearPosition(){
 		float x = 0, y = 0;
 		switch (direction) {
 			case NORTH :
@@ -136,6 +136,8 @@ public abstract class Mobile extends Element{
 					break;
 			case WEST :
 					x = scale;
+					break;
+			default:
 					break;				
 		}
 		return new Position(position.getAbsciss() + x, position.getOrdinate() + y);
