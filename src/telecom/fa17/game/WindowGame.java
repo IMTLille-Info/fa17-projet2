@@ -27,7 +27,7 @@ public class WindowGame extends BasicGame {
 	
 	Player objPlayer;
 	boolean playerHit;
-	Animation hit;
+	AnimationView animations;
 	
 
 	/**
@@ -75,7 +75,8 @@ public class WindowGame extends BasicGame {
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
         
-        hit = new Animation();
+        animations = new AnimationView();
+       
     }
 	
 	/** 
