@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -25,6 +26,7 @@ public class WindowGame extends BasicGame {
 	
 	Player objPlayer;
 	Sounds music;
+	Hud myHud;
 
 	/**
      * Création de la fenetre.
@@ -83,6 +85,8 @@ public class WindowGame extends BasicGame {
         objPlayer.init();
                
 		music = new Sounds(map.get(0).getMusicFilename());
+		myHud = new Hud();
+		myHud.init();
     }
 	
 	/** 
@@ -104,8 +108,9 @@ public class WindowGame extends BasicGame {
 		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
-	    // On affiche pas la couche de collision qui serait la prochaine
+	    
 		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
+		myHud.render(g);
 
     }
 	
@@ -213,6 +218,7 @@ public class WindowGame extends BasicGame {
 	}
 	
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
+		g.setColor(new Color(255, 255, 255));
 		g.drawString(text, absOrigin, ordOrigin);
 	}
 	
