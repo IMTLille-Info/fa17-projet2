@@ -7,48 +7,39 @@ public class Sounds {
 
 	Music backgroundMusic;
 	
-	public Sounds(String pathtoMusic) throws SlickException{
-		backgroundMusic = new Music(pathtoMusic);
+	public Sounds(String fileName) throws SlickException{
+		this.backgroundMusic = new Music("resources/music/" + fileName);
 		this.backgroundMusic.loop();
 	}
 	
-	/********************** Monsters & Players Sounds
-	** Peut être utilisée 
-	** Lorsqu'un joueur/monstre meurt
-	** Lorsqu'un joueur/ monstre attaque - différent selon arme
-	** Lorsqu'un joueur ramasse un objet
-	** Sons différents possibles selon monstres
-	**
-	** format String play : "resources/music/exemple.ogg"*/
-	public void playSound(String play) throws SlickException {
-		Music playSound = new Music(play);
+	public void playSound(String fileName) throws SlickException {
+		Music playSound = new Music("resources/music/" + fileName);
 		playSound.play();
 	}
 	
-	/********************** Winner/Loser Sounds */
-		public void  WinSound() throws SlickException {
-		StopBackgroundMusic(this.backgroundMusic);
-		Music WinSound = new Music("resources/music/exemple.ogg");
+	/* Sound played when the player wins NOT YET IMPLEMENTED 
+	public void  WinSound() throws SlickException {
+		StopBackgroundMusic();
+		Music WinSound = new Music("resources/music/");
 		WinSound.play();
-	}
+	} */
 	
+	/* Sound played when the player looses NOT YET IMPLEMENTED 
 	public void  GameOverSound() throws SlickException {
-		StopBackgroundMusic(this.backgroundMusic);
-		Music GameOverSound = new Music("resources/music/exemple.ogg");
+		StopBackgroundMusic();
+		Music GameOverSound = new Music("resources/music/");
  		GameOverSound.play();
-	}
+	}*/
 	
-	/********************** Background Music */
-		public void StopBackgroundMusic(Music currentMusic) {
-		if(currentMusic.playing()){
-			currentMusic.stop();
+	public void StopBackgroundMusic() {
+		if(this.backgroundMusic.playing()){
+			this.backgroundMusic.stop();
 		}
 	}
 
-	// son Outdoor/Indoor différent - jouer sur ambiance - exemple String backgroundMusic : resources/music/exemple.ogg
-	public void setBackgroundMusic(String backgroundMusic) throws SlickException{
-		StopBackgroundMusic(this.backgroundMusic);
-		this.backgroundMusic = new Music (backgroundMusic);
+	public void setBackgroundMusic(String fileName) throws SlickException{
+		StopBackgroundMusic();
+		this.backgroundMusic = new Music("resources/music/" + fileName);
 		this.backgroundMusic.loop();
 	}	
 }
