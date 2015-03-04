@@ -9,7 +9,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -25,7 +24,7 @@ public class WindowGame extends BasicGame {
 	int indexMap = 0;
 	
 	Player objPlayer;
-	Sounds background;
+	Sounds music;
 
 	/**
      * Création de la fenetre.
@@ -45,13 +44,13 @@ public class WindowGame extends BasicGame {
         
         // Charge la map
         map = new LinkedList<Map>();
-        map.add(new Map("firstMap"));
+        map.add(new Map("firstMap", "townMap.ogg"));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
         map.get(0).addExit(new Exit(9 * 32, 0, 9 * 32, 14 * 32, 1));
         map.get(0).addExit(new Exit(10 * 32, 0, 16 * 32, 14 * 32, 1));
         
-        map.add(new Map("secondMap"));
+        map.add(new Map("secondMap", "caveMap.ogg"));
         map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
         map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
@@ -61,14 +60,14 @@ public class WindowGame extends BasicGame {
         monster.init();
         map.get(1).addAdversary(monster);
         
-        map.add(new Map("thirdMap"));
+        map.add(new Map("thirdMap", "caveMap.ogg"));
         map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
         map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
         PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension(), 10, 50);
         monster2.init();
         map.get(2).addAdversary(monster2);
         
-        map.add(new Map("fourthMap"));
+        map.add(new Map("fourthMap", "townMap.ogg"));
         PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 10, 50);
         monster3.init();
         PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 10, 50);
@@ -83,7 +82,7 @@ public class WindowGame extends BasicGame {
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
                
-		//background = new Sounds("townMap.ogg");
+		music = new Sounds(map.get(0).getMusicFilename());
     }
 	
 	/** 
@@ -119,7 +118,7 @@ public class WindowGame extends BasicGame {
 
 		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
-			
+
 			// On est resté appuyé sur une touche - callback keyPressed
 			if(listener.isKeyDown(Input.KEY_UP)) {
 				keyPressed(Input.KEY_UP, ' ');
@@ -153,7 +152,6 @@ public class WindowGame extends BasicGame {
 	public void keyPressed(int key, char c) {
 		
 		boolean isOnEdge = true;
-		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
             container.exit();
@@ -201,6 +199,11 @@ public class WindowGame extends BasicGame {
 					if(exit != null){
 						indexMap = exit.getMapNumber();
 						objPlayer.setPosition(exit.getNextPosition());
+						try {
+							music.setBackgroundMusic(map.get(indexMap).getMusicFilename());
+						} catch (SlickException e) {
+							
+						}
 					} else {
 						objPlayer.setMoving();
 					}

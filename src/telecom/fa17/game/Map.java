@@ -13,11 +13,13 @@ public class Map {
 	private TiledMap map;	
 	private List<Element> obstacles;
 	private List<PNJ> adversaries;
+	private String musicFilename;
 	
-	public Map(String name) throws SlickException {
+	public Map(String name, String mscFile) throws SlickException {
 		   this.map = new TiledMap("resources/map/" + name + ".tmx");
 		   obstacles = new LinkedList<Element>();
 		   adversaries = new LinkedList<PNJ>();
+		   musicFilename = mscFile;
 	}
 	
 	public int getTileDimension(){
@@ -44,6 +46,11 @@ public class Map {
 	
 	public int getTileId(int x, int y, String name){
 		return map.getTileId(x, y, this.map.getLayerIndex(name));
+	}
+	
+	public String getMusicFilename()
+	{
+		return musicFilename;
 	}
 	
 	public void addExit(Exit prm){
