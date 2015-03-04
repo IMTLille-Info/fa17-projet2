@@ -47,22 +47,23 @@ public abstract class Mobile extends Element{
 
 	public void getNextPosition(int delta){
 		if (moving) {
+			moveAnim += delta;
 	        switch (direction) {
         		// On veut monter
         		case NORTH :
-        			getNext(false, true, delta);
+        			getNext(false, true);
         			break;
 	        	// On veut aller à gauche
 	        	case EAST :
-	        			getNext(true, false, delta);
+	        			getNext(true, false);
         				break;
         	        	// On veut descendre
         	    case SOUTH :
-        	        	getNext(false, false, delta);
+        	        	getNext(false, false);
             			break;
 	        	// On veut aller à droite
 	        	case WEST :
-	        			getNext(true, true, delta);
+	        			getNext(true, true);
 						break;
 	        	default:
 	        			break;
@@ -70,12 +71,11 @@ public abstract class Mobile extends Element{
 		}
 	}
 	
-	private void getNext(boolean HORIZONTAL, boolean UP, int delta){			
+	private void getNext(boolean HORIZONTAL, boolean UP){			
 		int x = 0, y = 0;
 		if((tempScale < scale)) {
-			moveAnim += delta;
 			// Toutes les 5ms, on bouge le personnage d'un pixel
-			if(moveAnim > 5){
+			if(moveAnim > 4){
 				tempScale++;
 				if(HORIZONTAL){ 
 					x = (UP) ? 1 : -1; 

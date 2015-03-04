@@ -70,8 +70,8 @@ public class WindowGame extends BasicGame {
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
         objPlayer.init();
                
-		@SuppressWarnings("unused")
-		Sounds background = new Sounds("resources/music/sample.ogg");
+		/*@SuppressWarnings("unused")
+		Sounds background = new Sounds("resources/music/sample.ogg");*/
     }
 	
 	/** 
@@ -128,7 +128,7 @@ public class WindowGame extends BasicGame {
 	 */
 	public static void main(String[] args) throws SlickException {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(true); // Désactivation de l'affichage des FPS
+		container.setShowFPS(false); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre)
     }
 	
