@@ -22,4 +22,9 @@
    H4sIAAAAAAAAC2NgwA12M2LHhAAutZSYh0xTCgi5DxefXHvQxYjRR6xaYt2B7B588UCK+0ixm5AaYtyFLz5oEVbEuhmXOCnhSkp+INU8YvFQAAAwVgM5sAQAAA==
   </data>
  </layer>
+ <layer name="collision" width="20" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkYGBgxIFxAVzqsemjpXno8oTMoZX7GHGoo5V/8dmJTZxUMBTNwyZOariRGvbkuptagFbuG8wYAMsvq0uwBAAA
+  </data>
+ </layer>
 </map>
