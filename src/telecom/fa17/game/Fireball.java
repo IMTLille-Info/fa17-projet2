@@ -15,7 +15,7 @@ public class Fireball extends Mobile{
 		this.image = new Image("resources/map/monster/projectile_fireball.png");
 		this.signumAbsciss = signumAbsciss;
 		this.signumOrdinate = signumOrdinate;
-		this.attack = attack;
+		setAttack(attack);
 		this.isCrossable = true;
 	}
 

@@ -17,7 +17,7 @@ public class Firelord extends PNJ{
 		int signumAbsciss = Long.signum((long)x);
 		int signumOrdinate = Long.signum((long)y);
 		
-		Fireball ball = new Fireball(position, this.scale, signumAbsciss, signumOrdinate, this.attack);
+		Fireball ball = new Fireball(position, this.scale, signumAbsciss, signumOrdinate, getAttack());
 		return ball;
 	}
 }

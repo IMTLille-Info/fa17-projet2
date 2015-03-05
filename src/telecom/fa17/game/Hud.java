@@ -22,9 +22,9 @@ public class Hud {
 		this.hudImage = new Image("resources/hud/HP_Bar.png");
 	}
 
-	public void render(Graphics g) {
+	public void render(Graphics g, float life) {
 		g.drawImage(hudImage, X_BAR, Y_BAR);
 		g.setColor(LIFE_COLOR);
-		g.fillRect(X_BAR_LIFE, Y_BAR_LIFE, 0.5f * BAR_WIDTH, BAR_HEIGHT);
+		g.fillRect(X_BAR_LIFE, Y_BAR_LIFE, (float) (life / 100) * BAR_WIDTH, BAR_HEIGHT);
 	}
 }

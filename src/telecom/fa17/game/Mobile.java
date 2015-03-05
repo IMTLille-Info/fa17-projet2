@@ -6,20 +6,19 @@ import org.newdawn.slick.SlickException;
 
 public abstract class Mobile extends Element{
 	
-	final int DURATION_FRAME = 100;
+	protected final int DURATION_FRAME = 100;
 	
 	private boolean moving = false;
-	
 	private Direction direction = Direction.SOUTH;
-	protected int life;
-	protected boolean isMobile;
-	protected int attack;
+	
+	private int life;
+	private boolean isMobile;
+	private int attack;
 	
 	protected Animation[] animations;
 	protected Image[] standings;
 	
 	protected int scale;
-
 	private int tempScale = 0;
 	private int moveAnim = 0;
 	
@@ -100,8 +99,7 @@ public abstract class Mobile extends Element{
 	}
 	
 	public boolean isAlive() {
-		if (getLife() <= 0){
-			//image mort / cadavre loot item ou disparait
+		if (this.life <= 0){
 			this.isCrossable = true;
 			return false;
 		} else {
@@ -109,8 +107,20 @@ public abstract class Mobile extends Element{
 		}
 	}
 
-	private int getLife() {
+	public int getLife() {
 		return life;
+	}
+	
+	public void setLife(int hp) {
+		this.life = hp;
+	}
+	
+	public void addLife(int hp){
+		if((this.life + hp) < 100){	
+			this.life += hp;
+		} else {
+			this.life = 100;
+		}
 	}
 
 	public void hurt(int attack) {
@@ -145,7 +155,6 @@ public abstract class Mobile extends Element{
 	
 	public void attack(Map map){
 		Position target = getNearPosition();
-		System.out.println(target.toString());
 		for (PNJ pnj : map.getAdversaries()){
 			if (Position.equals(pnj.getPosition() , target)){
 				pnj.hurt(attack);
@@ -158,7 +167,10 @@ public abstract class Mobile extends Element{
 	}
 
 	public void setAttack(int attack) {
-		//objet récupéré peut augmenter l'attaque du joueur
+		this.attack = attack;
+	}
+	
+	public void addAttack(int power){
 		this.attack += attack;
 	}
 }
