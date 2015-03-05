@@ -91,7 +91,7 @@ public class Map {
 		Position nextPos = getNextPosition(key, pos);
 
 		if (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0){
-			int i =0;
+			int i = 0;
 			if(!adversaries.isEmpty()){
 				while(i < adversaries.size()){
 					if(Position.equals(adversaries.get(i).getPosition(), nextPos)&&adversaries.get(i).isCrossable==false){

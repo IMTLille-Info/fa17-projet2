@@ -3,7 +3,6 @@ package telecom.fa17.game;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
