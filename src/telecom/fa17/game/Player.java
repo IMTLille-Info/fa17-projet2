@@ -8,8 +8,8 @@ public class Player extends Mobile {
 	
 	public Player(float x, float y, int tileSize){
 		super(x, y, tileSize);
-		attack = 10;
-		life = 50;
+		setAttack(20);
+		setLife(50);
 		// MARQUES DE COMMENTAIRES A METTRE POUR MODE TEST SUR LE TRY
 	}
 	
