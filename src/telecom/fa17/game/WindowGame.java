@@ -110,7 +110,7 @@ public class WindowGame extends BasicGame {
 		map.get(indexMap).renderForeground();
 	    
 		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
-		myHud.render(g, objPlayer.getLife());
+		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
 
     }
 	
