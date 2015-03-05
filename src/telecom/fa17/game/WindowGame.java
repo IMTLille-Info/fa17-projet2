@@ -101,9 +101,9 @@ public class WindowGame extends BasicGame {
 	    // On affiche pas la couche de collision qui serait la prochaine
 		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
 
+		//affiche l'animation des degats si un joueur est touché
 		if(map.get(indexMap).playerHit()){
-			//g.drawAnimation(hit, map.get(indexMap).getHitZone().getAbsciss(), map.get(indexMap).getHitZone().getAbsciss());
-			System.out.println("touché a " + map.get(indexMap).getHitZone().toString());
+			animations.hitAnimate(map.get(indexMap));
 		}
     }
 	
@@ -215,4 +215,5 @@ public class WindowGame extends BasicGame {
 			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
 		}
 	}
+	
 }

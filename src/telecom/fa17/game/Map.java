@@ -138,8 +138,16 @@ public class Map {
 	public Position getHitZone(){
 		return hitPosition;
 	}
-
+	
+	/**
+	 * return if a player was hit on the map and change the status if true
+	 * @return hit state
+	 */
 	public boolean playerHit() {
 		return playerHit;
+	}
+	
+	public void stopHit(){
+		playerHit = false;
 	}
 }
