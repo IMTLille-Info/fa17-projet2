@@ -119,6 +119,7 @@ public class WindowGame extends BasicGame {
 		//affiche l'animation des degats si un joueur est touché
 		if(map.get(indexMap).playerHit()){
 			animations.hitAnimate(map.get(indexMap));
+			animations.swordAttack.draw(objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
     }
 	
