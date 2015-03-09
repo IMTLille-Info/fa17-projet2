@@ -59,7 +59,7 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
         map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
         map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
-        map.get(1).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 5 * 32, 3));
+        map.get(1).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 3));
         PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 5, 50);
         monster.init();
         map.get(1).addAdversary(monster);
@@ -72,7 +72,7 @@ public class WindowGame extends BasicGame {
         map.get(2).addAdversary(monster2);
         
         map.add(new Map("fourthMap", "townMap.ogg"));
-        map.get(3).addExit(new Exit(17 * 32, 5 * 32, 18 * 32, 1 * 32, 1));
+        map.get(3).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 1));
         PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 10, 50);
         monster3.init();
         PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 10, 50);
