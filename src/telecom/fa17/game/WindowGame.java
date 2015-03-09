@@ -72,6 +72,7 @@ public class WindowGame extends BasicGame {
         map.get(2).addAdversary(monster2);
         
         map.add(new Map("fourthMap", "townMap.ogg"));
+        map.get(3).addExit(new Exit(17 * 32, 5 * 32, 18 * 32, 1 * 32, 1));
         PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 10, 50);
         monster3.init();
         PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 10, 50);
