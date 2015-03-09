@@ -90,7 +90,7 @@ public class WindowGame extends BasicGame {
                
 		music = new Sounds(map.get(0).getMusicFilename());
 		myHud = new Hud();
-		myHud.init();
+		myHud.init(true);
     }
 	
 	/** 
@@ -113,7 +113,7 @@ public class WindowGame extends BasicGame {
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    
-		displayText(g, "© 2015 GameZ Copyright", (WIDTH_MAX / 2) - 3*32, HEIGHT_MAX);
+		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
 
 		//affiche l'animation des degats si un joueur est touché
@@ -121,6 +121,9 @@ public class WindowGame extends BasicGame {
 			animations.hitAnimate(map.get(indexMap));
 			animations.swordAttack.draw(objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
+		
+		// RECUPERATION DE LA VIE DU MONSTRE QUE L'ON EST EN TRAIN DE COMBATTRE
+		//displayHUDMonsters(g, 50);
     }
 	
 	/** 
@@ -235,6 +238,13 @@ public class WindowGame extends BasicGame {
 		for(PNJ monster : monsters){
 			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
 		}
+	}
+	
+	private void displayHUDMonsters(Graphics g, int monsterLife) throws SlickException
+	{
+		Hud monsterHud = new Hud();
+		monsterHud.init(false);
+		monsterHud.renderMonster(g, monsterLife);
 	}
 	
 }

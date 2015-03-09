@@ -14,6 +14,8 @@ public abstract class Mobile extends Element{
 	private int life;
 	private boolean isMobile;
 	private int attack;
+	// BOOLEAN pour indiquer si le joueur est en combat
+	private boolean isFighting;
 	
 	protected Animation[] animations;
 	protected Image[] standings;
@@ -25,6 +27,7 @@ public abstract class Mobile extends Element{
 	public Mobile(float x, float y, int tileSize){
 		super(x, y, false);
 		scale = tileSize;
+		isFighting = false;
 		
 		animations = new Animation[4];
 		standings = new Image[4];
@@ -173,5 +176,13 @@ public abstract class Mobile extends Element{
 	
 	public void addAttack(int power){
 		this.attack += attack;
+	}
+	
+	public boolean getFightingState() {
+		return isFighting;
+	}
+
+	public void setFightingState(boolean inFight) {
+		this.isFighting = inFight;
 	}
 }

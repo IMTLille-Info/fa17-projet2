@@ -12,6 +12,8 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class AnimationView {
 
+	protected final int DURATION_FRAME = 100;
+	
 	public Animation hit;
 	public Animation swordAttack;
 	
@@ -20,10 +22,10 @@ public class AnimationView {
 		hit = new Animation(hitSheet, 30);
 		hit.setLooping(false);
 		
-		swordAttack= new Animation();
-		swordAttack.addFrame(new Image("resources/map/player/personAttack1.png"), 100);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack2.png"), 100);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), 100);
+		swordAttack = new Animation();
+		swordAttack.addFrame(new Image("resources/map/player/personAttack1.png"), DURATION_FRAME);
+		swordAttack.addFrame(new Image("resources/map/player/personAttack2.png"), DURATION_FRAME);
+		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), DURATION_FRAME);
 	}
 	
 	/**
@@ -34,8 +36,8 @@ public class AnimationView {
 		if(hit.isStopped()){
 			map.stopHit();
 			hit.restart();
-		}else{
-		hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
+		} else {
+			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
 		}
 	}
 }
