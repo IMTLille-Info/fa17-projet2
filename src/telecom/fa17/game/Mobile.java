@@ -73,7 +73,7 @@ public abstract class Mobile extends Element{
 		}
 	}
 	
-	private void getNext(boolean HORIZONTAL, boolean UP){			
+	public void getNext(boolean HORIZONTAL, boolean UP){			
 		int x = 0, y = 0;
 		if((tempScale < scale)) {
 			// Toutes les 5ms, on bouge le personnage d'un pixel
@@ -174,6 +174,10 @@ public abstract class Mobile extends Element{
 		this.attack = attack;
 	}
 	
+	public Direction getDirection() {
+		return direction;
+	}
+
 	public void addAttack(int power){
 		this.attack += attack;
 	}

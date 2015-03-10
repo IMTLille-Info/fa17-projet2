@@ -5,100 +5,99 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MobileTest {
+import telecom.fa17.game.Direction;
+import telecom.fa17.game.Player;
+import telecom.fa17.game.Position;
 
+public class MobileTest {
+	
+	Player player = new Player(0, 0, 10);
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@Test
-	public void testGetAttack() {
-		fail("Not yet implemented");
+	
 	}
 
 	@Test
 	public void testSetAttack() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMobile() {
-		fail("Not yet implemented");
+		player.setAttack(50);
+		assertEquals(50 , player.getAttack());
 	}
 
 	@Test
 	public void testSetDirection() {
-		fail("Not yet implemented");
+		player.setDirection(Direction.EAST);
+		assertEquals(Direction.EAST , player.getDirection());
 	}
 
 	@Test
 	public void testSetMoving() {
-		fail("Not yet implemented");
+		player.setMoving();
+		assertTrue(player.isMoving());
 	}
 
 	@Test
 	public void testIsMoving() {
-		fail("Not yet implemented");
+		assertFalse(player.isMoving());
 	}
 
-	@Test
-	public void testGetPosition() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	public void testSetPositionPosition() {
-		fail("Not yet implemented");
+		player.setPosition(new Position(0, 1));
+		assertEquals(player.getPosition().toString(), new Position(0, 1).toString());
 	}
 
 	@Test
 	public void testSetPositionFloatFloat() {
-		fail("Not yet implemented");
+		player.setPosition(0,1);
+		assertEquals(player.getPosition().toString(), new Position(0, 1).toString());
 	}
+	
+	@Test
+	public void testGetNext() {
+		player.setPosition(0,0);
+		player.setMoving();
+		player.getNextPosition(5);
+		player.getNext(true,true);
+		assertEquals(new Position(0, 1).toString(), player.getPosition().toString());
+	}
+
 
 	@Test
 	public void testGetNextPosition() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetNext() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetStandingImage() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetAnimation() {
-		fail("Not yet implemented");
+		player.getNextPosition(0);
+		assertEquals(new Position(0, 0).toString() , player.getPosition().toString());
 	}
 
 	@Test
 	public void testIsAlive() {
-		fail("Not yet implemented");
+		player.setLife(0);
+		assertFalse(player.isAlive());
 	}
 
 	@Test
 	public void testGetLife() {
-		fail("Not yet implemented");
+		player.setLife(20);
+		assertEquals(20, player.getLife());
 	}
 
 	@Test
 	public void testSetLife() {
-		fail("Not yet implemented");
+		player.setLife(20);
+		assertEquals(20, player.getLife());
 	}
 
 	@Test
 	public void testIsMobile() {
-		fail("Not yet implemented");
+		assertFalse(player.isMobile());
 	}
 
 	@Test
 	public void testAttack() {
-		fail("Not yet implemented");
+		int life = player.getLife();
+		player.hurt(10);
+		assertEquals(life - 10, player.getLife());
+		
 	}
 
 }
