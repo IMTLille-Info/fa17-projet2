@@ -6,11 +6,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class PNJ extends Mobile {
+	
+	protected Map map;
 
-	public PNJ(float x, float y, int tileSize, int attack, int life) {
+	public PNJ(float x, float y, int tileSize, int attack, int life, Map map) {
 		super(x, y, tileSize);
 		setLife(life);
 		setAttack(attack);
+		this.map=map;
 	}
 
 	@Override

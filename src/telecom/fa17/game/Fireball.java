@@ -3,20 +3,21 @@ package telecom.fa17.game;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Fireball extends Mobile{
+public class Fireball extends PNJ{
 
 	Image image;
 	int signumAbsciss;
 	int signumOrdinate;
 	
-	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int attack) throws SlickException {
-		//tester si case est libre ou non
-		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize);
+	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int attack, int life, Map map) throws SlickException, InterruptedException {
+		//ne pas tester si case est libre ou non => firelord test deja
+		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize, attack, life, map);
 		this.image = new Image("resources/map/monster/projectile_fireball.png");
 		this.signumAbsciss = signumAbsciss;
 		this.signumOrdinate = signumOrdinate;
-		setAttack(attack);
 		this.isCrossable = true;
+		setMoving();
+		move();
 	}
 
 	@Override
@@ -24,10 +25,11 @@ public class Fireball extends Mobile{
 		standings[Direction.SOUTH.index] = image;
 	}
 	
-	public void move(){
+	public void move() throws InterruptedException{
+		Thread.sleep(1000);
 		// tester si prochaine case est libre ou non
 		// si non libre (solid) => destroy fireball
-		// si non libre (joueur) => destroy maj player
+		// si non libre (joueur) => maj player
 		// si libre continue
 	}
 

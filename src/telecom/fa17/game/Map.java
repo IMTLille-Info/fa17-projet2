@@ -53,8 +53,7 @@ public class Map {
 		return map.getTileId(x, y, this.map.getLayerIndex(name));
 	}
 	
-	public String getMusicFilename()
-	{
+	public String getMusicFilename(){
 		return musicFilename;
 	}
 	
@@ -151,7 +150,7 @@ public class Map {
 	 * return if a player was hit on the map and change the status if true
 	 * @return hit state
 	 */
-	public boolean playerHit() {
+	public boolean playerHit(){
 		return playerHit;
 	}
 	
