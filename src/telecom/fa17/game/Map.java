@@ -95,7 +95,7 @@ public class Map {
 			if (!adversaries.isEmpty()) {
 				while (i < adversaries.size()) {
 					if (adversaries.get(i).getPosition().equals(nextPos)
-							&& ! adversaries.get(i).isCrossable()) {
+							&& !adversaries.get(i).isCrossable()) {
 						return true;
 					}
 					i++;
@@ -108,17 +108,14 @@ public class Map {
 
 	public Exit findExit(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
-		int i = 0;
-		boolean found = false;
-
-		while ((i < obstacles.size() && !found)) {
-			if (obstacles.get(i).getPosition().equals(nextPos)) {
-				found = true;
-			} else {
-				i++;
+		for (Element each : obstacles) {
+			if (each.getPosition().equals(nextPos)) { // each.isCloseTo(nextPos)
+				return (Exit) each; // TODO qu'est-ce qui garantit que c'est
+									// possible ? ça ne peut pas être un autre
+									// type d'obstacle ?
 			}
 		}
-		return (found) ? (Exit) obstacles.get(i) : null;
+		return null;
 	}
 
 	public void addAdversary(PNJ prm) {
