@@ -31,7 +31,12 @@ public class Position {
 		ordinate = ord;
 	}
 	
-	public static boolean equals(Position arg0, Position arg1){
-		return ((arg0.getAbsciss() == arg1.getAbsciss()) && (arg0.getOrdinate() == arg1.getOrdinate()));
+	@Override
+	public boolean equals(Object o){
+		if (! (o instanceof Position)) { return false; }
+		Position other = (Position)o;
+		final float EPSILON = 1e-6f;
+		return Math.abs(other.getAbsciss() - this.getAbsciss()) < EPSILON
+				&& Math.abs(other.getOrdinate() - this.getOrdinate()) < EPSILON;
 	}
 }

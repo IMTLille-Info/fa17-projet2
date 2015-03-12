@@ -44,7 +44,7 @@ public class MobileTest {
 	@Test
 	public void testSetPositionPosition() {
 		player.setPosition(new Position(0, 1));
-		assertEquals(player.getPosition().toString(), new Position(0, 1).toString());
+		assertEquals(new Position(0, 1), player.getPosition());
 	}
 
 	@Test
