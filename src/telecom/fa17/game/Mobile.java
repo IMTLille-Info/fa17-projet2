@@ -4,89 +4,90 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public abstract class Mobile extends Element{
-	
+public abstract class Mobile extends Element {
+
 	protected final int DURATION_FRAME = 100;
-	
+
 	private boolean moving = false;
 	private Direction direction = Direction.SOUTH;
-	
+
 	private int life;
 	private boolean isMobile;
 	private int attack;
 	// BOOLEAN pour indiquer si le joueur est en combat
 	private boolean isFighting;
-	
+
 	protected Animation[] animations;
 	protected Image[] standings;
-	
+
 	protected int scale;
 	private int tempScale = 0;
 	private int moveAnim = 0;
-	
-	public Mobile(float x, float y, int tileSize, int life, int attack){
+
+	public Mobile(float x, float y, int tileSize, int life, int attack) {
 		super(x, y, false);
 		scale = tileSize;
 		isFighting = false;
 		this.life = life;
 		this.attack = attack;
-		
+
 		animations = new Animation[4];
 		standings = new Image[4];
 	}
-	
+
 	public abstract void init() throws SlickException;
-		
-	public void setDirection(Direction dir){
+
+	public void setDirection(Direction dir) {
 		direction = dir;
 	}
-	
-	public void setMoving(){
+
+	public void setMoving() {
 		moving = true;
 	}
-	
-	public boolean isMoving(){
+
+	public boolean isMoving() {
 		return moving;
 	}
 
-	public void getNextPosition(int delta){
+	public void getNextPosition(int delta) {
 		if (moving) {
 			moveAnim += delta;
-	        switch (direction) {
-        		// On veut monter
-        		case NORTH :
-        			getNext(false, true);
-        			break;
-	        	// On veut aller à gauche
-	        	case EAST :
-	        			getNext(true, false);
-        				break;
-        	        	// On veut descendre
-        	    case SOUTH :
-        	        	getNext(false, false);
-            			break;
-	        	// On veut aller à droite
-	        	case WEST :
-	        			getNext(true, true);
-						break;
-	        	default:
-	        			break;
-	        }
+			switch (direction) {
+			// On veut monter
+			case NORTH:
+				getNext(false, true);
+				break;
+			// On veut aller à gauche
+			case EAST:
+				getNext(true, false);
+				break;
+			// On veut descendre
+			case SOUTH:
+				getNext(false, false);
+				break;
+			// On veut aller à droite
+			case WEST:
+				getNext(true, true);
+				break;
+			default:
+				break;
+			}
 		}
 	}
-	
-	public void getNext(boolean HORIZONTAL, boolean UP){			
+
+	public void getNext(boolean HORIZONTAL, boolean UP) {
 		int x = 0, y = 0;
-		if((tempScale < scale)) {
+		if ((tempScale < scale)) {
 			// Toutes les 5ms, on bouge le personnage d'un pixel
-			if(moveAnim > 4){
+			if (moveAnim > 4) {
 				tempScale++;
-				if(HORIZONTAL){ 
-					x = (UP) ? 1 : -1; 
-				} else { 
-					y = (UP) ? -1 : 1; 			
+				if (HORIZONTAL) {
+					x = (UP) ? 1 : -1;
+				} else {
+					y = (UP) ? -1 : 1;
 				}
-				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
+				setPosition(position.getAbsciss() + x, position.getOrdinate()
+						+ y);
 				moveAnim = 0;
 			}
 		} else {
@@ -94,17 +95,17 @@ public abstract class Mobile extends Element{
 			tempScale = 0;
 		}
 	}
-	
-	public Image getStandingImage()	{
+
+	public Image getStandingImage() {
 		return standings[direction.index];
 	}
-	
-	public Animation getAnimation()	{
+
+	public Animation getAnimation() {
 		return animations[direction.index];
 	}
-	
+
 	public boolean isAlive() {
-		if (this.life <= 0){
+		if (this.life <= 0) {
 			this.isCrossable = true;
 			return false;
 		} else {
@@ -115,9 +116,9 @@ public abstract class Mobile extends Element{
 	public int getLife() {
 		return life;
 	}
-	
-	public void addLife(int hp){
-		if((this.life + hp) < 100){	
+
+	public void addLife(int hp) {
+		if ((this.life + hp) < 100) {
 			this.life += hp;
 		} else {
 			this.life = 100;
@@ -173,15 +174,15 @@ public abstract class Mobile extends Element{
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-	
+
 	public Direction getDirection() {
 		return direction;
 	}
 
-	public void addAttack(int power){
+	public void addAttack(int power) {
 		this.attack += attack;
 	}
-	
+
 	public boolean getFightingState() {
 		return isFighting;
 	}

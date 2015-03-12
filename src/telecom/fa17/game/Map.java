@@ -10,86 +10,87 @@ import org.newdawn.slick.tiled.TiledMap;
 import telecom.fa17.game.Exit;
 
 public class Map {
-	private TiledMap map;	
+	private TiledMap map;
 	private List<Element> obstacles;
 	private List<PNJ> adversaries;
 	private Position hitPosition;
 	private boolean playerHit;
 	private String musicFilename;
 
-	
 	public Map(String name, String mscFile) throws SlickException {
-		   this.map = new TiledMap("resources/map/" + name + ".tmx");
-		   obstacles = new LinkedList<Element>();
-		   adversaries = new LinkedList<PNJ>();
-		   hitPosition = new Position(0,0);
-		   playerHit = false;
-		   musicFilename = mscFile;
+		this.map = new TiledMap("resources/map/" + name + ".tmx");
+		obstacles = new LinkedList<Element>();
+		adversaries = new LinkedList<PNJ>();
+		hitPosition = new Position(0, 0);
+		playerHit = false;
+		musicFilename = mscFile;
 	}
-	
-	public int getTileDimension(){
+
+	public int getTileDimension() {
 		return this.map.getTileHeight();
 	}
-	
-	public int getWidth(){
+
+	public int getWidth() {
 		int tileSize = this.getTileDimension();
 		return (this.map.getWidth() * tileSize) - tileSize;
 	}
-	
-	public int getHeight(){
+
+	public int getHeight() {
 		int tileSize = getTileDimension();
 		return (this.map.getHeight() * tileSize) - tileSize;
 	}
-	
-	public void renderBackground(){
+
+	public void renderBackground() {
 		this.map.render(0, 0, 0);
 	}
-	
-	public void renderForeground(){
+
+	public void renderForeground() {
 		this.map.render(0, 0, 1);
 	}
-	
-	public int getTileId(int x, int y, String name){
+
+	public int getTileId(int x, int y, String name) {
 		return map.getTileId(x, y, this.map.getLayerIndex(name));
 	}
-	
-	public String getMusicFilename(){
+
+	public String getMusicFilename() {
 		return musicFilename;
 	}
-	
-	public void addExit(Exit prm){
+
+	public void addExit(Exit prm) {
 		obstacles.add(prm);
 	}
-	
-	public void removeExit(int prm){
+
+	public void removeExit(int prm) {
 		obstacles.remove(prm);
 	}
-		
-	public Position getNextPosition(int key, Position pos){
+
+	public Position getNextPosition(int key, Position pos) {
 		float x = 0, y = 0;
-		
+
 		switch (key) {
-    		case Input.KEY_UP:  
-    			y = -getTileDimension();
-    			break;
-    		case Input.KEY_LEFT:
-    			x = -getTileDimension();
-    			break;
-    		case Input.KEY_DOWN:
-    			y = getTileDimension();
-    			break;
-    		case Input.KEY_RIGHT:
-    			x = getTileDimension();
-    			break;
+		case Input.KEY_UP:
+			y = -getTileDimension();
+			break;
+		case Input.KEY_LEFT:
+			x = -getTileDimension();
+			break;
+		case Input.KEY_DOWN:
+			y = getTileDimension();
+			break;
+		case Input.KEY_RIGHT:
+			x = getTileDimension();
+			break;
 		}
 		return new Position(pos.getAbsciss() + x, pos.getOrdinate() + y);
 	}
-	
+
 	// Met à jour les variables pour le mouvement
-	public boolean findCollision(int key, Position pos){		
+	public boolean findCollision(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
 
-		if (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0){
+		if (this.map.getTileId(
+				(int) (nextPos.getAbsciss() / getTileDimension()),
+				(int) (nextPos.getOrdinate() / getTileDimension()), 2) == 0) {
 			int i = 0;
 			if (!adversaries.isEmpty()) {
 				while (i < adversaries.size()) {
@@ -119,42 +120,43 @@ public class Map {
 		}
 		return (found) ? (Exit) obstacles.get(i) : null;
 	}
-	
-	public void addAdversary(PNJ prm){
+
+	public void addAdversary(PNJ prm) {
 		adversaries.add(prm);
 	}
-	
-	public List<PNJ> getAdversaries(){
+
+	public List<PNJ> getAdversaries() {
 		List<PNJ> retour = new LinkedList<PNJ>();
 		int i = 0;
-		
-		while(i < adversaries.size()){
-			if(adversaries.get(i).isAlive()){
+
+		while (i < adversaries.size()) {
+			if (adversaries.get(i).isAlive()) {
 				retour.add(adversaries.get(i));
 			}
 			i++;
 		}
 		return retour;
 	}
-	
-	public void setHitZone(Position position){
+
+	public void setHitZone(Position position) {
 		hitPosition = position;
 		playerHit = true;
 	}
-	
-	public Position getHitZone(){
+
+	public Position getHitZone() {
 		return hitPosition;
 	}
-	
+
 	/**
 	 * return if a player was hit on the map and change the status if true
+	 * 
 	 * @return hit state
 	 */
-	public boolean playerHit(){
+	public boolean playerHit() {
 		return playerHit;
 	}
-	
-	public void stopHit(){
+
+	public void stopHit() {
 		playerHit = false;
 	}
 }
