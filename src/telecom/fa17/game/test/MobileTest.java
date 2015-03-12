@@ -50,23 +50,23 @@ public class MobileTest {
 	@Test
 	public void testSetPositionFloatFloat() {
 		player.setPosition(0,1);
-		assertEquals(player.getPosition().toString(), new Position(0, 1).toString());
+		assertEquals(new Position(0, 1), player.getPosition());
 	}
 	
 	@Test
 	public void testGetNext() {
 		player.setPosition(0,0);
+		player.setDirection(Direction.WEST);
 		player.setMoving();
-		player.getNextPosition(5);
-		player.getNext(true,true);
-		assertEquals(new Position(0, 1).toString(), player.getPosition().toString());
+		player.getNextPosition(5); // TODO renommer en update(delta) ?
+		assertEquals(new Position(1,0), player.getPosition());
 	}
 
 
 	@Test
 	public void testGetNextPosition() {
 		player.getNextPosition(0);
-		assertEquals(new Position(0, 0).toString() , player.getPosition().toString());
+		assertEquals(new Position(0, 0) , player.getPosition());
 	}
 
 	@Test
