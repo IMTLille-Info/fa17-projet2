@@ -116,10 +116,6 @@ public abstract class Mobile extends Element{
 		return life;
 	}
 	
-	public void setLife(int hp) {
-		this.life = hp;
-	}
-	
 	public void addLife(int hp){
 		if((this.life + hp) < 100){	
 			this.life += hp;
