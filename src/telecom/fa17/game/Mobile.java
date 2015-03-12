@@ -127,43 +127,45 @@ public abstract class Mobile extends Element{
 	public void hurt(int attack) {
 		this.life -= attack;
 	}
-	
+
 	public boolean isMobile() {
-		//certains monstres peuvent être non mobile / ou effet immobilisant temporaire sur joueur
+		// certains monstres peuvent être non mobile / ou effet immobilisant
+		// temporaire sur joueur
 		return isMobile;
 	}
-	
-	public Position getNearPosition(){
+
+	public Position getNearPosition() {
 		float x = 0, y = 0;
 		switch (direction) {
-			case NORTH :
-					y = -scale;
-					break;
-			case EAST :
-					x = -scale;
-					break;
-			case SOUTH :
-					y = scale;
-					break;
-			case WEST :
-					x = scale;
-					break;
-			default:
-					break;				
+		case NORTH:
+			y = -scale;
+			break;
+		case EAST:
+			x = -scale;
+			break;
+		case SOUTH:
+			y = scale;
+			break;
+		case WEST:
+			x = scale;
+			break;
+		default:
+			break;
 		}
-		return new Position(position.getAbsciss() + x, position.getOrdinate() + y);
+		return new Position(position.getAbsciss() + x, position.getOrdinate()
+				+ y);
 	}
-	
-	public void attack(Map map){
+
+	public void attack(Map map) {
 		Position target = getNearPosition();
-		for (PNJ pnj : map.getAdversaries()){
-			if (Position.equals(pnj.getPosition() , target)){
+		for (PNJ pnj : map.getAdversaries()) {
+			if (pnj.getPosition().equals(target)) {
 				pnj.hurt(attack);
 				map.setHitZone(target);
 			}
 		}
 	}
-	
+
 	public int getAttack() {
 		return attack;
 	}

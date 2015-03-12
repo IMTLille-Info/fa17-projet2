@@ -91,9 +91,10 @@ public class Map {
 
 		if (this.map.getTileId((int) (nextPos.getAbsciss() / getTileDimension()), (int) (nextPos.getOrdinate()  / getTileDimension()), 2) == 0){
 			int i = 0;
-			if(!adversaries.isEmpty()){
-				while(i < adversaries.size()){
-					if(Position.equals(adversaries.get(i).getPosition(), nextPos)&&adversaries.get(i).isCrossable==false){
+			if (!adversaries.isEmpty()) {
+				while (i < adversaries.size()) {
+					if (adversaries.get(i).getPosition().equals(nextPos)
+							&& ! adversaries.get(i).isCrossable()) {
 						return true;
 					}
 					i++;
@@ -103,15 +104,14 @@ public class Map {
 		}
 		return true;
 	}
-	
-	
-	public Exit findExit(int key, Position pos){	
+
+	public Exit findExit(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
 		int i = 0;
 		boolean found = false;
-		
-		while((i < obstacles.size() && !found)){
-			if(Position.equals(obstacles.get(i).getPosition(), nextPos)){
+
+		while ((i < obstacles.size() && !found)) {
+			if (obstacles.get(i).getPosition().equals(nextPos)) {
 				found = true;
 			} else {
 				i++;
