@@ -24,10 +24,12 @@ public abstract class Mobile extends Element{
 	private int tempScale = 0;
 	private int moveAnim = 0;
 	
-	public Mobile(float x, float y, int tileSize){
+	public Mobile(float x, float y, int tileSize, int life, int attack){
 		super(x, y, false);
 		scale = tileSize;
 		isFighting = false;
+		this.life = life;
+		this.attack = attack;
 		
 		animations = new Animation[4];
 		standings = new Image[4];

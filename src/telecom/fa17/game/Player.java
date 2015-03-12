@@ -7,9 +7,7 @@ import org.newdawn.slick.SlickException;
 public class Player extends Mobile {
 	
 	public Player(float x, float y, int tileSize){
-		super(x, y, tileSize);
-		setAttack(20);
-		setLife(50);
+		super(x, y, tileSize, 50, 20);
 		// MARQUES DE COMMENTAIRES A METTRE POUR MODE TEST SUR LE TRY
 	}
 	

@@ -10,9 +10,7 @@ public class PNJ extends Mobile {
 	protected Map map;
 
 	public PNJ(float x, float y, int tileSize, int attack, int life, Map map) {
-		super(x, y, tileSize);
-		setLife(life);
-		setAttack(attack);
+		super(x, y, tileSize, life, attack);
 		this.map=map;
 	}
 
