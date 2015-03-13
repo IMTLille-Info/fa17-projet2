@@ -159,7 +159,7 @@ public abstract class Mobile extends Element {
 
 	public void attack(Map map) {
 		Position target = getNearPosition();
-		for (PNJ pnj : map.getAdversaries()) {
+		for (PNJ pnj : map.getAliveAdversaries()) {
 			if (pnj.getPosition().equals(target)) {
 				pnj.hurt(attack);
 				map.setHitZone(target);

@@ -108,7 +108,7 @@ public class WindowGame extends BasicGame {
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
 		
-		displayMonsters(g, map.get(indexMap).getAdversaries());
+		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
 		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();

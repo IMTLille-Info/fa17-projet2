@@ -90,15 +90,17 @@ public class Map {
 
 		if (this.map.getTileId(
 				(int) (nextPos.getAbsciss() / getTileDimension()),
-				(int) (nextPos.getOrdinate() / getTileDimension()), 2) == 0) { return true; }
-		if (!adversaries.isEmpty()) {
-			for(PNJ el : adversaries) {
-				if (el.getPosition().equals(nextPos) && !el.isCrossable()) {
-					return true;
+				(int) (nextPos.getOrdinate() / getTileDimension()), 2) == 0) {
+			if (!adversaries.isEmpty()) {
+				for(PNJ el : adversaries) {
+					if (el.getPosition().equals(nextPos) && !el.isCrossable()) {
+						return true;
+					}
 				}
 			}
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public Exit findExit(int key, Position pos) {
@@ -117,17 +119,16 @@ public class Map {
 		adversaries.add(prm);
 	}
 
-	public List<PNJ> getAdversaries() {
+	public List<PNJ> getAliveAdversaries() {
 		List<PNJ> retour = new LinkedList<PNJ>();
-		int i = 0;
 
-		while (i < adversaries.size()) {
-			if (adversaries.get(i).isAlive()) {
-				retour.add(adversaries.get(i));
+		for(PNJ el : adversaries) {
+			if (el.isAlive()) {
+				retour.add(el);
 			}
-			i++;
 		}
 		return retour;
+
 	}
 
 	public void setHitZone(Position position) {
