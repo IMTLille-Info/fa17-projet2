@@ -90,20 +90,15 @@ public class Map {
 
 		if (this.map.getTileId(
 				(int) (nextPos.getAbsciss() / getTileDimension()),
-				(int) (nextPos.getOrdinate() / getTileDimension()), 2) == 0) {
-			int i = 0;
-			if (!adversaries.isEmpty()) {
-				while (i < adversaries.size()) {
-					if (adversaries.get(i).getPosition().equals(nextPos)
-							&& !adversaries.get(i).isCrossable()) {
-						return true;
-					}
-					i++;
+				(int) (nextPos.getOrdinate() / getTileDimension()), 2) == 0) { return true; }
+		if (!adversaries.isEmpty()) {
+			for(PNJ el : adversaries) {
+				if (el.getPosition().equals(nextPos) && !el.isCrossable()) {
+					return true;
 				}
 			}
-			return false;
 		}
-		return true;
+		return false;
 	}
 
 	public Exit findExit(int key, Position pos) {
