@@ -240,8 +240,7 @@ public class WindowGame extends BasicGame {
 		}
 	}
 	
-	private void displayHUDMonsters(Graphics g, int monsterLife) throws SlickException
-	{
+	private void displayHUDMonsters(Graphics g, int monsterLife) throws SlickException{
 		Hud monsterHud = new Hud();
 		monsterHud.init(false);
 		monsterHud.renderMonster(g, monsterLife);
