@@ -9,15 +9,15 @@ public class Fireball extends PNJ{
 	int signumAbsciss;
 	int signumOrdinate;
 	
-	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int attack, int life, Map map) throws SlickException, InterruptedException {
+	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int life, int attack, Map map) throws SlickException {
 		//ne pas tester si case est libre ou non => firelord test deja
-		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize, attack, life, map);
+		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize, life, attack, map);
 		this.image = new Image("resources/map/monster/projectile_fireball.png");
 		this.signumAbsciss = signumAbsciss;
 		this.signumOrdinate = signumOrdinate;
 		this.isCrossable = true;
 		setMoving();
-		move();
+		//move();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class Fireball extends PNJ{
 	}
 	
 	public void move() throws InterruptedException{
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		// tester si prochaine case est libre ou non
 		// si non libre (solid) => destroy fireball
 		// si non libre (joueur) => maj player

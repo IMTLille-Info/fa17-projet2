@@ -6,8 +6,8 @@ public class Firelord extends PNJ{
 	
 	int lifeFireball = 1;
 	
-	public Firelord(float x, float y, int tileSize, int attack, int life, Map map) {
-		super(x, y, tileSize, attack, life, map);
+	public Firelord(float x, float y, int tileSize, int life, int attack, Map map) {
+		super(x, y, tileSize, life, attack, map);
 		this.map = map;
 	}
 	
