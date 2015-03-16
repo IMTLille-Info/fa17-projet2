@@ -6,7 +6,7 @@ public abstract class Element {
 	protected boolean isCrossable;
 		
 	public Element(float x, float y, boolean isCrossable){
-		position = new Position(x, y);
+		this.position = new Position(x, y);
 		this.isCrossable = isCrossable;
 	}
 	
@@ -19,11 +19,12 @@ public abstract class Element {
 	}
 	
 	public void setPosition(Position pos){
-		position = pos;
+		this.position.setAbsciss(pos.getAbsciss());
+		this.position.setOrdinate(pos.getOrdinate());
 	}
 	
 	public void setPosition(float x, float y){
-		position.setAbsciss(x);
-		position.setOrdinate(y);
+		this.position.setAbsciss(x);
+		this.position.setOrdinate(y);
 	}
 }

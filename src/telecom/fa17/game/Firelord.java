@@ -6,8 +6,8 @@ public class Firelord extends PNJ{
 	
 	int lifeFireball = 1;
 	
-	public Firelord(float x, float y, int tileSize, int attack, int life, Map map) {
-		super(x, y, tileSize, attack, life, map);
+	public Firelord(float x, float y, int tileSize, int life, int attack, Map map) {
+		super(x, y, tileSize, life, attack, map);
 		this.map = map;
 	}
 	
@@ -31,7 +31,20 @@ public class Firelord extends PNJ{
 		//									  Au final, pas besoin de signum nan ?
 		//									  Tu te fais attaquer, tu envoies sur le joueur ?	
 		
-		Fireball ball = new Fireball(position, this.scale, signumAbsciss, signumOrdinate, getAttack(), lifeFireball, map);
-		map.addAdversary(ball);
+		int key = 0;
+
+		Position fireballPosition = new Position(0,0);
+		fireballPosition.setAbsciss(fireLordPosition.getAbsciss()+signumAbsciss);
+		fireballPosition.setOrdinate(fireLordPosition.getOrdinate()+signumOrdinate);
+		
+		boolean isok = false;
+		if(!this.map.findCollision(key, fireballPosition)){
+			isok = true;
+		}
+		
+		if(isok){
+			Fireball ball = new Fireball(fireballPosition, this.scale, signumAbsciss, signumOrdinate, getAttack(), 1, map);
+			map.addAdversary(ball);
+		}
 	}
 }

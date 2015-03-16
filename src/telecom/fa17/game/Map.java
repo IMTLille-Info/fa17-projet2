@@ -11,7 +11,7 @@ import telecom.fa17.game.Exit;
 
 public class Map {
 	private TiledMap map;
-	private List<Element> obstacles;
+	private List<Exit> exit;
 	private List<PNJ> adversaries;
 	private Position hitPosition;
 	private boolean playerHit;
@@ -19,7 +19,7 @@ public class Map {
 
 	public Map(String name, String mscFile) throws SlickException {
 		this.map = new TiledMap("resources/map/" + name + ".tmx");
-		obstacles = new LinkedList<Element>();
+		exit = new LinkedList<Exit>();
 		adversaries = new LinkedList<PNJ>();
 		hitPosition = new Position(0, 0);
 		playerHit = false;
@@ -57,16 +57,16 @@ public class Map {
 	}
 
 	public void addExit(Exit prm) {
-		obstacles.add(prm);
+		exit.add(prm);
 	}
 
 	public void removeExit(int prm) {
-		obstacles.remove(prm);
+		exit.remove(prm);
 	}
 
 	public Position getNextPosition(int key, Position pos) {
 		float x = 0, y = 0;
-
+		
 		switch (key) {
 		case Input.KEY_UP:
 			y = -getTileDimension();
@@ -105,9 +105,9 @@ public class Map {
 
 	public Exit findExit(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
-		for (Element each : obstacles) {
+		for (Exit each : exit) {
 			if (each.getPosition().equals(nextPos)) { // each.isCloseTo(nextPos)
-				return (Exit) each; // TODO qu'est-ce qui garantit que c'est
+				return each; // TODO qu'est-ce qui garantit que c'est
 									// possible ? ça ne peut pas être un autre
 									// type d'obstacle ?
 			}
