@@ -106,10 +106,8 @@ public class Map {
 	public Exit findExit(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
 		for (Exit each : exit) {
-			if (each.getPosition().equals(nextPos)) { // each.isCloseTo(nextPos)
-				return each; // TODO qu'est-ce qui garantit que c'est
-									// possible ? ça ne peut pas être un autre
-									// type d'obstacle ?
+			if (each.getPosition().equals(nextPos)) { // each.isCloseTo(nextPos) ?
+				return each;
 			}
 		}
 		return null;

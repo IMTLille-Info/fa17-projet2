@@ -29,7 +29,6 @@ public class WindowGame extends BasicGame {
 	Sounds music;
 	Hud myHud;
 
-
 	/**
      * Création de la fenetre.
      *

@@ -11,7 +11,6 @@ public enum Direction {
 
     /**
      * Indice.
-     *
      */
     public final int index;
     

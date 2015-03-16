@@ -78,7 +78,7 @@ public abstract class Mobile extends Element {
 	public void getNext(boolean HORIZONTAL, boolean UP) {
 		int x = 0, y = 0;
 		if ((tempScale < scale)) {
-			// Toutes les 5ms, on bouge le personnage d'un pixel
+			// Toutes les 4ms, on bouge le personnage d'un pixel
 			if (moveAnim > 4) {
 				tempScale++;
 				if (HORIZONTAL) {
@@ -86,8 +86,7 @@ public abstract class Mobile extends Element {
 				} else {
 					y = (UP) ? -1 : 1;
 				}
-				setPosition(position.getAbsciss() + x, position.getOrdinate()
-						+ y);
+				setPosition(position.getAbsciss() + x, position.getOrdinate() + y);
 				moveAnim = 0;
 			}
 		} else {
@@ -117,6 +116,12 @@ public abstract class Mobile extends Element {
 		return life;
 	}
 
+	/**
+     * Ajoute de la vie au personnage.
+     *
+     * @param hp - Vie à ajouter
+     * INFO - Limitation of the life : 100 HP
+     */
 	public void addLife(int hp) {
 		if ((this.life + hp) < 100) {
 			this.life += hp;
@@ -153,10 +158,10 @@ public abstract class Mobile extends Element {
 		default:
 			break;
 		}
-		return new Position(position.getAbsciss() + x, position.getOrdinate()
-				+ y);
+		return new Position(position.getAbsciss() + x, position.getOrdinate() + y);
 	}
 
+	
 	public void attack(Map map) {
 		Position target = getNearPosition();
 		for (PNJ pnj : map.getAliveAdversaries()) {
