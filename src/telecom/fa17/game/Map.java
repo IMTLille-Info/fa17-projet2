@@ -16,14 +16,16 @@ public class Map {
 	private Position hitPosition;
 	private boolean playerHit;
 	private String musicFilename;
+	private boolean isArena;
 
-	public Map(String name, String mscFile) throws SlickException {
+	public Map(String name, String mscFile, boolean isArena) throws SlickException {
 		this.map = new TiledMap("resources/map/" + name + ".tmx");
-		exit = new LinkedList<Exit>();
-		adversaries = new LinkedList<PNJ>();
-		hitPosition = new Position(0, 0);
-		playerHit = false;
-		musicFilename = mscFile;
+		this.exit = new LinkedList<Exit>();
+		this.adversaries = new LinkedList<PNJ>();
+		this.hitPosition = new Position(0, 0);
+		this.playerHit = false;
+		this.musicFilename = mscFile;
+		this.isArena = isArena;
 	}
 
 	public int getTileDimension() {
@@ -149,5 +151,13 @@ public class Map {
 
 	public void stopHit() {
 		playerHit = false;
+	}
+	
+	void setArena(boolean isArena) {
+		this.isArena = isArena;
+	}
+	
+	boolean isArena() {
+		return isArena;
 	}
 }
