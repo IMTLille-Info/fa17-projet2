@@ -229,17 +229,37 @@ public class WindowGame extends BasicGame {
 		}
 	}
 	
+	/**
+     * Affichage de texte sur la fenêtre du jeu.
+     *
+     * @param g - Contexte Graphique.
+     * @param text - Texte à afficher.
+     * @param absOrigin - Coordonnée Horizontale en haut à gauche de la première lettre du texte.
+     * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
+     */
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
 		g.setColor(new Color(255, 255, 255));
 		g.drawString(text, absOrigin, ordOrigin);
 	}
 	
+	/**
+     * Affichage des monstres sur la fenêtre du jeu.
+     *
+     * @param g - Contexte Graphique.
+     * @param monsters - Liste des monstres à afficher
+     */
 	private void displayMonsters(Graphics g, List<PNJ> monsters){
 		for(PNJ monster : monsters){
 			g.drawImage(monster.getStandingImage(), monster.getPosition().getAbsciss(), monster.getPosition().getOrdinate());
 		}
 	}
 	
+	/**
+     * Affichage du HUD monstre en combat.
+     *
+     * @param g - Contexte Graphique.
+     * @param monsterLife - Vue du Monstre
+     */
 	private void displayHUDMonsters(Graphics g, int monsterLife) throws SlickException
 	{
 		Hud monsterHud = new Hud();
