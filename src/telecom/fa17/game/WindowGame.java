@@ -59,23 +59,23 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
         map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
         map.get(1).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 5 * 32, 3));
-        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 5, 50, map.get(1));
+        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 30, 20, map.get(1));
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap", "caveMap.ogg", false));
         map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
         map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
-        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension(), 10, 50, map.get(2));
+        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension(), 50, 20, map.get(2));
         monster2.init();
         map.get(2).addAdversary(monster2);
         
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 10, 50, map.get(3));
+        PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 50, 40, map.get(3));
         monster3.init();
-        PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 10, 50, map.get(3));
+        PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 80, 70, map.get(3));
         monster4.init();
-        PNJ monster5 = new PNJ(11 * 32, 5 * 32, map.get(3).getTileDimension(), 10, 50, map.get(3));
+        PNJ monster5 = new PNJ(11 * 32, 5 * 32, map.get(3).getTileDimension(), 100, 100, map.get(3));
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
@@ -100,11 +100,13 @@ public class WindowGame extends BasicGame {
 	    // Affichage du fond principal de la carte
 		map.get(indexMap).renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
-		if (objPlayer.isMoving()) {
-			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
-		} else {
-			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
-			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
+		if(objPlayer.isAlive()){
+			if (objPlayer.isMoving()) {
+				g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
+			} else {
+				// Sinon, on affiche le personnage statique en fonction de sa dernière direction
+					g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
+			}
 		}
 		
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
@@ -181,7 +183,7 @@ public class WindowGame extends BasicGame {
 		}
 		
 	    // Si l'on a fini le mouvement
-		if(!objPlayer.isMoving()){
+		if(objPlayer.isAlive()&&!objPlayer.isMoving()){
 			switch (key){
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
