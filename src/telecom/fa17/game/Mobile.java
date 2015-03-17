@@ -140,7 +140,7 @@ public abstract class Mobile extends Element {
 		return isMobile;
 	}
 
-	public Position getNearPosition() {
+	public Position getInfrontPosition() {
 		float x = 0, y = 0;
 		switch (direction) {
 		case NORTH:
@@ -163,7 +163,7 @@ public abstract class Mobile extends Element {
 
 	
 	public void attack(Map map) {
-		Position target = getNearPosition();
+		Position target = getInfrontPosition();
 		for (PNJ pnj : map.getAliveAdversaries()) {
 			if (pnj.getPosition().equals(target)) {
 				pnj.hurt(attack);
