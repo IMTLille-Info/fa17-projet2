@@ -188,11 +188,11 @@ public abstract class Mobile extends Element {
 		this.attack += attack;
 	}
 
-	public boolean getFightingState() {
+	public boolean isFighting() {
 		return isFighting;
 	}
 
-	public void setFightingState(boolean inFight) {
+	public void setInFight(boolean inFight) {
 		this.isFighting = inFight;
 	}
 }

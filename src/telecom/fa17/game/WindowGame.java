@@ -115,14 +115,14 @@ public class WindowGame extends BasicGame {
 		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
 
-		if(objPlayer.getFightingState()){
+		if(objPlayer.isFighting()){
 			// RECUPERATION DE LA VIE DU MONSTRE QUE L'ON EST EN TRAIN DE COMBATTRE
 			displayHUDMonsters(g, 50);
 		}
 		
 		//affiche l'animation des degats si un joueur est touché
 		if(map.get(indexMap).playerHit()){
-			objPlayer.setFightingState(true);
+			objPlayer.setInFight(true);
 			animations.hitAnimate(map.get(indexMap));
 			animations.swordAttack.draw(objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}
