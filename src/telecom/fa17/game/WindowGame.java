@@ -185,7 +185,7 @@ public class WindowGame extends BasicGame {
 		}
 		
 	    	// Si l'on a fini le mouvement
-		if(objPlayer.isAlive()&&!objPlayer.isMoving()){
+		if(!objPlayer.isMoving()){
 			switch (key){
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
