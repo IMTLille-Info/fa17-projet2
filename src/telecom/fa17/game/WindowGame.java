@@ -59,6 +59,7 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
         map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
         map.get(1).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 5 * 32, 3));
+        map.get(1).addExit(new Exit(11 * 32, 6 * 32, 10 * 32, 8 * 32, 4));
         PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 30, 20, map.get(1));
         monster.init();
         map.get(1).addAdversary(monster);
@@ -80,6 +81,12 @@ public class WindowGame extends BasicGame {
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
+        
+        map.add(new Map("firstArena", "caveMap.ogg", true));
+        map.get(4).addExit(new Exit(0, 0, 11 * 32, 8 * 32, 1));
+        PNJ monsterArena1 = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 30, 20, map.get(4));
+        monsterArena1.init();
+        map.get(4).addAdversary(monsterArena1);
         
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
@@ -173,7 +180,7 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-		
+		System.out.println(c);
 		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
@@ -181,7 +188,15 @@ public class WindowGame extends BasicGame {
         	}
 		
 		if(key == Input.KEY_SPACE){
-			objPlayer.attack(map.get(indexMap));
+			if(map.get(indexMap).isArena()){
+				objPlayer.attack(map.get(indexMap));
+				if(map.get(indexMap).allAdversariesKilled()){
+					objPlayer.setPosition(map.get(indexMap).exit.get(0).getNextPosition());
+					this.indexMap = map.get(indexMap).exit.get(0).getMapNumber();
+					map.get(indexMap).removeExit(map.get(indexMap).getExitListSize() - 1);
+					keyPressed(Input.KEY_UP, ' ');
+				}
+			}
 		}
 		
 	    	// Si l'on a fini le mouvement
