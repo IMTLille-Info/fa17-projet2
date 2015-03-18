@@ -100,13 +100,11 @@ public class WindowGame extends BasicGame {
 	    // Affichage du fond principal de la carte
 		map.get(indexMap).renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
-		if(objPlayer.isAlive()){
-			if (objPlayer.isMoving()) {
-				g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
-			} else {
-				// Sinon, on affiche le personnage statique en fonction de sa dernière direction
-					g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
-			}
+		if (objPlayer.isMoving()) {
+			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
+		} else {
+			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
+			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
 		}
 		
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
@@ -119,7 +117,7 @@ public class WindowGame extends BasicGame {
 
 		if(objPlayer.isFighting()){
 			// RECUPERATION DE LA VIE DU MONSTRE QUE L'ON EST EN TRAIN DE COMBATTRE
-			displayHUDMonsters(g, 50);
+			//displayHUDMonsters(g, 50);
 		}
 		
 		//affiche l'animation des degats si un joueur est touché
@@ -136,6 +134,10 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
+
+		if(!objPlayer.isAlive()){
+			keyPressed(Input.KEY_ESCAPE, ' ');
+		}
 
 		if(!objPlayer.isMoving()){
 			Input listener = container.getInput();			
@@ -162,7 +164,7 @@ public class WindowGame extends BasicGame {
 		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
 		container.setShowFPS(false); // Désactivation de l'affichage des FPS
 		container.start(); // Démarrage du jeu (lancement de la fenêtre)
-    }
+    	}
 	
 	/** 
 	 * Méthode qui permet de savoir quand une touche est pressée.
@@ -175,14 +177,14 @@ public class WindowGame extends BasicGame {
 		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
-            container.exit();
-        }
+            		container.exit();
+        	}
 		
 		if(key == Input.KEY_SPACE){
 			objPlayer.attack(map.get(indexMap));
 		}
 		
-	    // Si l'on a fini le mouvement
+	    	// Si l'on a fini le mouvement
 		if(objPlayer.isAlive()&&!objPlayer.isMoving()){
 			switch (key){
     			case Input.KEY_UP:  
