@@ -1,6 +1,5 @@
 package telecom.fa17.game;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import telecom.fa17.game.Exit;
 
 public class Map {
 	private TiledMap map;
-	protected List<Exit> exit;
+	private List<Exit> exit;
 	private List<PNJ> adversaries;
 	private Position hitPosition;
 	private boolean playerHit;
@@ -21,8 +20,8 @@ public class Map {
 
 	public Map(String name, String mscFile, boolean isArena) throws SlickException {
 		this.map = new TiledMap("resources/map/" + name + ".tmx");
-		this.exit = new ArrayList<Exit>();
-		this.adversaries = new ArrayList<PNJ>();
+		this.exit = new LinkedList<Exit>();
+		this.adversaries = new LinkedList<PNJ>();
 		this.hitPosition = new Position(0, 0);
 		this.playerHit = false;
 		this.musicFilename = mscFile;
@@ -56,25 +55,17 @@ public class Map {
 	}
 
 	public String getMusicFilename() {
-		return this.musicFilename;
+		return musicFilename;
 	}
 
 	public void addExit(Exit prm) {
-		this.exit.add(prm);
+		exit.add(prm);
 	}
 
 	public void removeExit(int prm) {
-		this.exit.remove(prm);
-	}
-	
-	public void removePNJ(PNJ prm) {
-		this.adversaries.remove(prm);
+		exit.remove(prm);
 	}
 
-	public int getExitListSize(){
-		return this.exit.size();
-	}
-	
 	public Position getNextPosition(int key, Position pos) {
 		float x = 0, y = 0;
 		
@@ -129,7 +120,7 @@ public class Map {
 	}
 
 	public List<PNJ> getAliveAdversaries() {
-		List<PNJ> retour = new ArrayList<PNJ>();
+		List<PNJ> retour = new LinkedList<PNJ>();
 
 		for(PNJ el : adversaries) {
 			if (el.isAlive()) {
@@ -138,14 +129,6 @@ public class Map {
 		}
 		return retour;
 
-	}
-	
-	public void removeAdversary(PNJ monster){
-		this.adversaries.remove(monster);
-	}
-	
-	public boolean allAdversariesKilled(){
-		return adversaries.isEmpty();
 	}
 
 	public void setHitZone(Position position) {

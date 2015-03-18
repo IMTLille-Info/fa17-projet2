@@ -167,12 +167,8 @@ public abstract class Mobile extends Element {
 		for (PNJ pnj : map.getAliveAdversaries()) {
 			if (pnj.getPosition().equals(target)) {
 				pnj.hurt(attack);
+				this.hurt(pnj.getAttack());
 				map.setHitZone(target);
-				if(pnj.isAlive()){
-					this.hurt(pnj.getAttack());
-				}else{
-					map.removeAdversary(pnj);
-				}
 			}
 		}
 	}
