@@ -1,7 +1,6 @@
 package telecom.fa17.game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.newdawn.slick.Input;

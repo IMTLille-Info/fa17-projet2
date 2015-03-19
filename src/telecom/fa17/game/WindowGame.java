@@ -61,23 +61,23 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(17, 4, 18, 1, 2));
         map.get(1).addExit(new Exit(18, 1, 17, 5, 3));
  
-        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, 1);
+        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap", "caveMap.ogg", false));
         map.get(2).addExit(new Exit(1, 13, 7, 3, 1));
         map.get(2).addExit(new Exit(18, 1, 17, 4, 1));
-        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, 2);
+        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20,map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
         
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40, 3);
+        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40,map.get(3), 3);
         monster3.init();
-        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70, 3);
+        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70,map.get(3), 3);
         monster4.init();
-        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100, 3);
+        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100,map.get(3), 3);
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
@@ -86,7 +86,7 @@ public class WindowGame extends BasicGame {
         map.add(new Map("firstArena", "caveMap.ogg", true));
         map.get(4).addExit(new Exit(0, 0, 11, 8, 1));
         
-        PNJ monsterArena1 = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, 4);
+        PNJ monsterArena1 = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
         monsterArena1.init();
         map.get(4).addAdversary(monsterArena1);
         
@@ -198,7 +198,7 @@ public class WindowGame extends BasicGame {
 				objPlayer.attack(map.get(indexMap));
 				if(map.get(4).allAdversariesKilled()){
 					objPlayer.setPosition(map.get(indexMap).exit.get(0).getNextPosition());
-					this.indexMap = map.get(indexMap).exit.get(0).getMapNumber();
+					indexMap = map.get(indexMap).exit.get(0).getMapNumber();
 					map.get(indexMap).removeExit(map.get(indexMap).getExitListSize() - 1);
 					keyPressed(Input.KEY_UP, ' ');
 			}
