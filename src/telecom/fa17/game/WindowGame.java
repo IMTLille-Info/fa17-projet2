@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -88,11 +89,12 @@ public class WindowGame extends BasicGame {
         monsterArena1.init();
         map.get(4).addAdversary(monsterArena1);
         
+        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 40, 50);
         // Création d'un joueur
         objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
-        objPlayer.init();
+        objPlayer.init(playerSprite);
         
-        animations = new AnimationView();
+        animations = new AnimationView(playerSprite);
                
 		music = new Sounds(map.get(0).getMusicFilename());
 		myHud = new Hud();
@@ -109,22 +111,22 @@ public class WindowGame extends BasicGame {
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
-		}else{//affiche l'animation des degats si un joueur est touché
-			if(map.get(indexMap).playerHit()){
-				objPlayer.setInFight(true);
+		}else{//affiche l'animation d'un coup d'epee
+			if(objPlayer.isFighting()){
 				animations.attackAnimate(map.get(indexMap), objPlayer);
 			}else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
 			}
 		}
+		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
 		
+		//affiche l'animation des degats si un joueur est touché
 		if(map.get(indexMap).playerHit()){
-			objPlayer.setInFight(true);
 			animations.hitAnimate(map.get(indexMap));
 		}
 		
-		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
+	
 		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();

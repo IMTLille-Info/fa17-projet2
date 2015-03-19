@@ -35,8 +35,6 @@ public abstract class Mobile extends Element {
 		standings = new Image[4];
 	}
 
-	public abstract void init() throws SlickException;
-
 	public void setDirection(Direction dir) {
 		direction = dir;
 	}
@@ -163,6 +161,7 @@ public abstract class Mobile extends Element {
 
 	
 	public void attack(Map map) {
+		startFight();
 		Position target = getInfrontPosition();
 		for (PNJ pnj : map.getAliveAdversaries()) {
 			if (pnj.getPosition().equals(target)) {
@@ -197,7 +196,10 @@ public abstract class Mobile extends Element {
 		return isFighting;
 	}
 
-	public void setInFight(boolean inFight) {
-		this.isFighting = inFight;
+	public void startFight() {
+		this.isFighting = true;
+	}
+	public void stopFight() {
+		this.isFighting = false;
 	}
 }
