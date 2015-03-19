@@ -8,9 +8,12 @@ import org.newdawn.slick.SlickException;
 public class PNJ extends Mobile {
 	
 	protected Map map;
+	private Position firstPosition;
+	private int previousMapIdx;
 
-	public PNJ(float x, float y, int tileSize, int life, int attack, Map map) {
-		super(x, y, tileSize, life, attack);		this.map = map;
+	public PNJ(float x, float y, int tileSize, int life, int attack, int  idxMap) {
+		super(x, y, tileSize, life, attack);
+		firstPosition = new Position (x*32, y*32);		this.map = map;
 	}
 
 	public void init() throws SlickException {
@@ -28,9 +31,16 @@ public class PNJ extends Mobile {
 	}
 	
 	public void trigger(){
+		previousMapIdx = WindowGame.indexMap;
 		WindowGame.indexMap = 4;
 		WindowGame.objPlayer.setPosition(new Position(8*32, 10*32));
 		WindowGame.objPlayer.startFight();
+	}
+	
+	public void returnToLastPosition(){
+		WindowGame.indexMap = previousMapIdx;
+		WindowGame.objPlayer.setPosition(firstPosition);
+		WindowGame.objPlayer.stopFight();
 	}
 
 	@Override

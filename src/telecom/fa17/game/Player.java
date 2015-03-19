@@ -42,11 +42,12 @@ public class Player extends Mobile {
 					if(pnj.isAlive()){
 						this.hurt(pnj.getAttack());
 					}else{
-						map.removeAdversary(pnj);
+						pnj.returnToLastPosition();		
 					}
 				}else{
 					pnj.trigger();
-				}	
+				}
+				
 			}
 		}
 	}
