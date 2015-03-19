@@ -112,11 +112,16 @@ public class WindowGame extends BasicGame {
 		}else{//affiche l'animation des degats si un joueur est touché
 			if(map.get(indexMap).playerHit()){
 				objPlayer.setInFight(true);
-				animations.hitAnimate(map.get(indexMap), objPlayer);
+				animations.attackAnimate(map.get(indexMap), objPlayer);
 			}else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
 			}
+		}
+		
+		if(map.get(indexMap).playerHit()){
+			objPlayer.setInFight(true);
+			animations.hitAnimate(map.get(indexMap));
 		}
 		
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());

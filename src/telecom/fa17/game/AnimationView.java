@@ -41,7 +41,13 @@ public class AnimationView {
 	 * @param map
 	 * @param player 
 	 */
-	public void hitAnimate(Map map, Player player){
+	public void hitAnimate(Map map){
+		if(!endAnimation(hit, map)){
+			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
+		}
+	}
+	
+	public void attackAnimate(Map map, Player player){
 		Animation animation = swordAttackSouth ;
 		switch (player.getDirection()){
 			case SOUTH :
@@ -58,8 +64,7 @@ public class AnimationView {
 				break;
 		}
 		
-		if(!endAnimation(hit, map) && !endAnimation(animation, map)){
-			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
+		if(!endAnimation(animation, map)){
 			animation.draw(player.getPosition().getAbsciss(), player.getPosition().getOrdinate());
 		}
 	}
