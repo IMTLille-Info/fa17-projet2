@@ -180,7 +180,6 @@ public class WindowGame extends BasicGame {
 	 */
 	@Override
 	public void keyPressed(int key, char c) {
-		System.out.println(c);
 		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
