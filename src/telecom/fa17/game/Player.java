@@ -30,5 +30,21 @@ public class Player extends Mobile {
 		// Marcher vers la droite
 		this.animations[Direction.WEST.index] = new Animation(playerSprite, 0 , 0, 12, 0, true, DURATION_FRAME, true);
 	}
+	
+	public void attack(Map map) {
+		startFight();
+		Position target = getInfrontPosition();
+		for (PNJ pnj : map.getAliveAdversaries()) {
+			if (pnj.getPosition().equals(target)) {
+				pnj.hurt(getAttack());
+				map.setHitZone(target);
+				if(pnj.isAlive()){
+					this.hurt(pnj.getAttack());
+				}else{
+					map.removeAdversary(pnj);
+				}
+			}
+		}
+	}
 }
 

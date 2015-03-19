@@ -85,6 +85,7 @@ public class WindowGame extends BasicGame {
         
         map.add(new Map("firstArena", "caveMap.ogg", true));
         map.get(4).addExit(new Exit(0, 0, 11, 8, 1));
+        
         PNJ monsterArena1 = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(4));
         monsterArena1.init();
         map.get(4).addAdversary(monsterArena1);

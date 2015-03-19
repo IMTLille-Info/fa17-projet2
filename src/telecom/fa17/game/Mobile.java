@@ -160,21 +160,7 @@ public abstract class Mobile extends Element {
 	}
 
 	
-	public void attack(Map map) {
-		startFight();
-		Position target = getInfrontPosition();
-		for (PNJ pnj : map.getAliveAdversaries()) {
-			if (pnj.getPosition().equals(target)) {
-				pnj.hurt(attack);
-				map.setHitZone(target);
-				if(pnj.isAlive()){
-					this.hurt(pnj.getAttack());
-				}else{
-					map.removeAdversary(pnj);
-				}
-			}
-		}
-	}
+	public abstract void attack(Map map);
 
 	public int getAttack() {
 		return attack;
