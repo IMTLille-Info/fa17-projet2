@@ -26,4 +26,14 @@ public class PNJ extends Mobile {
 					break;
 		}
 	}
+	
+	public void trigger(){
+		
+	}
+
+	@Override
+	public void attack(Map map) {
+		// TODO Auto-generated method stub
+		
+	}
 }
