@@ -23,9 +23,9 @@ public class WindowGame extends BasicGame {
 	// Constantes de Map
 	int WIDTH_MAX, HEIGHT_MAX;
 	// Map en cours d'affichage
-	int indexMap = 0;
+	public static int indexMap = 0;
+	public static Player objPlayer;
 	
-	Player objPlayer;
 	AnimationView animations;
 	Sounds music;
 	Hud myHud;
@@ -60,7 +60,7 @@ public class WindowGame extends BasicGame {
         map.get(1).addExit(new Exit(7, 3, 1, 13, 2));
         map.get(1).addExit(new Exit(17, 4, 18, 1, 2));
         map.get(1).addExit(new Exit(18, 1, 17, 5, 3));
-        map.get(1).addExit(new Exit(11, 6, 10, 8, 4));
+ 
         PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(1));
         monster.init();
         map.get(1).addAdversary(monster);
