@@ -29,7 +29,8 @@ public class AnimationView {
 		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), DURATION_FRAME);
 		*/
 		SpriteSheet zelda = new SpriteSheet("resources/map/player/zelda.png", 38, 38);
-		swordAttack = new Animation(zelda, 0, 6, 8, 6, true, 100, true);
+		swordAttack = new Animation(zelda, 0, 6, 6, 6, true, 1000, true);
+		swordAttack.setLooping(false);
 	}
 	
 	/**
@@ -37,9 +38,10 @@ public class AnimationView {
 	 * @param map
 	 */
 	public void hitAnimate(Map map){
-		if(hit.isStopped()){
+		if(hit.isStopped() && swordAttack.isStopped()){
 			map.stopHit();
 			hit.restart();
+			swordAttack.restart();
 		} else {
 			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
 		}
