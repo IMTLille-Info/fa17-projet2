@@ -3,6 +3,7 @@ package telecom.fa17.game;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 public class Player extends Mobile {
 	
@@ -10,32 +11,24 @@ public class Player extends Mobile {
 		super(x, y, tileSize, 50, 20);
 	}
 	
-	public void init() throws SlickException{
+	public void init(SpriteSheet playerSprite) throws SlickException{
 		// Images du joueur correspondantes à ces états statiques
-		standings[Direction.NORTH.index] = new Image("resources/map/player/personStandUp.png");
-		standings[Direction.EAST.index] = new Image("resources/map/player/personStandLeft.png");
-		standings[Direction.SOUTH.index] = new Image("resources/map/player/personStandDown.png");
-		standings[Direction.WEST.index] = new Image("resources/map/player/personStandRight.png");
+		standings[Direction.NORTH.index] = playerSprite.getSubImage(0, 1);
+		standings[Direction.EAST.index] = playerSprite.getSubImage(0, 3);
+		standings[Direction.SOUTH.index] = playerSprite.getSubImage(0, 2);
+		standings[Direction.WEST.index] = playerSprite.getSubImage(0, 0);
 
 		// Marcher vers le haut
-		this.animations[Direction.NORTH.index] = new Animation();
-		this.animations[Direction.NORTH.index].addFrame(new Image("resources/map/player/personWalkingUp.png"), DURATION_FRAME);
-		this.animations[Direction.NORTH.index].addFrame(new Image("resources/map/player/personStandUp.png"), DURATION_FRAME);
+		this.animations[Direction.NORTH.index] = new Animation(playerSprite, 0 , 1, 12, 1, true, DURATION_FRAME, true);
     
 		// Marcher vers la gauche
-		this.animations[Direction.EAST.index] = new Animation();
-		this.animations[Direction.EAST.index].addFrame(new Image("resources/map/player/personWalkingLeft.png"), DURATION_FRAME);
-		this.animations[Direction.EAST.index].addFrame(new Image("resources/map/player/personStandLeft.png"), DURATION_FRAME);
+		this.animations[Direction.EAST.index] = new Animation(playerSprite, 0 , 3, 12, 3, true, DURATION_FRAME, true);
 
 		// Marcher vers le bas
-		this.animations[Direction.SOUTH.index] = new Animation();
-		this.animations[Direction.SOUTH.index].addFrame(new Image("resources/map/player/personWalkingDown.png"), DURATION_FRAME);
-		this.animations[Direction.SOUTH.index].addFrame(new Image("resources/map/player/personStandDown.png"), DURATION_FRAME);
+		this.animations[Direction.SOUTH.index] = new Animation(playerSprite, 0 , 2, 12, 2, true, DURATION_FRAME, true);
 
 		// Marcher vers la droite
-		this.animations[Direction.WEST.index] = new Animation();
-		this.animations[Direction.WEST.index].addFrame(new Image("resources/map/player/personWalkingRight.png"), DURATION_FRAME);
-		this.animations[Direction.WEST.index].addFrame(new Image("resources/map/player/personStandRight.png"), DURATION_FRAME);
+		this.animations[Direction.WEST.index] = new Animation(playerSprite, 0 , 0, 12, 0, true, DURATION_FRAME, true);
 	}
 }
 
