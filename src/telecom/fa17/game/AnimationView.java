@@ -15,29 +15,69 @@ public class AnimationView {
 	protected final int DURATION_FRAME = 100;
 	
 	public Animation hit;
-	public Animation swordAttack;
+	public Animation swordAttackSouth;
+	public Animation swordAttackNorth;
+	public Animation swordAttackEast;
+	public Animation swordAttackWest;
 	
-	public AnimationView() throws SlickException{
+	public AnimationView(SpriteSheet playerSprite) throws SlickException{
 		SpriteSheet hitSheet = new SpriteSheet(new Image("/resources/map/animation/iceBlaster_hit.png"), 32, 32);
 		hit = new Animation(hitSheet, 30);
 		hit.setLooping(false);
-		
-		swordAttack = new Animation();
-		swordAttack.addFrame(new Image("resources/map/player/personAttack1.png"), DURATION_FRAME);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack2.png"), DURATION_FRAME);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), DURATION_FRAME);
+	
+		swordAttackSouth = new Animation(playerSprite, 0, 4, 7, 4, true, 25, true);
+		swordAttackSouth.setLooping(false);
+		swordAttackNorth = new Animation(playerSprite, 0, 7, 7, 7, true, 25, true);
+		swordAttackNorth.setLooping(false);
+		swordAttackEast = new Animation(playerSprite, 0, 6, 7, 6, true, 25, true);
+		swordAttackEast.setLooping(false);
+		swordAttackWest = new Animation(playerSprite, 0, 5, 7, 5, true, 25, true);
+		swordAttackWest.setLooping(false);
 	}
 	
 	/**
 	 * Affiche l'animation hit une fois à l'emplacement du joueur puis se stop et réinitialise l'animation
 	 * @param map
+	 * @param player 
 	 */
 	public void hitAnimate(Map map){
-		if(hit.isStopped()){
+		if(endAnimation(hit)){
 			map.stopHit();
-			hit.restart();
-		} else {
+		}else{
 			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
 		}
+	}
+	
+	
+	public void attackAnimate(Map map, Player player){
+		Animation animation = swordAttackSouth ;
+		switch (player.getDirection()){
+			case SOUTH :
+				animation = swordAttackSouth;
+				break;
+			case NORTH :
+				animation = swordAttackNorth;
+				break;
+			case EAST :
+				animation = swordAttackEast;
+				break;
+			case WEST :
+				animation = swordAttackWest;
+				break;
+		}
+		
+		if(endAnimation(animation)){
+			player.stopFight();
+		}else{
+			animation.draw(player.getPosition().getAbsciss(), player.getPosition().getOrdinate());
+		}
+	}
+	
+	public boolean endAnimation(Animation animation){
+		if(animation.isStopped()){
+			animation.restart();
+			return true;
+		}
+		return false;
 	}
 }

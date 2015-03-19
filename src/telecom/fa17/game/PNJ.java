@@ -13,7 +13,6 @@ public class PNJ extends Mobile {
 		super(x, y, tileSize, life, attack);		this.map = map;
 	}
 
-	@Override
 	public void init() throws SlickException {
 		switch(new Random().nextInt(3)) {
 			case 0 :
