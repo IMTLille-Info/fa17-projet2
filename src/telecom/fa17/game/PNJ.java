@@ -32,16 +32,21 @@ public class PNJ extends Mobile {
 	}
 	
 	public void trigger(){
+		//transporte le joueur dans l'arêne
 		WindowGame.indexMap = 4;
 		WindowGame.objPlayer.setPosition(new Position(8*32, 10*32));
 		WindowGame.objPlayer.startFight();
+		//transporte le monstre avec
+		this.position = new Position(9*32, 5*32);
+		WindowGame.map.get(4).addAdversary(this);
+		
 	}
 	
 	public void returnToLastPosition(){
 		WindowGame.indexMap = previousMapIdx;
 		WindowGame.objPlayer.setPosition(firstPosition);
 		WindowGame.objPlayer.stopFight();
-		map.removeAdversary(this);
+		WindowGame.map.get(4).removeAdversary(this);
 	}
 
 	@Override

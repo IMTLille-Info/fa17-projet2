@@ -18,7 +18,7 @@ import org.newdawn.slick.SpriteSheet;
 public class WindowGame extends BasicGame {
 
     private GameContainer container;
-	private List<Map> map;
+	public static List<Map> map;
 	
 	// Constantes de Map
 	int WIDTH_MAX, HEIGHT_MAX;
@@ -84,11 +84,6 @@ public class WindowGame extends BasicGame {
         map.get(3).addAdversary(monster5);
         
         map.add(new Map("firstArena", "caveMap.ogg", true));
-        map.get(4).addExit(new Exit(0, 0, 11, 8, 1));
-        
-        PNJ monsterArena1 = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
-        monsterArena1.init();
-        map.get(4).addAdversary(monsterArena1);
         
        
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 40, 50);
@@ -196,12 +191,6 @@ public class WindowGame extends BasicGame {
 		
 		if(key == Input.KEY_SPACE){
 				objPlayer.attack(map.get(indexMap));
-				if(map.get(4).allAdversariesKilled()){
-					objPlayer.setPosition(map.get(indexMap).exit.get(0).getNextPosition());
-					indexMap = map.get(indexMap).exit.get(0).getMapNumber();
-					map.get(indexMap).removeExit(map.get(indexMap).getExitListSize() - 1);
-					keyPressed(Input.KEY_UP, ' ');
-			}
 		}
 		
 	    	// Si l'on a fini le mouvement
