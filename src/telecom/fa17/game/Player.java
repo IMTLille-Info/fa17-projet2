@@ -32,19 +32,24 @@ public class Player extends Mobile {
 	}
 	
 	public void attack(Map map) {
-		startFight();
+		startAttackAnime();
 		Position target = getInfrontPosition();
 		for (PNJ pnj : map.getAliveAdversaries()) {
 			if (pnj.getPosition().equals(target)) {
-				pnj.hurt(getAttack());
-				map.setHitZone(target);
-				if(pnj.isAlive()){
-					this.hurt(pnj.getAttack());
+				if(isFighting()){
+					pnj.hurt(getAttack());
+					map.setHitZone(target);
+					if(pnj.isAlive()){
+						this.hurt(pnj.getAttack());
+					}else{
+						map.removeAdversary(pnj);
+					}
 				}else{
-					map.removeAdversary(pnj);
-				}
+					pnj.trigger();
+				}	
 			}
 		}
 	}
+
 }
 

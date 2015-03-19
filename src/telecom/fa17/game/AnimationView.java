@@ -67,7 +67,7 @@ public class AnimationView {
 		}
 		
 		if(endAnimation(animation)){
-			player.stopFight();
+			player.stopAttackAnime();
 		}else{
 			animation.draw(player.getPosition().getAbsciss(), player.getPosition().getOrdinate());
 		}

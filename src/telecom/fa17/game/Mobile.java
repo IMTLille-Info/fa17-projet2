@@ -16,6 +16,7 @@ public abstract class Mobile extends Element {
 	private int attack;
 	// BOOLEAN pour indiquer si le joueur est en combat
 	private boolean isFighting;
+	private boolean isAttack;
 
 	protected Animation[] animations;
 	protected Image[] standings;
@@ -30,6 +31,7 @@ public abstract class Mobile extends Element {
 		isFighting = false;
 		this.life = life;
 		this.attack = attack;
+		this.isAttack = false;
 
 		animations = new Animation[4];
 		standings = new Image[4];
@@ -188,4 +190,17 @@ public abstract class Mobile extends Element {
 	public void stopFight() {
 		this.isFighting = false;
 	}
+	
+	void startAttackAnime() {
+		isAttack = true;
+	}
+	
+	void stopAttackAnime() {
+		isAttack = false;
+	}
+	
+	boolean isAttacking(){
+		return isAttack;
+	}
+	
 }

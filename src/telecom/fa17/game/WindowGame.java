@@ -114,7 +114,7 @@ public class WindowGame extends BasicGame {
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
 		}else{//affiche l'animation d'un coup d'epee
-			if(objPlayer.isFighting()){
+			if(objPlayer.isAttacking()){
 				animations.attackAnimate(map.get(indexMap), objPlayer);
 			}else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
@@ -196,6 +196,7 @@ public class WindowGame extends BasicGame {
 		
 		if(key == Input.KEY_SPACE){
 			if(map.get(indexMap).isArena()){
+				objPlayer.startFight();
 				objPlayer.attack(map.get(indexMap));
 				if(map.get(indexMap).allAdversariesKilled()){
 					objPlayer.setPosition(map.get(indexMap).exit.get(0).getNextPosition());
