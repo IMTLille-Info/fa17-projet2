@@ -16,16 +16,20 @@ public class AnimationView {
 	
 	public Animation hit;
 	public Animation swordAttack;
+	public Animation zeldaRightMove;
 	
 	public AnimationView() throws SlickException{
 		SpriteSheet hitSheet = new SpriteSheet(new Image("/resources/map/animation/iceBlaster_hit.png"), 32, 32);
 		hit = new Animation(hitSheet, 30);
 		hit.setLooping(false);
 		
-		swordAttack = new Animation();
+		/*swordAttack = new Animation();
 		swordAttack.addFrame(new Image("resources/map/player/personAttack1.png"), DURATION_FRAME);
 		swordAttack.addFrame(new Image("resources/map/player/personAttack2.png"), DURATION_FRAME);
 		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), DURATION_FRAME);
+		*/
+		SpriteSheet zelda = new SpriteSheet("resources/map/player/zelda.png", 38, 38);
+		swordAttack = new Animation(zelda, 0, 6, 8, 6, true, 100, true);
 	}
 	
 	/**
