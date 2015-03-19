@@ -195,16 +195,13 @@ public class WindowGame extends BasicGame {
         	}
 		
 		if(key == Input.KEY_SPACE){
-			if(map.get(indexMap).isArena()){
-				objPlayer.startFight();
 				objPlayer.attack(map.get(indexMap));
-				if(map.get(indexMap).allAdversariesKilled()){
+			/*	if(map.get(indexMap).allAdversariesKilled()){
 					objPlayer.setPosition(map.get(indexMap).exit.get(0).getNextPosition());
 					this.indexMap = map.get(indexMap).exit.get(0).getMapNumber();
 					map.get(indexMap).removeExit(map.get(indexMap).getExitListSize() - 1);
 					keyPressed(Input.KEY_UP, ' ');
-				}
-			}
+			}*/
 		}
 		
 	    	// Si l'on a fini le mouvement

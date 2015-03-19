@@ -29,7 +29,8 @@ public class PNJ extends Mobile {
 	
 	public void trigger(){
 		WindowGame.indexMap = 4;
-		WindowGame.objPlayer.setPosition(new Position(8, 10));
+		WindowGame.objPlayer.setPosition(new Position(8*32, 10*32));
+		WindowGame.objPlayer.startFight();
 	}
 
 	@Override
