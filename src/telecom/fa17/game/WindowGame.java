@@ -51,47 +51,48 @@ public class WindowGame extends BasicGame {
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
-        map.get(0).addExit(new Exit(9 * 32, 0, 9 * 32, 14 * 32, 1));
-        map.get(0).addExit(new Exit(10 * 32, 0, 16 * 32, 14 * 32, 1));
+        map.get(0).addExit(new Exit(9, 0, 9, 14, 1));
+        map.get(0).addExit(new Exit(10, 0, 16, 14, 1));
         
         map.add(new Map("secondMap", "caveMap.ogg", false));
-        map.get(1).addExit(new Exit(9 * 32, 14 * 32, 9 * 32, 0, 0));
-        map.get(1).addExit(new Exit(16 * 32, 14 * 32, 10 * 32, 0, 0)); 
-        map.get(1).addExit(new Exit(7 * 32, 3 * 32, 1 * 32, 13 * 32, 2));
-        map.get(1).addExit(new Exit(17 * 32, 4 * 32, 18 * 32, 1 * 32, 2));
-        map.get(1).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 5 * 32, 3));
-        map.get(1).addExit(new Exit(11 * 32, 6 * 32, 10 * 32, 8 * 32, 4));
-        PNJ monster = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 30, 20, map.get(1));
+        map.get(1).addExit(new Exit(9, 14, 9, 0, 0));
+        map.get(1).addExit(new Exit(16, 14, 10, 0, 0)); 
+        map.get(1).addExit(new Exit(7, 3, 1, 13, 2));
+        map.get(1).addExit(new Exit(17, 4, 18, 1, 2));
+        map.get(1).addExit(new Exit(18, 1, 17, 5, 3));
+        map.get(1).addExit(new Exit(11, 6, 10, 8, 4));
+        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(1));
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap", "caveMap.ogg", false));
-        map.get(2).addExit(new Exit(1 * 32, 13 * 32, 7 * 32, 3 * 32, 1));
-        map.get(2).addExit(new Exit(18 * 32, 1 * 32, 17 * 32, 4 * 32, 1));
-        PNJ monster2 = new PNJ(4 * 32, 8 * 32, map.get(1).getTileDimension(), 50, 20, map.get(2));
+        map.get(2).addExit(new Exit(1, 13, 7, 3, 1));
+        map.get(2).addExit(new Exit(18, 1, 17, 4, 1));
+        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, map.get(2));
         monster2.init();
         map.get(2).addAdversary(monster2);
         
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9 * 32, 9 * 32, map.get(3).getTileDimension(), 50, 40, map.get(3));
+        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40, map.get(3));
         monster3.init();
-        PNJ monster4 = new PNJ(2 * 32, 4 * 32, map.get(3).getTileDimension(), 80, 70, map.get(3));
+        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70, map.get(3));
         monster4.init();
-        PNJ monster5 = new PNJ(11 * 32, 5 * 32, map.get(3).getTileDimension(), 100, 100, map.get(3));
+        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100, map.get(3));
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
         
         map.add(new Map("firstArena", "caveMap.ogg", true));
-        map.get(4).addExit(new Exit(0, 0, 11 * 32, 8 * 32, 1));
-        PNJ monsterArena1 = new PNJ(11 * 32, 5 * 32, map.get(1).getTileDimension(), 30, 20, map.get(4));
+        map.get(4).addExit(new Exit(0, 0, 11, 8, 1));
+        PNJ monsterArena1 = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(4));
         monsterArena1.init();
         map.get(4).addAdversary(monsterArena1);
         
+       
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 40, 50);
         // Création d'un joueur
-        objPlayer = new Player(224, 192, this.map.get(indexMap).getTileDimension());
+        objPlayer = new Player(7, 6, this.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
         
         animations = new AnimationView(playerSprite);

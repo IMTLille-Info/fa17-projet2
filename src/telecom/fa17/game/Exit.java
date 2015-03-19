@@ -6,7 +6,7 @@ public class Exit extends Element {
 
 		public Exit(float x, float y, float nextAbs, float nextOrd, int nextMapNb){
 				super(x, y, true);
-				this.nextPosition = new Position(nextAbs, nextOrd);
+				this.nextPosition = new Position(nextAbs*32, nextOrd*32);
 				this.nextMapNumber = nextMapNb;
 		}
 

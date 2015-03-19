@@ -6,7 +6,7 @@ public abstract class Element {
 	protected boolean isCrossable;
 		
 	public Element(float x, float y, boolean isCrossable){
-		this.position = new Position(x, y);
+		this.position = new Position(x *32, y*32);
 		this.isCrossable = isCrossable;
 	}
 	
