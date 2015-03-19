@@ -15,35 +15,61 @@ public class AnimationView {
 	protected final int DURATION_FRAME = 100;
 	
 	public Animation hit;
-	public Animation swordAttack;
-	public Animation zeldaRightMove;
+	public Animation swordAttackSouth;
+	public Animation swordAttackNorth;
+	public Animation swordAttackEast;
+	public Animation swordAttackWest;
 	
 	public AnimationView() throws SlickException{
 		SpriteSheet hitSheet = new SpriteSheet(new Image("/resources/map/animation/iceBlaster_hit.png"), 32, 32);
 		hit = new Animation(hitSheet, 30);
 		hit.setLooping(false);
 		
-		/*swordAttack = new Animation();
-		swordAttack.addFrame(new Image("resources/map/player/personAttack1.png"), DURATION_FRAME);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack2.png"), DURATION_FRAME);
-		swordAttack.addFrame(new Image("resources/map/player/personAttack3.png"), DURATION_FRAME);
-		*/
 		SpriteSheet zelda = new SpriteSheet("resources/map/player/zelda.png", 38, 38);
-		swordAttack = new Animation(zelda, 0, 6, 6, 6, true, 1000, true);
-		swordAttack.setLooping(false);
+		swordAttackSouth = new Animation(zelda, 0, 6, 6, 6, true, 30, true);
+		swordAttackSouth.setLooping(false);
+		swordAttackNorth = new Animation(zelda, 0, 9, 6, 9, true, 1000, true);
+		swordAttackNorth.setLooping(false);
+		swordAttackEast = new Animation(zelda, 0, 8, 6, 8, true, 1000, true);
+		swordAttackEast.setLooping(false);
+		swordAttackWest = new Animation(zelda, 0, 6, 6, 6, true, 1000, true);
+		swordAttackWest.setLooping(false);
 	}
 	
 	/**
 	 * Affiche l'animation hit une fois à l'emplacement du joueur puis se stop et réinitialise l'animation
 	 * @param map
+	 * @param player 
 	 */
-	public void hitAnimate(Map map){
-		if(hit.isStopped() && swordAttack.isStopped()){
-			map.stopHit();
-			hit.restart();
-			swordAttack.restart();
-		} else {
-			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
+	public void hitAnimate(Map map, Player player){
+		Animation animation = swordAttackSouth ;
+		switch (player.getDirection()){
+			case SOUTH :
+				animation = swordAttackSouth;
+				break;
+			case NORTH :
+				animation = swordAttackNorth;
+				break;
+			case EAST :
+				animation = swordAttackEast;
+				break;
+			case WEST :
+				animation = swordAttackWest;
+				break;
 		}
+		
+		if(!endAnimation(hit, map) && !endAnimation(animation, map)){
+			hit.draw(map.getHitZone().getAbsciss(), map.getHitZone().getOrdinate());
+			animation.draw(player.getPosition().getAbsciss(), player.getPosition().getOrdinate());
+		}
+	}
+	
+	public boolean endAnimation(Animation animation, Map map){
+		if(animation.isStopped()){
+			map.stopHit();
+			animation.restart();
+			return true;
+		}
+		return false;
 	}
 }

@@ -109,9 +109,14 @@ public class WindowGame extends BasicGame {
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
-		} else {
+		}else{//affiche l'animation des degats si un joueur est touché
+			if(map.get(indexMap).playerHit()){
+				objPlayer.setInFight(true);
+				animations.hitAnimate(map.get(indexMap), objPlayer);
+			}else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
 			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
+			}
 		}
 		
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
@@ -127,12 +132,6 @@ public class WindowGame extends BasicGame {
 			//displayHUDMonsters(g, 50);
 		}
 		
-		//affiche l'animation des degats si un joueur est touché
-		if(map.get(indexMap).playerHit()){
-			objPlayer.setInFight(true);
-			animations.hitAnimate(map.get(indexMap));
-			animations.swordAttack.draw(objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
-		}
     }
 	
 	/** 
