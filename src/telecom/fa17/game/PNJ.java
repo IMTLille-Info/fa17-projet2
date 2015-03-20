@@ -11,10 +11,10 @@ public class PNJ extends Mobile {
 	private Position firstPosition;
 	private int previousMapIdx;
 
-	public PNJ(float x, float y, int tileSize, int life, int attack, Map map, int idxMap) {
+	public PNJ(float x, float y, int tileSize, int life, int attack, Map map, int previousMapIdx) {
 		super(x, y, tileSize, life, attack);
 		firstPosition = new Position (x*32, y*32);
-		previousMapIdx = idxMap;
+		this.previousMapIdx = previousMapIdx;
 	}
 
 	public void init() throws SlickException {
