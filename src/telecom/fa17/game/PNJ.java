@@ -47,6 +47,7 @@ public class PNJ extends Mobile {
 		MapGameState.objPlayer.setPosition(firstPosition);
 		MapGameState.objPlayer.stopFight();
 		MapGameState.map.get(4).removeAdversary(this);
+		MapGameState.map.get(4).stopHit();
 	}
 
 	@Override
