@@ -7,11 +7,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
-import telecom.fa17.game.Exit;
+import telecom.fa17.game.Trigger;
 
 public class Map {
 	private TiledMap map;
-	protected List<Exit> exit;
+	protected List<Trigger> trigger;
 	private List<PNJ> adversaries;
 	private Position hitPosition;
 	private boolean playerHit;
@@ -20,7 +20,7 @@ public class Map {
 
 	public Map(String name, String mscFile, boolean isArena) throws SlickException {
 		this.map = new TiledMap("resources/map/" + name + ".tmx");
-		this.exit = new ArrayList<Exit>();
+		this.trigger = new ArrayList<Trigger>();
 		this.adversaries = new ArrayList<PNJ>();
 		this.hitPosition = new Position(0, 0);
 		this.playerHit = false;
@@ -58,12 +58,12 @@ public class Map {
 		return this.musicFilename;
 	}
 
-	public void addExit(Exit prm) {
-		this.exit.add(prm);
+	public void addExit(Trigger prm) {
+		this.trigger.add(prm);
 	}
 
 	public void removeExit(int prm) {
-		this.exit.remove(prm);
+		this.trigger.remove(prm);
 	}
 	
 	public void removePNJ(PNJ prm) {
@@ -71,7 +71,7 @@ public class Map {
 	}
 
 	public int getExitListSize(){
-		return this.exit.size();
+		return this.trigger.size();
 	}
 	
 	public Position getNextPosition(int key, Position pos) {
@@ -113,9 +113,9 @@ public class Map {
 		return true;
 	}
 
-	public Exit findExit(int key, Position pos) {
+	public Trigger findTrigger(int key, Position pos) {
 		Position nextPos = getNextPosition(key, pos);
-		for (Exit each : exit) {
+		for (Trigger each : trigger) {
 			if (each.getPosition().equals(nextPos)) { // each.isCloseTo(nextPos) ?
 				return each;
 			}

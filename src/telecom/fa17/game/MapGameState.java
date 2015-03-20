@@ -216,11 +216,11 @@ public class MapGameState extends BasicGameState {
 			if(!isOnEdge){ 
 				// La prochaine case n'est pas une collision
 				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition())){
-					Exit exit = map.get(indexMap).findExit(key, objPlayer.getPosition());
+					
+					Trigger trigger = map.get(indexMap).findTrigger(key, objPlayer.getPosition());
 					// Pas de collision, on vérifie si ce n'est pas une sortie
-					if(exit != null){
-						indexMap = exit.getMapNumber();
-						objPlayer.setPosition(exit.getNextPosition());
+					if(trigger != null){
+						trigger.action();
 						try {
 							music.setBackgroundMusic(map.get(indexMap).getMusicFilename());
 						} catch (SlickException e) {
