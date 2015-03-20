@@ -3,21 +3,23 @@ package telecom.fa17.game;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
  */
-public class WindowGame extends BasicGame {
+public class WindowGame extends BasicGameState {
 
     private GameContainer container;
+    public static final int ID = 1;
+    
 	public static List<Map> map;
 	
 	// Constantes de Map
@@ -28,25 +30,21 @@ public class WindowGame extends BasicGame {
 	
 	AnimationView animations;
 	Sounds music;
-	Hud myHud;
-
-	/**
-     * Création de la fenetre.
-     *
-     * @param title - Titre de la fenetre.
-     */
-	public WindowGame(String title) {
-		super(title);
+	Hud myHud;	
+	
+	@Override
+	public int getID() {
+		return ID;
 	}
 	
 	/** 
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
 	 */
 	@Override
-	public void init(GameContainer container) throws SlickException {
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
         this.container = container;
         
-        // Charge la map
+       
         map = new LinkedList<Map>();
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
@@ -102,7 +100,7 @@ public class WindowGame extends BasicGame {
 	 * Affiche le contenu du jeux
 	 */
 	@Override
-	public void render(GameContainer container, Graphics g) throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 	    // Affichage du fond principal de la carte
 		map.get(indexMap).renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
@@ -143,7 +141,7 @@ public class WindowGame extends BasicGame {
 	 * C’est ici que la logique du jeux est renfermé.
 	 */
 	@Override
-	public void update(GameContainer container, int delta) throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
 		if(!objPlayer.isAlive()){
 			keyPressed(Input.KEY_ESCAPE, ' ');
@@ -166,21 +164,13 @@ public class WindowGame extends BasicGame {
 		// Calcul des futurs coordonnées désirées
 		objPlayer.getNextPosition(delta);
 	}
-	
-	/** 
-	 * Démarre le jeu. 
-	 */
-	public static void main(String[] args) throws SlickException {
-		AppGameContainer container = new AppGameContainer(new WindowGame("GameZ"), 640, 480, false);
-		container.setShowFPS(false); // Désactivation de l'affichage des FPS
-		container.start(); // Démarrage du jeu (lancement de la fenêtre)
-    	}
+
 	
 	/** 
 	 * Méthode qui permet de savoir quand une touche est pressée.
 	 * 
 	 * Touche pour quitter : ESC. 
-	 */
+	 */	
 	@Override
 	public void keyPressed(int key, char c) {
 		boolean isOnEdge = true;
@@ -279,6 +269,5 @@ public class WindowGame extends BasicGame {
 		Hud monsterHud = new Hud();
 		monsterHud.init(false);
 		monsterHud.renderMonster(g, monsterLife);
-	}
-	
+	}	
 }

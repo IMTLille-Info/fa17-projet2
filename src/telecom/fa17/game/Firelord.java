@@ -20,17 +20,6 @@ public class Firelord extends PNJ{
 		int signumAbsciss = Long.signum((long) x);
 		int signumOrdinate = Long.signum((long) y);
 		
-		//tester future position de fireball
-		
-		// COMMENTAIRE DE FLORENT : ATTENTION, tu vas passer tes signum en coordoonées de carte
-		//							et ce n'est pas les signum qu'il faut passer, c'est
-		//							la position de la fireball par rapport
-		//							au firelord si j'ai bien compris
-		
-		// CORRECTION SELON MOI (À VALiDER) : new Fireball(.. , .. , playerPosition.getAbsciss(), playerPosition.getOrdinate()
-		//									  Au final, pas besoin de signum nan ?
-		//									  Tu te fais attaquer, tu envoies sur le joueur ?	
-		
 		int key = 0;
 
 		Position fireballPosition = new Position(0,0);
