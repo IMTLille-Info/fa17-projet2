@@ -1,6 +1,6 @@
 package telecom.fa17.game;
 
-public class Exit extends Element {
+public class Exit extends Trigger {
 		private Position nextPosition;
 		private int nextMapNumber;
 
@@ -16,5 +16,11 @@ public class Exit extends Element {
 
 		public int getMapNumber(){
 			return nextMapNumber;
+		}
+
+		@Override
+		public void action() {
+			MapGameState.objPlayer.setPosition(nextPosition);
+			MapGameState.indexMap = nextMapNumber;
 		}
 }
