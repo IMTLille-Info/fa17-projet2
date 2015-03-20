@@ -86,7 +86,7 @@ public class WindowGame extends BasicGame {
         map.add(new Map("firstArena", "caveMap.ogg", true));
         
        
-        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 40, 50);
+        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
         // Création d'un joueur
         objPlayer = new Player(7, 6, WindowGame.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
@@ -107,13 +107,13 @@ public class WindowGame extends BasicGame {
 		map.get(indexMap).renderBackground();
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
-			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());
+			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss() - 15, objPlayer.getPosition().getOrdinate() -22);
 		}else{//affiche l'animation d'un coup d'epee
 			if(objPlayer.isAttacking()){
 				animations.attackAnimate(map.get(indexMap), objPlayer);
 			}else {
 			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
-			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss(), objPlayer.getPosition().getOrdinate());		
+			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss()- 15, objPlayer.getPosition().getOrdinate() -22);		
 			}
 		}
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());

@@ -69,7 +69,7 @@ public class AnimationView {
 		if(endAnimation(animation)){
 			player.stopAttackAnime();
 		}else{
-			animation.draw(player.getPosition().getAbsciss(), player.getPosition().getOrdinate());
+			animation.draw(player.getPosition().getAbsciss() - 15, player.getPosition().getOrdinate() -22);
 		}
 	}
 	
