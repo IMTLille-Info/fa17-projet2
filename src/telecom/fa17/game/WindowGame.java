@@ -88,7 +88,7 @@ public class WindowGame extends BasicGame {
        
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 40, 50);
         // Création d'un joueur
-        objPlayer = new Player(7, 6, this.map.get(indexMap).getTileDimension());
+        objPlayer = new Player(7, 6, WindowGame.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
         
         animations = new AnimationView(playerSprite);
