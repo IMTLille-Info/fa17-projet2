@@ -58,7 +58,7 @@ public class Map {
 		return this.musicFilename;
 	}
 
-	public void addExit(Trigger prm) {
+	public void addTrigger(Trigger prm) {
 		this.trigger.add(prm);
 	}
 
@@ -175,5 +175,9 @@ public class Map {
 	
 	boolean isArena() {
 		return isArena;
+	}
+
+	public void removeTrigger(Trigger trigger) {
+		this.trigger.remove(trigger);		
 	}
 }

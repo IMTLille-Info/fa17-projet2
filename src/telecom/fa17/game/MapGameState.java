@@ -49,23 +49,24 @@ public class MapGameState extends BasicGameState {
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
-        map.get(0).addExit(new Exit(9, 0, 9, 14, 1));
-        map.get(0).addExit(new Exit(10, 0, 16, 14, 1));
+        map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
+        map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
+        map.get(0).addTrigger(new HealBonus(9, 1));
         
         map.add(new Map("secondMap", "caveMap.ogg", false));
-        map.get(1).addExit(new Exit(9, 14, 9, 0, 0));
-        map.get(1).addExit(new Exit(16, 14, 10, 0, 0)); 
-        map.get(1).addExit(new Exit(7, 3, 1, 13, 2));
-        map.get(1).addExit(new Exit(17, 4, 18, 1, 2));
-        map.get(1).addExit(new Exit(18, 1, 17, 5, 3));
+        map.get(1).addTrigger(new Exit(9, 14, 9, 0, 0));
+        map.get(1).addTrigger(new Exit(16, 14, 10, 0, 0)); 
+        map.get(1).addTrigger(new Exit(7, 3, 1, 13, 2));
+        map.get(1).addTrigger(new Exit(17, 4, 18, 1, 2));
+        map.get(1).addTrigger(new Exit(18, 1, 17, 5, 3));
  
         PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
         
         map.add(new Map("thirdMap", "caveMap.ogg", false));
-        map.get(2).addExit(new Exit(1, 13, 7, 3, 1));
-        map.get(2).addExit(new Exit(18, 1, 17, 4, 1));
+        map.get(2).addTrigger(new Exit(1, 13, 7, 3, 1));
+        map.get(2).addTrigger(new Exit(18, 1, 17, 4, 1));
         PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20,map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
