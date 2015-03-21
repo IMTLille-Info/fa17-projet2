@@ -2,11 +2,16 @@ package telecom.fa17.game;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import end.EndState;
+
 public class StateGame extends StateBasedGame {
 
+	private GameContainer container;
+	
 	public StateGame() {
 		super("GameZ");
 	}
@@ -17,15 +22,18 @@ public class StateGame extends StateBasedGame {
 	 * 
 	 */
 	@Override
-	public void initStatesList(GameContainer arg0) throws SlickException {
+	public void initStatesList(GameContainer container) throws SlickException {
+		this.container = container;
 		addState(new MapGameState());
 		addState(new end.EndState());
 	}
-
+	
 	/*
-	 * Méthôde main de référence, lance le jeu 
+	 * Méthode main de référence, lance le jeu 
 	 */
 	public static void main(String[] args) throws SlickException {
-	    new AppGameContainer(new StateGame(), 640, 480, false).start();
+		AppGameContainer container = new AppGameContainer(new StateGame(), 640, 480, false);
+		container.setShowFPS(false); // Désactivation de l'affichage des FPS
+		container.start(); // Démarrage du jeu (lancement de la fenêtre)
 	}
 }

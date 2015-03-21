@@ -178,6 +178,8 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void keyPressed(int key, char c) {
 		
+		System.out.println("MAP");
+		
 		/* 
 		 * TEST POUR DECLENCHER LA FIN
 		 */
@@ -190,7 +192,7 @@ public class MapGameState extends BasicGameState {
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
             		container.exit();
-        	}
+        }
 		
 		if(key == Input.KEY_SPACE){
 				objPlayer.attack(map.get(indexMap));
