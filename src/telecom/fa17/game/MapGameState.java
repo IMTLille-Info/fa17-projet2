@@ -18,13 +18,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MapGameState extends BasicGameState {
 
     private GameContainer container;
+	private StateBasedGame game;
     public static final int ID = 1;
     
 	public static List<Map> map;
 	
 	// Constantes de Map
-	int WIDTH_MAX, HEIGHT_MAX;
-	// Map en cours d'affichage
+	private int WIDTH_MAX, HEIGHT_MAX;
+	// Contenu standard de la fenêtre
 	public static int indexMap = 0;
 	public static Player objPlayer;
 	
@@ -43,7 +44,7 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
         this.container = container;
-        
+        this.game = game;
        
         map = new LinkedList<Map>();
         map.add(new Map("firstMap", "townMap.ogg", false));
@@ -174,6 +175,10 @@ public class MapGameState extends BasicGameState {
 	 */	
 	@Override
 	public void keyPressed(int key, char c) {
+		
+		// TEST POUR DECLENCHER LA FIN
+		//game.enterState(MapGameState.ID);
+		
 		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
