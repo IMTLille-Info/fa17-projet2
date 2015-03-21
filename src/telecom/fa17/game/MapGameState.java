@@ -178,8 +178,6 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void keyPressed(int key, char c) {
 		
-		System.out.println("MAP");
-		
 		/* 
 		 * TEST POUR DECLENCHER LA FIN
 		 */

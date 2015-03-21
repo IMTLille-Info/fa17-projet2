@@ -25,8 +25,11 @@ public class EndState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		// TODO Auto-generated method stub
-		
+		displayText(g, "YOU ARE GREAT", 260, 64);
+		/*
+		 * AFFICHAGE DU TEXTE DE FIN
+		 */
+		displayText(g, "PRESS [ESC] TO END THE GAME", 200, 400);
 	}
 
 	@Override
