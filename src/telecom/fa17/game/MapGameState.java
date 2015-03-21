@@ -11,6 +11,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import end.EndState;
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -176,8 +178,13 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void keyPressed(int key, char c) {
 		
-		// TEST POUR DECLENCHER LA FIN
-		//game.enterState(MapGameState.ID);
+		/* 
+		 * TEST POUR DECLENCHER LA FIN
+		 */
+		if (key == Input.KEY_NUMPAD8) {
+			game.enterState(EndState.ID);
+		}
+		/* ****** */
 		
 		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
