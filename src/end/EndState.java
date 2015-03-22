@@ -1,6 +1,5 @@
 package end;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -62,7 +61,6 @@ public class EndState extends BasicGameState {
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
-		g.setColor(new Color(255, 255, 255));
 		g.drawString(text, absOrigin, ordOrigin);
 	}
 

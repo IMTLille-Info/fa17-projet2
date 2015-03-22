@@ -24,6 +24,8 @@ public class MapGameState extends BasicGameState {
     public static final int ID = 1;
     
 	public static List<Map> map;
+	boolean textToDisplay = false;
+	int tempoText;
 	
 	// Constantes de Map
 	private int WIDTH_MAX, HEIGHT_MAX;
@@ -125,19 +127,14 @@ public class MapGameState extends BasicGameState {
 			animations.hitAnimate(map.get(indexMap));
 		}
 		
-	
-		
 		// Affichage de l'Avant-Plan
 		map.get(indexMap).renderForeground();
 	    
 		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
-
-		if(objPlayer.isFighting()){
-			// RECUPERATION DE LA VIE DU MONSTRE QUE L'ON EST EN TRAIN DE COMBATTRE
-			//displayHUDMonsters(g, 50);
-		}
 		
+		
+		if(textToDisplay) displayText(g, "", 0, 0, 2);
     }
 	
 	/** 
@@ -147,8 +144,10 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
+		if(textToDisplay) tempoText += delta;
+		
 		if(!objPlayer.isAlive()){
-			keyPressed(Input.KEY_ESCAPE, ' ');
+			keyPressed(Input.KEY_NUMPAD8, ' ');
 		}
 
 		if(!objPlayer.isMoving()){
@@ -169,7 +168,6 @@ public class MapGameState extends BasicGameState {
 		objPlayer.getNextPosition(delta);
 	}
 
-	
 	/** 
 	 * Méthode qui permet de savoir quand une touche est pressée.
 	 * 
@@ -255,9 +253,24 @@ public class MapGameState extends BasicGameState {
      * @param absOrigin - Coordonnée Horizontale en haut à gauche de la première lettre du texte.
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
-	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin){
-		g.setColor(new Color(255, 255, 255));
-		g.drawString(text, absOrigin, ordOrigin);
+	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin, int delta){
+		
+		tempoText += delta;
+		int percent = (tempoText / 1000);
+		/*int x = 0, y = 0;
+		if ((tempoText < scale)) {
+			// Toutes les 4ms, on affiche un caractère
+			if (moveAnim > 4) {
+				tempScale++;
+				if (HORIZONTAL) {
+
+				}
+
+			}
+		}*/
+		
+		//g.setColor(new Color(255, 255, 255));
+		//g.drawString(text, absOrigin, ordOrigin);
 	}
 	
 	/**
