@@ -24,7 +24,7 @@ public class MapGameState extends BasicGameState {
     public static final int ID = 1;
     
 	public static List<Map> map;
-	boolean textToDisplay = false;
+	boolean textToDisplay = true;
 	int tempoText;
 	
 	// Constantes de Map
@@ -144,7 +144,8 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
-		if(textToDisplay) tempoText += delta;
+		if(textToDisplay) tempoText += delta;  System.out.println(tempoText / 1000);
+		if((tempoText / 1000) > 10) textToDisplay = false; tempoText = 0;
 		
 		if(!objPlayer.isAlive()){
 			keyPressed(Input.KEY_NUMPAD8, ' ');
@@ -255,22 +256,16 @@ public class MapGameState extends BasicGameState {
      */
 	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin, int delta){
 		
-		tempoText += delta;
-		int percent = (tempoText / 1000);
-		/*int x = 0, y = 0;
-		if ((tempoText < scale)) {
-			// Toutes les 4ms, on affiche un caractère
-			if (moveAnim > 4) {
-				tempScale++;
-				if (HORIZONTAL) {
-
-				}
-
-			}
-		}*/
+		// Couleur Blanche
+		g.setColor(new Color(255, 255, 255));
+		g.fillRoundRect(10, 420, 620, 50, 10);
 		
-		//g.setColor(new Color(255, 255, 255));
-		//g.drawString(text, absOrigin, ordOrigin);
+		// Couleur Noire
+		g.setColor(new Color(0, 0, 0));
+		g.drawRoundRect(10, 420, 620, 50, 10);
+		g.drawRoundRect(15, 425, 610, 40, 10);
+		
+		g.drawString("GameZ - The Best game you've ever played ! Number of letters : 62" , 25, 435);
 	}
 	
 	/**
