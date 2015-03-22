@@ -34,9 +34,10 @@ public class MapGameState extends BasicGameState {
 	public static int indexMap = 0;
 	public static Player objPlayer;
 	
-	AnimationView animations;
-	Sounds music;
-	Hud myHud;	
+	private AnimationView animations;
+	private Sounds music;
+	private Hud myHud;
+	private String displayText = "GameZ - The Best game you've ever played ! Number of letters : 62";	
 	
 	@Override
 	public int getID() {
@@ -136,7 +137,7 @@ public class MapGameState extends BasicGameState {
 		
 		
 		if(textToDisplay)
-			displayText(g, "GameZ - The Best game you've ever played ! Number of letters : 62");
+			displayText(g, displayText );
     }
 	
 	/** 
