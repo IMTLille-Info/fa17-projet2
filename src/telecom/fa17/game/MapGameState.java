@@ -24,6 +24,7 @@ public class MapGameState extends BasicGameState {
     public static final int ID = 1;
     
 	public static List<Map> map;
+	private final int TIME_DISPLAY_TEXT = 6000;
 	boolean textToDisplay = true;
 	int tempoText;
 	
@@ -134,7 +135,8 @@ public class MapGameState extends BasicGameState {
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
 		
 		
-		if(textToDisplay) displayText(g, "", 0, 0, 2);
+		if(textToDisplay)
+			displayText(g, "GameZ - The Best game you've ever played ! Number of letters : 62");
     }
 	
 	/** 
@@ -144,9 +146,16 @@ public class MapGameState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
-		if(textToDisplay) tempoText += delta;  System.out.println(tempoText / 1000);
-		if((tempoText / 1000) > 10) textToDisplay = false; tempoText = 0;
+		// Affichage INFO-BULLE
+		if(textToDisplay) 
+			tempoText += delta; 
+		if(tempoText > TIME_DISPLAY_TEXT) 
+		{
+			textToDisplay = false;
+			tempoText = 0;
+		}
 		
+		// Player mort, affichage de l'état END
 		if(!objPlayer.isAlive()){
 			keyPressed(Input.KEY_NUMPAD8, ' ');
 		}
@@ -254,7 +263,7 @@ public class MapGameState extends BasicGameState {
      * @param absOrigin - Coordonnée Horizontale en haut à gauche de la première lettre du texte.
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
-	public void displayText(Graphics g, String text, float absOrigin, float ordOrigin, int delta){
+	public void displayText(Graphics g, String text){
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
@@ -265,7 +274,7 @@ public class MapGameState extends BasicGameState {
 		g.drawRoundRect(10, 420, 620, 50, 10);
 		g.drawRoundRect(15, 425, 610, 40, 10);
 		
-		g.drawString("GameZ - The Best game you've ever played ! Number of letters : 62" , 25, 435);
+		g.drawString(text, 25, 435);
 	}
 	
 	/**
