@@ -24,9 +24,6 @@ public class MapGameState extends BasicGameState {
     public static final int ID = 1;
     
 	public static List<Map> map;
-	private final int TIME_DISPLAY_TEXT = 6000;
-	boolean textToDisplay = true;
-	int tempoText;
 	
 	// Constantes de Map
 	private int WIDTH_MAX, HEIGHT_MAX;
@@ -37,7 +34,10 @@ public class MapGameState extends BasicGameState {
 	private AnimationView animations;
 	private Sounds music;
 	private Hud myHud;
-	private String displayText = "GameZ - The Best game you've ever played ! Number of letters : 62";	
+	
+	boolean textToDisplay = false;
+	int tempoText;
+	private String displayText;	
 	
 	@Override
 	public int getID() {
@@ -102,6 +102,8 @@ public class MapGameState extends BasicGameState {
 		music = new Sounds(map.get(0).getMusicFilename());
 		myHud = new Hud();
 		myHud.init(true);
+		
+		textInit("GameZ - The Best game you've ever played ! Number of letters : 62");
     }
 	
 	/** 
@@ -109,35 +111,38 @@ public class MapGameState extends BasicGameState {
 	 */
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-	    // Affichage du fond principal de la carte
+	    
+		// Affichage du fond principal de la carte
 		map.get(indexMap).renderBackground();
+		
 		// Si on appuie sur une touche de direction, on joue une animation
 		if (objPlayer.isMoving()) {
 			g.drawAnimation(objPlayer.getAnimation(), objPlayer.getPosition().getAbsciss()-15, objPlayer.getPosition().getOrdinate()-22);
-		}else{//affiche l'animation d'un coup d'epee
+		} else {
+			// Affiche l'animation d'un coup d'epee
 			if(objPlayer.isAttacking()){
 				animations.attackAnimate(map.get(indexMap), objPlayer);
-			}else {
-			// Sinon, on affiche le personnage statique en fonction de sa dernière direction
-			g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss()-15, objPlayer.getPosition().getOrdinate()-22);		
+			} else {
+				// Sinon, on affiche le personnage statique en fonction de sa dernière direction
+				g.drawImage(objPlayer.getStandingImage(), objPlayer.getPosition().getAbsciss()-15, objPlayer.getPosition().getOrdinate()-22);		
 			}
 		}
 		displayMonsters(g, map.get(indexMap).getAliveAdversaries());
 		
-		//affiche l'animation des degats si un joueur est touché
+		// Affiche l'animation des dégats si le joueur est touché
 		if(map.get(indexMap).playerHit()){
 			animations.hitAnimate(map.get(indexMap));
 		}
 		
-		// Affichage de l'Avant-Plan
-		map.get(indexMap).renderForeground();
-	    
-		// Affichage des barres de vie, attaque, etc...
-		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
+		// Affichage de l'Avant-Plan de la Carte
+		map.get(indexMap).renderForeground();		
 		
-		
-		if(textToDisplay)
+		if(textToDisplay){
 			displayText(g, displayText );
+		} else { 
+			// Affichage des barres de vie, attaque, etc...
+			myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
+		}
     }
 	
 	/** 
@@ -148,15 +153,9 @@ public class MapGameState extends BasicGameState {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 
 		// Affichage INFO-BULLE
-		if(textToDisplay) 
-			tempoText += delta; 
-		if(tempoText > TIME_DISPLAY_TEXT) 
-		{
-			textToDisplay = false;
-			tempoText = 0;
-		}
+		textUpdate(delta);
 		
-		// Player mort, affichage de l'état END
+		// Player mort = passage à l'état END
 		if(!objPlayer.isAlive()){
 			keyPressed(Input.KEY_NUMPAD8, ' ');
 		}
@@ -175,6 +174,7 @@ public class MapGameState extends BasicGameState {
 				keyPressed(Input.KEY_RIGHT, ' ');
 			}
 		}
+		
 		// Calcul des futurs coordonnées désirées
 		objPlayer.getNextPosition(delta);
 	}
@@ -195,7 +195,6 @@ public class MapGameState extends BasicGameState {
 		}
 		/* ****** */
 		
-		boolean isOnEdge = true;
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
             		container.exit();
@@ -205,8 +204,9 @@ public class MapGameState extends BasicGameState {
 				objPlayer.attack(map.get(indexMap));
 		}
 		
-	    	// Si l'on a fini le mouvement
+	    // Si l'on a fini le mouvement
 		if(!objPlayer.isMoving()){
+			boolean isOnEdge = true;
 			switch (key){
     			case Input.KEY_UP:  
     				objPlayer.setDirection(Direction.NORTH);
@@ -240,7 +240,7 @@ public class MapGameState extends BasicGameState {
 				if(!map.get(indexMap).findCollision(key, objPlayer.getPosition())){
 					
 					Trigger trigger = map.get(indexMap).findTrigger(key, objPlayer.getPosition());
-					// Pas de collision, on vérifie si ce n'est pas une sortie
+					// Pas de collision, on vérifie si il y a un trigger
 					if(trigger != null){
 						trigger.action();
 						try {
@@ -254,6 +254,37 @@ public class MapGameState extends BasicGameState {
 				}
 			}
 		}
+	}
+	
+	
+	/**
+	 * Mis à jour des attributs pour afficher un texte
+	 * 
+	 * @param delta
+	 */
+	private void textInit(String prmS) {
+		textToDisplay = true;
+		displayText = prmS;
+	}
+	
+	/**
+	 * Mis à jour des attributs pour afficher un texte
+	 * 
+	 * @param delta
+	 */
+	private void textUpdate(int delta) {
+		// Time in ms
+		final int TIME_DISPLAY_TEXT = 4000;
+		
+		if(textToDisplay) 
+		{
+			tempoText += delta; 
+			if(tempoText > TIME_DISPLAY_TEXT) 
+			{
+				textToDisplay = false;
+				tempoText = 0;
+			}
+		}	
 	}
 	
 	/**
