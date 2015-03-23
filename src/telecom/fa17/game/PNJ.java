@@ -31,7 +31,7 @@ public class PNJ extends Mobile {
 		}
 	}
 	
-	public void trigger(){
+	public void redirectPlayerInArena(){
 		//transporte le joueur dans l'arêne
 		MapGameState.indexMap = 4;
 		MapGameState.objPlayer.setPosition(new Position(8*32, 10*32));

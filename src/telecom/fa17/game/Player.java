@@ -42,7 +42,7 @@ public class Player extends Mobile {
 						pnj.returnToLastPosition();		
 					}
 				}else{
-					pnj.trigger();
+					pnj.redirectPlayerInArena();
 				}
 				
 			}
