@@ -6,7 +6,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import end.EndState;
+import telecom.fa17.end.EndState;
 
 public class StateGame extends StateBasedGame {
 
@@ -25,7 +25,7 @@ public class StateGame extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 		this.container = container;
 		addState(new MapGameState());
-		addState(new end.EndState());
+		addState(new telecom.fa17.end.EndState());
 	}
 	
 	/*

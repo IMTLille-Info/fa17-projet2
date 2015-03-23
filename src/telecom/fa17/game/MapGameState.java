@@ -12,7 +12,7 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import end.EndState;
+import telecom.fa17.end.EndState;
 /**
  * @author FLORENT / PE / ÉTIENNE
  *
@@ -103,7 +103,7 @@ public class MapGameState extends BasicGameState {
 		myHud = new Hud();
 		myHud.init(true);
 		
-		textInit("GameZ - The Best game you've ever played ! Number of letters : 62");
+		textInit("GameZ - The Best game you've ever played ! Number of letters : 65");
 		//textInit("Welcome in our game !");
     }
 	
@@ -312,8 +312,6 @@ public class MapGameState extends BasicGameState {
 		} else {
 			str = text;
 		}
-		
-		
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));

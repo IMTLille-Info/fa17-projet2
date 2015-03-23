@@ -7,9 +7,7 @@ public class HealBonus extends Trigger {
 		super(x, y, true);
 	}
 
-	@Override
 	public void action() {
-		// TODO Auto-generated method stub
 		MapGameState.objPlayer.addLife(20);
 		MapGameState.map.get(MapGameState.indexMap).removeTrigger(this);
 	}

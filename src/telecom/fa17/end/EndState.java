@@ -1,4 +1,4 @@
-package end;
+package telecom.fa17.end;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
