@@ -58,7 +58,7 @@ public class MapGameState extends BasicGameState {
         HEIGHT_MAX = map.get(0).getHeight();
         map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
-        map.get(0).addTrigger(new HealBonus(9, 1));
+        map.get(0).addTrigger(new HealBonus(9, 1, 20));
         
         map.add(new Map("secondMap", "caveMap.ogg", false));
         map.get(1).addTrigger(new Exit(9, 14, 9, 0, 0));
