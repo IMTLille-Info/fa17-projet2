@@ -104,6 +104,7 @@ public class MapGameState extends BasicGameState {
 		myHud.init(true);
 		
 		textInit("GameZ - The Best game you've ever played ! Number of letters : 62");
+		//textInit("Welcome in our game !");
     }
 	
 	/** 
@@ -138,7 +139,7 @@ public class MapGameState extends BasicGameState {
 		map.get(indexMap).renderForeground();		
 		
 		if(textToDisplay){
-			displayText(g, displayText );
+			displayText(g, tempoText, displayText );
 		} else { 
 			// Affichage des barres de vie, attaque, etc...
 			myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
@@ -295,7 +296,24 @@ public class MapGameState extends BasicGameState {
      * @param absOrigin - Coordonnée Horizontale en haut à gauche de la première lettre du texte.
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
-	public void displayText(Graphics g, String text){
+	public void displayText(Graphics g, int timeSpent, String text){
+		final int TIME_FOR_ONE_MORE_LETTER = 45;
+		String str = "";
+		int lengthToDisplay; 
+		
+		if(timeSpent < 3000)
+		{
+			lengthToDisplay = timeSpent / TIME_FOR_ONE_MORE_LETTER;
+			if(lengthToDisplay < text.length()){
+				str = text.substring(0, lengthToDisplay);
+			} else {
+				str = text;
+			}
+		} else {
+			str = text;
+		}
+		
+		
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
@@ -306,7 +324,7 @@ public class MapGameState extends BasicGameState {
 		g.drawRoundRect(10, 420, 620, 50, 10);
 		g.drawRoundRect(15, 425, 610, 40, 10);
 		
-		g.drawString(text, 25, 435);
+		g.drawString(str, 25, 435);
 	}
 	
 	/**
