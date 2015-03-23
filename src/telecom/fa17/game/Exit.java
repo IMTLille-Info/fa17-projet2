@@ -23,4 +23,7 @@ public class Exit extends Trigger {
 			MapGameState.objPlayer.setPosition(nextPosition);
 			MapGameState.indexMap = nextMapNumber;
 		}
+
+		@Override
+		public void drawItself() {}
 }

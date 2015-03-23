@@ -12,4 +12,9 @@ public class HealBonus extends Item {
 		MapGameState.map.get(MapGameState.indexMap).removeTrigger(this);
 	}
 
+	@Override
+	public void drawItself() {
+		AnimationView.potion.draw(position.getAbsciss() , position.getOrdinate());
+	}
+
 }

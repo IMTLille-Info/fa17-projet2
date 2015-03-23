@@ -135,6 +135,8 @@ public class MapGameState extends BasicGameState {
 			animations.hitAnimate(map.get(indexMap));
 		}
 		
+		map.get(indexMap).drawTrigger();
+		
 		// Affichage de l'Avant-Plan de la Carte
 		map.get(indexMap).renderForeground();		
 		

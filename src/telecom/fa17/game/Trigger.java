@@ -10,5 +10,10 @@ public abstract class Trigger extends Element {
 	 * effectue l'action du déclencheur
 	 */
 	public abstract void action();
+	
+	/**
+	 * se dessine sur la carte
+	 */
+	public abstract void drawItself();
 
 }

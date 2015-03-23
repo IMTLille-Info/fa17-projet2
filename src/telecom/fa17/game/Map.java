@@ -180,4 +180,10 @@ public class Map {
 	public void removeTrigger(Trigger trigger) {
 		this.trigger.remove(trigger);		
 	}
+	
+	public void drawTrigger(){
+		for (Trigger trig : this.trigger){
+			trig.drawItself();
+		}
+	}
 }
