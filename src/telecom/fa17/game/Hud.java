@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 
 public class Hud {
 
-	// Position of Element with X & Y Coordinates
+	// Positions of Element with X & Y Coordinates
 	static final int X_BAR = 16,
 					 X_BAR_MONSTER = 444,
 					 Y_BAR = 432,

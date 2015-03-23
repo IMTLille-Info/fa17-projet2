@@ -156,11 +156,6 @@ public class Map {
 		return hitPosition;
 	}
 
-	/**
-	 * return if a player was hit on the map and change the status if true
-	 * 
-	 * @return hit state
-	 */
 	public boolean playerHit() {
 		return playerHit;
 	}

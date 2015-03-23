@@ -5,8 +5,6 @@ public abstract class Item extends Trigger{
 	//	Can be positif or negatif
 	int lifeBonus, attackBonus;
 	
-	String descriptif;
-	
 	public Item(float x, float y, boolean crossable, int life, int attack){
 		super (x, y, true);
 		this.lifeBonus = life;

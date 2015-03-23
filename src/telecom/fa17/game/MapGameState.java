@@ -104,7 +104,7 @@ public class MapGameState extends BasicGameState {
 		myHud = new Hud();
 		myHud.init(true);
 		
-		textInit("GameZ - The Best game you've ever played ! Number of letters : 65");
+		textInit("GameZ - The Best game you've ever played !");
 		//textInit("Welcome in our game !");
     }
 	
@@ -141,12 +141,11 @@ public class MapGameState extends BasicGameState {
 		// Affichage de l'Avant-Plan de la Carte
 		map.get(indexMap).renderForeground();		
 		
-		if(textToDisplay){
-			displayText(g, tempoText, displayText );
-		} else { 
-			// Affichage des barres de vie, attaque, etc...
-			myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
-		}
+		// Affichage info-bulle
+		if(textToDisplay) displayText(g, tempoText, displayText );
+		
+		// Affichage des barres de vie, attaque, etc...
+		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
     }
 	
 	/** 
@@ -204,6 +203,7 @@ public class MapGameState extends BasicGameState {
             		container.exit();
         }
 		
+		// Touche SPACE on veut attaquer
 		if(key == Input.KEY_SPACE){
 				objPlayer.attack(map.get(indexMap));
 		}
@@ -318,14 +318,14 @@ public class MapGameState extends BasicGameState {
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
-		g.fillRoundRect(10, 420, 620, 50, 10);
+		g.fillRoundRect(220, 420, 410, 50, 10);
 		
 		// Couleur Noire
 		g.setColor(new Color(0, 0, 0));
-		g.drawRoundRect(10, 420, 620, 50, 10);
-		g.drawRoundRect(15, 425, 610, 40, 10);
+		g.drawRoundRect(220, 420, 410, 50, 10);
+		g.drawRoundRect(225, 425, 400, 40, 10);
 		
-		g.drawString(str, 25, 435);
+		g.drawString(str, 240, 435);
 	}
 	
 	/**
