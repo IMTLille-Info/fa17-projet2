@@ -88,6 +88,7 @@ public class MapGameState extends BasicGameState {
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
+        map.get(3).addTrigger(new HealBonus(9, 8, 20));
         
         map.add(new Map("firstArena", "caveMap.ogg", true));
         
