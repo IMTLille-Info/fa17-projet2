@@ -10,6 +10,7 @@ public class HealBonus extends Item {
 	public void action() {
 		MapGameState.objPlayer.addLife(this.lifeBonus);
 		MapGameState.map.get(MapGameState.indexMap).removeTrigger(this);
+		MapGameState.textInit("You got a bonus life : +"+this.lifeBonus+" !");
 	}
 
 	@Override

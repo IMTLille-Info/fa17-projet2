@@ -35,9 +35,9 @@ public class MapGameState extends BasicGameState {
 	private Sounds music;
 	private Hud myHud;
 	
-	boolean textToDisplay = false;
+	static boolean textToDisplay = false;
 	int tempoText;
-	private String displayText;	
+	private static String displayText;	
 	
 	@Override
 	public int getID() {
@@ -265,7 +265,7 @@ public class MapGameState extends BasicGameState {
 	 * 
 	 * @param delta
 	 */
-	private void textInit(String prmS) {
+	static void textInit(String prmS) {
 		textToDisplay = true;
 		displayText = prmS;
 	}
