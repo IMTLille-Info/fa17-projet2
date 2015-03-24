@@ -53,6 +53,8 @@ public class MapGameState extends BasicGameState {
         this.game = game;
        
         map = new LinkedList<Map>();
+        
+        // Init First Map
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
@@ -60,6 +62,7 @@ public class MapGameState extends BasicGameState {
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
         map.get(0).addTrigger(new HealBonus(9, 1, 20));
         
+        // Init Second Map
         map.add(new Map("secondMap", "caveMap.ogg", false));
         map.get(1).addTrigger(new Exit(9, 14, 9, 0, 0));
         map.get(1).addTrigger(new Exit(16, 14, 10, 0, 0)); 
@@ -67,40 +70,46 @@ public class MapGameState extends BasicGameState {
         map.get(1).addTrigger(new Exit(17, 4, 18, 1, 2));
         map.get(1).addTrigger(new Exit(18, 1, 17, 5, 3));
  
-        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
+        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
         
+        // Init Third Map
         map.add(new Map("thirdMap", "caveMap.ogg", false));
         map.get(2).addTrigger(new Exit(1, 13, 7, 3, 1));
         map.get(2).addTrigger(new Exit(18, 1, 17, 4, 1));
-        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20,map.get(2), 2);
+        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
         
+        // Init Final Map
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40,map.get(3), 3);
+        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40, map.get(3), 3);
         monster3.init();
-        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70,map.get(3), 3);
+        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70, map.get(3), 3);
         monster4.init();
-        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100,map.get(3), 3);
+        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100, map.get(3), 3);
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
         map.get(3).addTrigger(new HealBonus(9, 8, 20));
         
+        // Init ARENA Map
         map.add(new Map("firstArena", "caveMap.ogg", true));
         
-       
-        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
         // Création d'un joueur
+        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
         objPlayer = new Player(7, 6, MapGameState.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
         
+        // Init Animations
         animations = new AnimationView(playerSprite);
-               
+           
+        // Init Music
 		music = new Sounds(map.get(0).getMusicFilename());
+		
+		// Init Player HUD
 		myHud = new Hud();
 		myHud.init(true);
 		
@@ -301,6 +310,18 @@ public class MapGameState extends BasicGameState {
      */
 	public void displayText(Graphics g, int timeSpent, String text){
 		final int TIME_FOR_ONE_MORE_LETTER = 45;
+		
+		// Positions of Element with X & Y Coordinates
+		final int X_START = 220,
+				  X_START_INTERIOR = 225,
+				  Y_START = 420,
+				  Y_START_INTERIOR = 425,
+			      X_WIDTH = 410,
+				  X_WIDTH_INTERIOR = 400,
+				  Y_HEIGHT = 50,
+				  Y_HEIGHT_INTERIOR = 40,
+			      CORNER = 10;
+		
 		String str = "";
 		int lengthToDisplay; 
 		
@@ -318,12 +339,12 @@ public class MapGameState extends BasicGameState {
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
-		g.fillRoundRect(220, 420, 410, 50, 10);
+		g.fillRoundRect(X_START, Y_START, X_WIDTH, Y_HEIGHT, CORNER);
 		
 		// Couleur Noire
 		g.setColor(new Color(0, 0, 0));
-		g.drawRoundRect(220, 420, 410, 50, 10);
-		g.drawRoundRect(225, 425, 400, 40, 10);
+		g.drawRoundRect(X_START, Y_START, X_WIDTH, Y_HEIGHT, CORNER);
+		g.drawRoundRect(X_START_INTERIOR, Y_START_INTERIOR, X_WIDTH_INTERIOR, Y_HEIGHT_INTERIOR, CORNER);
 		
 		g.drawString(str, 240, 435);
 	}
