@@ -287,7 +287,7 @@ public class MapGameState extends BasicGameState {
 	 */
 	private void textUpdate(int delta) {
 		// Time in ms
-		final int TIME_DISPLAY_TEXT = 4000;
+		final int TIME_DISPLAY_TEXT = 3000;
 		
 		if(textToDisplay) 
 		{
@@ -309,7 +309,7 @@ public class MapGameState extends BasicGameState {
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
 	public void displayText(Graphics g, int timeSpent, String text){
-		final int TIME_FOR_ONE_MORE_LETTER = 45;
+		final int TIME_FOR_ONE_MORE_LETTER = 45, TIME_TO_DISPLAY = 2000;
 		
 		// Positions of Element with X & Y Coordinates
 		final int X_START = 220,
@@ -322,20 +322,7 @@ public class MapGameState extends BasicGameState {
 				  Y_HEIGHT_INTERIOR = 40,
 			      CORNER = 10;
 		
-		String str = "";
-		int lengthToDisplay; 
-		
-		if(timeSpent < 3000)
-		{
-			lengthToDisplay = timeSpent / TIME_FOR_ONE_MORE_LETTER;
-			if(lengthToDisplay < text.length()){
-				str = text.substring(0, lengthToDisplay);
-			} else {
-				str = text;
-			}
-		} else {
-			str = text;
-		}
+		final int X_START_TEXT = 240, Y_START_TEXT = 435;
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
@@ -346,7 +333,17 @@ public class MapGameState extends BasicGameState {
 		g.drawRoundRect(X_START, Y_START, X_WIDTH, Y_HEIGHT, CORNER);
 		g.drawRoundRect(X_START_INTERIOR, Y_START_INTERIOR, X_WIDTH_INTERIOR, Y_HEIGHT_INTERIOR, CORNER);
 		
-		g.drawString(str, 240, 435);
+		if(timeSpent < TIME_TO_DISPLAY)
+		{
+			int lengthToDisplay = timeSpent / TIME_FOR_ONE_MORE_LETTER;
+			if(lengthToDisplay < text.length()){
+				g.drawString(text.substring(0, lengthToDisplay), X_START_TEXT, Y_START_TEXT);
+			} else {
+				g.drawString(text, X_START_TEXT, Y_START_TEXT);
+			}
+		} else {
+			g.drawString(text, X_START_TEXT, Y_START_TEXT);
+		}
 	}
 	
 	/**
