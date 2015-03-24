@@ -96,7 +96,7 @@ public class MapGameState extends BasicGameState {
         map.get(3).addTrigger(new HealBonus(9, 8, 20));
         
         // Init ARENA Map
-        map.add(new Map("firstArena", "caveMap.ogg", true));
+        map.add(new Map("Arena", "caveMap.ogg", true));
         
         // Création d'un joueur
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
