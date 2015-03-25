@@ -47,11 +47,12 @@ public class MapGameState extends BasicGameState {
 	/** 
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
 	 */
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+	@SuppressWarnings("static-access")
+	public void enterState(GameContainer container, StateBasedGame game) throws SlickException {
         this.container = container;
         this.game = game;
-       
+        this.indexMap = 0;
+        
         map = new LinkedList<Map>();
         
         // Init First Map
@@ -200,16 +201,21 @@ public class MapGameState extends BasicGameState {
 	public void keyPressed(int key, char c) {
 		
 		/* 
-		 * TEST POUR DECLENCHER LA FIN
+		 * TEST POUR RELANCER LE JEU
 		 */
 		if (key == Input.KEY_NUMPAD8) {
-			game.enterState(EndState.ID);
+			try {
+				enterState(container, game);
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		/* ****** */
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
-            		container.exit();
+            container.exit();
         }
 		
 		// Touche SPACE on veut attaquer
@@ -289,11 +295,9 @@ public class MapGameState extends BasicGameState {
 		// Time in ms
 		final int TIME_DISPLAY_TEXT = 3000;
 		
-		if(textToDisplay) 
-		{
+		if(textToDisplay) {
 			tempoText += delta; 
-			if(tempoText > TIME_DISPLAY_TEXT) 
-			{
+			if(tempoText > TIME_DISPLAY_TEXT){
 				textToDisplay = false;
 				tempoText = 0;
 			}
@@ -368,5 +372,11 @@ public class MapGameState extends BasicGameState {
 		Hud monsterHud = new Hud();
 		monsterHud.init(false);
 		monsterHud.renderMonster(g, monsterLife);
-	}	
+	}
+
+	@Override
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		enterState(container, game);
+	}
+
 }
