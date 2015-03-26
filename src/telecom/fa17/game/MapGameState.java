@@ -28,7 +28,7 @@ public class MapGameState extends BasicGameState {
 	// Constantes de Map
 	private int WIDTH_MAX, HEIGHT_MAX;
 	// Contenu standard de la fenêtre
-	public static int indexMap = 0;
+	public static int indexMap;
 	public static Player objPlayer;
 	
 	private AnimationView animations;
@@ -117,6 +117,12 @@ public class MapGameState extends BasicGameState {
 		textInit("GameZ - The Best game you've ever played !");
 		//textInit("Welcome in our game !");
     }
+	
+
+	@Override
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		enterState(container, game);
+	}
 	
 	/** 
 	 * Affiche le contenu du jeux
@@ -373,10 +379,4 @@ public class MapGameState extends BasicGameState {
 		monsterHud.init(false);
 		monsterHud.renderMonster(g, monsterLife);
 	}
-
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		enterState(container, game);
-	}
-
 }

@@ -49,7 +49,7 @@ public class EndState extends BasicGameState {
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
-            		container.exit();
+			container.exit();
         }
 	}
 	
