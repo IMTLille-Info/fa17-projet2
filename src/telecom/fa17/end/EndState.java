@@ -31,6 +31,7 @@ public class EndState extends BasicGameState {
 		/*
 		 * AFFICHAGE DU TEXTE DE FIN
 		 */
+		displayText(g, "PRESS [ENTER] TO REPLAY", 215, 350);
 		displayText(g, "PRESS [ESC] TO END THE GAME", 200, 400);
 	}
 
