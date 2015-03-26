@@ -46,14 +46,10 @@ public class MapGameState extends BasicGameState {
 	
 	/** 
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
+	 * @throws SlickException 
 	 */
-	@SuppressWarnings("static-access")
-	public void enterState(GameContainer container, StateBasedGame game) throws SlickException {
-        this.container = container;
-        this.game = game;
-        this.indexMap = 0;
-        
-        map = new LinkedList<Map>();
+	public void razGame() throws SlickException {
+        indexMap = 0;
         
         // Init First Map
         map.add(new Map("firstMap", "townMap.ogg", false));
@@ -121,7 +117,12 @@ public class MapGameState extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		enterState(container, game);
+        this.container = container;
+        this.game = game;
+        
+        map = new LinkedList<Map>();
+		
+        razGame();
 	}
 	
 	/** 
@@ -211,11 +212,8 @@ public class MapGameState extends BasicGameState {
 		 */
 		if (key == Input.KEY_NUMPAD8) {
 			try {
-				enterState(container, game);
-			} catch (SlickException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				razGame();
+			} catch (SlickException e) {}
 		}
 		/* ****** */
 		
