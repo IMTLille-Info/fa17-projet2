@@ -37,9 +37,8 @@ public class MapGameState extends BasicGameState {
 	private static Sounds music;
 	private static Hud myHud;
 	
-	static boolean textToDisplay = false;
 	int tempoText;
-	private static String displayText = null;	
+	private static String displayText = "";	
 	
 	@Override
 	public int getID() {
@@ -112,7 +111,7 @@ public class MapGameState extends BasicGameState {
 		myHud = new Hud();
 		myHud.init(true);
 		
-		//textInit("GameZ - The Best game you've ever played !");
+		textInit("GameZ - The Best game you've ever played !");
 		//textInit("Welcome in our game !");
     }
 	
@@ -161,14 +160,14 @@ public class MapGameState extends BasicGameState {
 		map.get(indexMap).renderForeground();		
 		
 		// Affichage info-bulle
-		if(textToDisplay) displayText(g, tempoText, displayText );
+		if(!displayText.isEmpty()) displayText(g, tempoText, displayText );
 		
 		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
     }
 	
 	/** 
-	 * Met à jour les élément de la scène en fonction du delta temps qui est survenu. 
+	 * Met à jour les éléments de la scène en fonction du delta temps qui est survenu. 
 	 * C’est ici que la logique du jeux est renfermé.
 	 */
 	@Override
@@ -179,7 +178,7 @@ public class MapGameState extends BasicGameState {
 		
 		// Player mort = passage à l'état END
 		if(!objPlayer.isAlive()){
-			keyPressed(Input.KEY_NUMPAD8, ' ');
+			keyPressed(Input.KEY_NUMPAD9, ' ');
 		}
 
 		if(!objPlayer.isMoving()){
@@ -296,7 +295,6 @@ public class MapGameState extends BasicGameState {
 	 * @param delta
 	 */
 	static void textInit(String prmS) {
-		textToDisplay = true;
 		displayText = prmS;
 	}
 	
@@ -309,10 +307,10 @@ public class MapGameState extends BasicGameState {
 		// Time in ms
 		final int TIME_DISPLAY_TEXT = 3000;
 		
-		if(textToDisplay) {
+		if(!displayText.isEmpty()) {
 			tempoText += delta; 
 			if(tempoText > TIME_DISPLAY_TEXT){
-				textToDisplay = false;
+				displayText = "";
 				tempoText = 0;
 			}
 		}	
