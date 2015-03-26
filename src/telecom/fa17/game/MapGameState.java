@@ -26,18 +26,20 @@ public class MapGameState extends BasicGameState {
 	public static List<Map> map;
 	
 	// Constantes de Map
-	private int WIDTH_MAX, HEIGHT_MAX;
+	private static int WIDTH_MAX;
+	private static int HEIGHT_MAX;
+	
 	// Contenu standard de la fenêtre
 	public static int indexMap;
 	public static Player objPlayer;
 	
-	private AnimationView animations;
-	private Sounds music;
-	private Hud myHud;
+	private static AnimationView animations;
+	private static Sounds music;
+	private static Hud myHud;
 	
 	static boolean textToDisplay = false;
 	int tempoText;
-	private static String displayText;	
+	private static String displayText = null;	
 	
 	@Override
 	public int getID() {
@@ -48,7 +50,7 @@ public class MapGameState extends BasicGameState {
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
 	 * @throws SlickException 
 	 */
-	public void razGame() throws SlickException {
+	public static void razGame() throws SlickException {
         indexMap = 0;
         
         // Init First Map
@@ -110,7 +112,7 @@ public class MapGameState extends BasicGameState {
 		myHud = new Hud();
 		myHud.init(true);
 		
-		textInit("GameZ - The Best game you've ever played !");
+		//textInit("GameZ - The Best game you've ever played !");
 		//textInit("Welcome in our game !");
     }
 	

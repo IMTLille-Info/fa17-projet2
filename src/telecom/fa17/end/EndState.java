@@ -8,6 +8,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import telecom.fa17.game.MapGameState;
+
 public class EndState extends BasicGameState {
 
 	private StateBasedGame game;
@@ -51,6 +53,14 @@ public class EndState extends BasicGameState {
 		if (key == Input.KEY_ESCAPE) {
 			container.exit();
         }
+		
+		// Touche ENTER on rejoue depuis le début
+		if (key == Input.KEY_ENTER) {
+				try {
+					MapGameState.razGame();
+				} catch (SlickException e) {}
+				game.enterState(MapGameState.ID);
+		}
 	}
 	
 	/**
