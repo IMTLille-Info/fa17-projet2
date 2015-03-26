@@ -217,6 +217,14 @@ public class MapGameState extends BasicGameState {
 		}
 		/* ****** */
 		
+		/* 
+		 * TEST POUR ARRIVER A LA FIN
+		 */
+		if (key == Input.KEY_NUMPAD9) {
+				game.enterState(EndState.ID);
+		}
+		/* ****** */
+		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
             container.exit();
