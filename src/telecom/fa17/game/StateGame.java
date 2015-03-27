@@ -6,7 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class StateGame extends StateBasedGame {
-
+	
 	public StateGame() {
 		super("GameZ");
 	}
