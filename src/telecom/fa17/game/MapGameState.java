@@ -164,6 +164,11 @@ public class MapGameState extends BasicGameState {
 		
 		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
+		
+		// MAP Arene, on affiche la vie du monstre qu'on récupère où ???
+		if(indexMap == 4) {
+			displayHUDMonsters(g, 50);
+		}
     }
 	
 	/** 
@@ -207,16 +212,6 @@ public class MapGameState extends BasicGameState {
 	 */	
 	@Override
 	public void keyPressed(int key, char c) {
-		
-		/* 
-		 * TEST POUR RELANCER LE JEU
-		 */
-		if (key == Input.KEY_NUMPAD8) {
-			try {
-				razGame();
-			} catch (SlickException e) {}
-		}
-		/* ****** */
 		
 		/* 
 		 * TEST POUR ARRIVER A LA FIN
