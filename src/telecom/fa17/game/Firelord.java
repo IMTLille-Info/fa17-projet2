@@ -6,8 +6,8 @@ public class Firelord extends PNJ{
 	
 	int lifeFireball = 1;
 	
-	public Firelord(float x, float y, int tileSize, int life, int attack, Map map) {
-		super(x, y, tileSize, life, attack, map, 1);
+	public Firelord(float x, float y, int tileSize, int life, int attack, Map map, int previousMapIdx) {
+		super(x, y, tileSize, life, attack, map, previousMapIdx);
 		this.map = map;
 	}
 	
@@ -32,7 +32,7 @@ public class Firelord extends PNJ{
 		}
 		
 		if(isok){
-			Fireball ball = new Fireball(fireballPosition, this.scale, signumAbsciss, signumOrdinate, getAttack(), 1, map);
+			Fireball ball = new Fireball(fireballPosition, this.scale, signumAbsciss, signumOrdinate, 1, getAttack(), map, 4);
 			map.addAdversary(ball);
 		}
 	}

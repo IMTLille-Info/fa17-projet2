@@ -9,9 +9,9 @@ public class Fireball extends PNJ{
 	int signumAbsciss;
 	int signumOrdinate;
 	
-	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int life, int attack, Map map) throws SlickException {
+	public Fireball(Position position, int tileSize, int signumAbsciss, int signumOrdinate, int life, int attack, Map map, int previousMapIdx) throws SlickException {
 		//ne pas tester si case est libre ou non => firelord test deja
-		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize, life, attack,map , 1);
+		super(position.getAbsciss()+signumAbsciss, position.getOrdinate()+signumOrdinate, tileSize, life, attack, map, previousMapIdx);
 		this.image = new Image("resources/map/monster/projectile_fireball.png");
 		this.signumAbsciss = signumAbsciss;
 		this.signumOrdinate = signumOrdinate;
