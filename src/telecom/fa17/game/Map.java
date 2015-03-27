@@ -181,4 +181,13 @@ public class Map {
 			trig.drawItself();
 		}
 	}
+	
+	public int getLifeMainPNJArena(){
+		for (PNJ pnj : this.getAliveAdversaries()) {
+			if (!MapGameState.map.get(pnj.getPreviousMapIdx()).isArena()) {
+				return pnj.getLife();
+			}
+		}
+		return 0;
+	}
 }

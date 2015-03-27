@@ -50,6 +50,10 @@ public class PNJ extends Mobile {
 		MapGameState.map.get(4).stopHit();
 	}
 
+	protected int getPreviousMapIdx() {
+		return previousMapIdx;
+	}
+
 	@Override
 	public void attack(Map map) {
 		// TODO Auto-generated method stub

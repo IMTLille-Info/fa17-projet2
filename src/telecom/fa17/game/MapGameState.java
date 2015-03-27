@@ -95,6 +95,7 @@ public class MapGameState extends BasicGameState {
         
         // Init ARENA Map
         map.add(new Map("Arena", "caveMap.ogg", true));
+        map.get(4).setArena(true);
         
         // Création d'un joueur
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
@@ -165,9 +166,9 @@ public class MapGameState extends BasicGameState {
 		// Affichage des barres de vie, attaque, etc...
 		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
 		
-		// MAP Arene, on affiche la vie du monstre qu'on récupère où ???
+		// MAP Arene, Affichage de la barre de vie du monstre responsable du changement de map
 		if(indexMap == 4) {
-			displayHUDMonsters(g, 50);
+			displayHUDMonsters(g, map.get(indexMap).getLifeMainPNJArena());
 		}
     }
 	
