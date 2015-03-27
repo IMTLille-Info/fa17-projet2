@@ -71,7 +71,7 @@ public class AnimationView {
 		
 		if(endAnimation(animation)){
 			player.stopAttackAnime();
-		}else{
+		} else {
 			animation.draw(player.getPosition().getAbsciss() - 15, player.getPosition().getOrdinate() -22);
 		}
 	}
