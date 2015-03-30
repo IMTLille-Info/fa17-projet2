@@ -26,18 +26,19 @@ public class MapGameState extends BasicGameState {
 	public static List<Map> map;
 	
 	// Constantes de Map
-	private int WIDTH_MAX, HEIGHT_MAX;
+	private static int WIDTH_MAX;
+	private static int HEIGHT_MAX;
+	
 	// Contenu standard de la fenêtre
-	public static int indexMap = 0;
+	public static int indexMap;
 	public static Player objPlayer;
 	
-	private AnimationView animations;
-	private Sounds music;
-	private Hud myHud;
+	private static AnimationView animations;
+	private static Sounds music;
+	private static Hud myHud;
 	
-	static boolean textToDisplay = false;
 	int tempoText;
-	private static String displayText;	
+	private static String displayText = "";	
 	
 	@Override
 	public int getID() {
@@ -46,16 +47,17 @@ public class MapGameState extends BasicGameState {
 	
 	/** 
 	 * Initialise le contenu du jeu, charger les graphismes, la musique, etc...
+	 * @throws SlickException 
 	 */
-	@Override
-	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-        this.container = container;
-        this.game = game;
+	public static void razGame() throws SlickException {
+        indexMap = 0;
         
         SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
         animations = new AnimationView(playerSprite);
         
         map = new LinkedList<Map>();
+        // Init First Map
+
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
         HEIGHT_MAX = map.get(0).getHeight();
@@ -64,6 +66,7 @@ public class MapGameState extends BasicGameState {
         map.get(0).addTrigger(new HealBonus(9, 1, 20));
         map.get(0).addTrigger(new Trap(9, 2, 10));
         
+        // Init Second Map
         map.add(new Map("secondMap", "caveMap.ogg", false));
         map.get(1).addTrigger(new Exit(9, 14, 9, 0, 0));
         map.get(1).addTrigger(new Exit(16, 14, 10, 0, 0)); 
@@ -71,44 +74,63 @@ public class MapGameState extends BasicGameState {
         map.get(1).addTrigger(new Exit(17, 4, 18, 1, 2));
         map.get(1).addTrigger(new Exit(18, 1, 17, 5, 3));
  
-        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20,map.get(1), 1);
+        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
         
+        // Init Third Map
         map.add(new Map("thirdMap", "caveMap.ogg", false));
         map.get(2).addTrigger(new Exit(1, 13, 7, 3, 1));
         map.get(2).addTrigger(new Exit(18, 1, 17, 4, 1));
-        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20,map.get(2), 2);
+        PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
         
+        // Init Final Map
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40,map.get(3), 3);
+        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40, map.get(3), 3);
         monster3.init();
-        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70,map.get(3), 3);
+        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70, map.get(3), 3);
         monster4.init();
-        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100,map.get(3), 3);
+        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100, map.get(3), 3);
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
         map.get(3).addTrigger(new HealBonus(9, 8, 20));
         
-        map.add(new Map("firstArena", "caveMap.ogg", true));
-        
-       
-        
+        // Init ARENA Map
+        map.add(new Map("Arena", "caveMap.ogg", true));
+        map.get(4).setArena(true);
+
         // Création d'un joueur
         objPlayer = new Player(7, 6, MapGameState.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
-               
+        
+        // Init Animations
+        animations = new AnimationView(playerSprite);
+           
+        // Init Music
 		music = new Sounds(map.get(0).getMusicFilename());
+		
+		// Init Player HUD
 		myHud = new Hud();
 		myHud.init(true);
 		
-		textInit("GameZ - The Best game you've ever played ! Number of letters : 65");
+		textInit("GameZ - The Best game you've ever played !");
 		//textInit("Welcome in our game !");
     }
+	
+
+	@Override
+	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        this.container = container;
+        this.game = game;
+        
+        map = new LinkedList<Map>();
+		
+        razGame();
+	}
 	
 	/** 
 	 * Affiche le contenu du jeux
@@ -143,16 +165,20 @@ public class MapGameState extends BasicGameState {
 		// Affichage de l'Avant-Plan de la Carte
 		map.get(indexMap).renderForeground();		
 		
-		if(textToDisplay){
-			displayText(g, tempoText, displayText );
-		} else { 
-			// Affichage des barres de vie, attaque, etc...
-			myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
+		// Affichage info-bulle
+		if(!displayText.isEmpty()) displayText(g, tempoText, displayText );
+		
+		// Affichage des barres de vie, attaque, etc...
+		myHud.render(g, objPlayer.getLife(), objPlayer.getAttack());
+		
+		// MAP Arene, Affichage de la barre de vie du monstre responsable du changement de map
+		if(indexMap == 4) {
+			displayHUDMonsters(g, map.get(indexMap).getLifeMainPNJArena());
 		}
     }
 	
 	/** 
-	 * Met à jour les élément de la scène en fonction du delta temps qui est survenu. 
+	 * Met à jour les éléments de la scène en fonction du delta temps qui est survenu. 
 	 * C’est ici que la logique du jeux est renfermé.
 	 */
 	@Override
@@ -163,7 +189,7 @@ public class MapGameState extends BasicGameState {
 		
 		// Player mort = passage à l'état END
 		if(!objPlayer.isAlive()){
-			keyPressed(Input.KEY_NUMPAD8, ' ');
+			keyPressed(Input.KEY_NUMPAD9, ' ');
 		}
 
 		if(!objPlayer.isMoving()){
@@ -194,18 +220,19 @@ public class MapGameState extends BasicGameState {
 	public void keyPressed(int key, char c) {
 		
 		/* 
-		 * TEST POUR DECLENCHER LA FIN
+		 * TEST POUR ARRIVER A LA FIN
 		 */
-		if (key == Input.KEY_NUMPAD8) {
-			game.enterState(EndState.ID);
+		if (key == Input.KEY_NUMPAD9) {
+				game.enterState(EndState.ID);
 		}
 		/* ****** */
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
-            		container.exit();
+            container.exit();
         }
 		
+		// Touche SPACE on veut attaquer
 		if(key == Input.KEY_SPACE){
 				objPlayer.attack(map.get(indexMap));
 		}
@@ -269,7 +296,6 @@ public class MapGameState extends BasicGameState {
 	 * @param delta
 	 */
 	static void textInit(String prmS) {
-		textToDisplay = true;
 		displayText = prmS;
 	}
 	
@@ -280,14 +306,12 @@ public class MapGameState extends BasicGameState {
 	 */
 	private void textUpdate(int delta) {
 		// Time in ms
-		final int TIME_DISPLAY_TEXT = 4000;
+		final int TIME_DISPLAY_TEXT = 3000;
 		
-		if(textToDisplay) 
-		{
+		if(!displayText.isEmpty()) {
 			tempoText += delta; 
-			if(tempoText > TIME_DISPLAY_TEXT) 
-			{
-				textToDisplay = false;
+			if(tempoText > TIME_DISPLAY_TEXT){
+				displayText = "";
 				tempoText = 0;
 			}
 		}	
@@ -302,32 +326,41 @@ public class MapGameState extends BasicGameState {
      * @param ordOrigin - Coordonnée Verticale en haut à gauche de la première lettre du texte.
      */
 	public void displayText(Graphics g, int timeSpent, String text){
-		final int TIME_FOR_ONE_MORE_LETTER = 45;
-		String str = "";
-		int lengthToDisplay; 
+		final int TIME_FOR_ONE_MORE_LETTER = 45, TIME_TO_DISPLAY = 2000;
 		
-		if(timeSpent < 3000)
-		{
-			lengthToDisplay = timeSpent / TIME_FOR_ONE_MORE_LETTER;
-			if(lengthToDisplay < text.length()){
-				str = text.substring(0, lengthToDisplay);
-			} else {
-				str = text;
-			}
-		} else {
-			str = text;
-		}
+		// Positions of Element with X & Y Coordinates
+		final int X_START = 220,
+				  X_START_INTERIOR = 225,
+				  Y_START = 420,
+				  Y_START_INTERIOR = 425,
+			      X_WIDTH = 410,
+				  X_WIDTH_INTERIOR = 400,
+				  Y_HEIGHT = 50,
+				  Y_HEIGHT_INTERIOR = 40,
+			      CORNER = 10;
+		
+		final int X_START_TEXT = 240, Y_START_TEXT = 435;
 		
 		// Couleur Blanche
 		g.setColor(new Color(255, 255, 255));
-		g.fillRoundRect(10, 420, 620, 50, 10);
+		g.fillRoundRect(X_START, Y_START, X_WIDTH, Y_HEIGHT, CORNER);
 		
 		// Couleur Noire
 		g.setColor(new Color(0, 0, 0));
-		g.drawRoundRect(10, 420, 620, 50, 10);
-		g.drawRoundRect(15, 425, 610, 40, 10);
+		g.drawRoundRect(X_START, Y_START, X_WIDTH, Y_HEIGHT, CORNER);
+		g.drawRoundRect(X_START_INTERIOR, Y_START_INTERIOR, X_WIDTH_INTERIOR, Y_HEIGHT_INTERIOR, CORNER);
 		
-		g.drawString(str, 25, 435);
+		if(timeSpent < TIME_TO_DISPLAY)
+		{
+			int lengthToDisplay = timeSpent / TIME_FOR_ONE_MORE_LETTER;
+			if(lengthToDisplay < text.length()){
+				g.drawString(text.substring(0, lengthToDisplay), X_START_TEXT, Y_START_TEXT);
+			} else {
+				g.drawString(text, X_START_TEXT, Y_START_TEXT);
+			}
+		} else {
+			g.drawString(text, X_START_TEXT, Y_START_TEXT);
+		}
 	}
 	
 	/**
@@ -352,5 +385,5 @@ public class MapGameState extends BasicGameState {
 		Hud monsterHud = new Hud();
 		monsterHud.init(false);
 		monsterHud.renderMonster(g, monsterLife);
-	}	
+	}
 }

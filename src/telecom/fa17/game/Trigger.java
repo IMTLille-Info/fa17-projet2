@@ -7,13 +7,13 @@ public abstract class Trigger extends Element {
 	}
 	
 	/**
-	 * effectue l'action du déclencheur
+	 * Action à effectuer lorsque l'on rencontre l'objet
 	 */
 	public abstract void action();
 	
 	/**
-	 * se dessine sur la carte
-	 * @param map 
+	 * @param map
+	 * S'auto-dessine sur la carte
 	 */
 	public abstract void drawItself(Map map);
 

@@ -7,8 +7,8 @@ import org.newdawn.slick.SlickException;
 
 public class Hud {
 
-	// Position of Element with X & Y Coordinates
-	static final int X_BAR = 16,
+	// Positions of Element with X & Y Coordinates
+	final int X_BAR = 16,
 					 X_BAR_MONSTER = 444,
 					 Y_BAR = 432,
 					 X_START_BAR = 57,
@@ -17,7 +17,7 @@ public class Hud {
 					 Y_BAR_ATTACK = 451,
 					 BAR_WIDTH = 129,
 		             BAR_HEIGHT = 8;
-	static final Color LIFE_COLOR = new Color(0, 255, 0),
+	final Color LIFE_COLOR = new Color(0, 255, 0),
 					   ATTACK_COLOR = new Color(0, 0, 255),
 					   MONSTER_LIFE_COLOR = new Color(255, 0, 0);
 	

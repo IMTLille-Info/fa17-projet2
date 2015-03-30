@@ -2,15 +2,10 @@ package telecom.fa17.game;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import telecom.fa17.end.EndState;
-
 public class StateGame extends StateBasedGame {
-
-	private GameContainer container;
 	
 	public StateGame() {
 		super("GameZ");
@@ -23,7 +18,6 @@ public class StateGame extends StateBasedGame {
 	 */
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
-		this.container = container;
 		addState(new MapGameState());
 		addState(new telecom.fa17.end.EndState());
 	}

@@ -158,11 +158,6 @@ public class Map {
 		return hitPosition;
 	}
 
-	/**
-	 * return if a player was hit on the map and change the status if true
-	 * 
-	 * @return hit state
-	 */
 	public boolean playerHit() {
 		return playerHit;
 	}
@@ -192,5 +187,14 @@ public class Map {
 		}
 		removeTrigger.clear();
 		
+	}
+	
+	public int getLifeMainPNJArena(){
+		for (PNJ pnj : this.getAliveAdversaries()) {
+			if (!MapGameState.map.get(pnj.getPreviousMapIdx()).isArena()) {
+				return pnj.getLife();
+			}
+		}
+		return 0;
 	}
 }

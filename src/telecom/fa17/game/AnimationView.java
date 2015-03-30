@@ -6,8 +6,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 /**
- * this class contain all animation we can use
- * @author pierre-edouard
+ * Class that contains all Animations
+ * @author Pierre-Édouard
  *
  */
 public class AnimationView {
@@ -29,18 +29,19 @@ public class AnimationView {
 		potion =new Image("/resources/map/bonus/health_potion.png");
 		trapSprite = new SpriteSheet(new Image("/resources/map/trap/trap.png"), 52 , 46);
 	
-		swordAttackSouth = new Animation(playerSprite, 0, 4, 7, 4, true, 25, true);
-		swordAttackSouth.setLooping(false);
 		swordAttackNorth = new Animation(playerSprite, 0, 7, 7, 7, true, 25, true);
 		swordAttackNorth.setLooping(false);
 		swordAttackEast = new Animation(playerSprite, 0, 6, 7, 6, true, 25, true);
 		swordAttackEast.setLooping(false);
+		swordAttackSouth = new Animation(playerSprite, 0, 4, 7, 4, true, 25, true);
+		swordAttackSouth.setLooping(false);
 		swordAttackWest = new Animation(playerSprite, 0, 5, 7, 5, true, 25, true);
 		swordAttackWest.setLooping(false);
 	}
 	
 	/**
-	 * Affiche l'animation hit une fois à l'emplacement du joueur puis se stop et réinitialise l'animation
+	 * Affiche l'animation 'hit' une fois
+	 * 
 	 * @param map
 	 * @param player 
 	 */
@@ -72,7 +73,7 @@ public class AnimationView {
 		
 		if(endAnimation(animation)){
 			player.stopAttackAnime();
-		}else{
+		} else {
 			animation.draw(player.getPosition().getAbsciss() - 15, player.getPosition().getOrdinate() -22);
 		}
 	}

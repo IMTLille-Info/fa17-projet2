@@ -25,5 +25,6 @@ public class Exit extends Trigger {
 		}
 
 		@Override
-		public void drawItself(Map map) {}
+		public void drawItself(Map map){}
+	
 }

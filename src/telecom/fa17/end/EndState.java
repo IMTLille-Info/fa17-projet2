@@ -3,15 +3,19 @@ package telecom.fa17.end;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import telecom.fa17.game.MapGameState;
+
 public class EndState extends BasicGameState {
 
 	private StateBasedGame game;
     private GameContainer container;
+	public boolean victory = true;
     public static final int ID = 2;
 	
 	@Override
@@ -25,11 +29,23 @@ public class EndState extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
-		displayText(g, "YOU ARE GREAT", 260, 64);
+		
+		if(victory){
+			displayText(g, "YOU WIN !", 285, 64);
+			displayText(g, "YOU'RE REALLY DAMN GOOD !", 220, 100);
+			g.drawImage(new Image("/resources/end/victory.png"), 225, 140);
+			displayText(g, "PRESS [ESC] TO END THE GAME", 200, 400);
+		} else {
+			displayText(g, "DAMN ! YOU'RE DEAD !", 240, 64);
+			displayText(g, "TRY AGAIN IF YOU HAVE THE BALLS !", 170, 100);
+			g.drawImage(new Image("/resources/end/dead.png"), 190, 145);
+			displayText(g, "PRESS [ESC] FOR LOOSERS", 216, 400);
+		}
+		
 		/*
 		 * AFFICHAGE DU TEXTE DE FIN
 		 */
-		displayText(g, "PRESS [ESC] TO END THE GAME", 200, 400);
+		displayText(g, "PRESS [ENTER] TO REPLAY", 215, 364);
 	}
 
 	@Override
@@ -49,8 +65,16 @@ public class EndState extends BasicGameState {
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
-            		container.exit();
+			container.exit();
         }
+		
+		// Touche ENTER on rejoue depuis le début
+		if (key == Input.KEY_ENTER) {
+				try {
+					MapGameState.razGame();
+				} catch (SlickException e) {}
+				game.enterState(MapGameState.ID);
+		}
 	}
 	
 	/**
