@@ -20,12 +20,14 @@ public class AnimationView {
 	public Animation swordAttackEast;
 	public Animation swordAttackWest;
 	public static Image potion;
+	public static SpriteSheet trapSprite;
 	
 	public AnimationView(SpriteSheet playerSprite) throws SlickException{
 		SpriteSheet hitSheet = new SpriteSheet(new Image("/resources/map/animation/iceBlaster_hit.png"), 32, 32);
 		hit = new Animation(hitSheet, 30);
 		hit.setLooping(false);
 		potion =new Image("/resources/map/bonus/health_potion.png");
+		trapSprite = new SpriteSheet(new Image("/resources/map/trap/trap.png"), 52 , 46);
 	
 		swordAttackSouth = new Animation(playerSprite, 0, 4, 7, 4, true, 25, true);
 		swordAttackSouth.setLooping(false);

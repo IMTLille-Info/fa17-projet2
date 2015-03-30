@@ -14,7 +14,7 @@ public class HealBonus extends Item {
 	}
 
 	@Override
-	public void drawItself() {
+	public void drawItself(Map map) {
 		AnimationView.potion.draw(position.getAbsciss() , position.getOrdinate());
 	}
 

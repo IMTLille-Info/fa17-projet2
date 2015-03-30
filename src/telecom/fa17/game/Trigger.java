@@ -13,7 +13,8 @@ public abstract class Trigger extends Element {
 	
 	/**
 	 * se dessine sur la carte
+	 * @param map 
 	 */
-	public abstract void drawItself();
+	public abstract void drawItself(Map map);
 
 }

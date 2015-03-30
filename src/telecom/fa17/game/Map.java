@@ -17,6 +17,7 @@ public class Map {
 	private boolean playerHit;
 	private String musicFilename;
 	private boolean isArena;
+	public List<Trigger> removeTrigger;
 
 	public Map(String name, String mscFile, boolean isArena) throws SlickException {
 		this.map = new TiledMap("resources/map/" + name + ".tmx");
@@ -26,6 +27,7 @@ public class Map {
 		this.playerHit = false;
 		this.musicFilename = mscFile;
 		this.isArena = isArena;
+		this.removeTrigger = new ArrayList <Trigger>();
 	}
 
 	public int getTileDimension() {
@@ -183,7 +185,12 @@ public class Map {
 	
 	public void drawTrigger(){
 		for (Trigger trig : this.trigger){
-			trig.drawItself();
+			trig.drawItself(this);
 		}
+		for (Trigger removeIt : this.removeTrigger){
+			this.trigger.remove(removeIt);		
+		}
+		removeTrigger.clear();
+		
 	}
 }

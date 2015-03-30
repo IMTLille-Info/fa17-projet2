@@ -51,7 +51,10 @@ public class MapGameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
         this.container = container;
         this.game = game;
-       
+        
+        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
+        animations = new AnimationView(playerSprite);
+        
         map = new LinkedList<Map>();
         map.add(new Map("firstMap", "townMap.ogg", false));
         WIDTH_MAX = map.get(0).getWidth();
@@ -59,6 +62,7 @@ public class MapGameState extends BasicGameState {
         map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
         map.get(0).addTrigger(new HealBonus(9, 1, 20));
+        map.get(0).addTrigger(new Trap(9, 2, 10));
         
         map.add(new Map("secondMap", "caveMap.ogg", false));
         map.get(1).addTrigger(new Exit(9, 14, 9, 0, 0));
@@ -93,12 +97,10 @@ public class MapGameState extends BasicGameState {
         map.add(new Map("firstArena", "caveMap.ogg", true));
         
        
-        SpriteSheet playerSprite = new SpriteSheet("resources/map/player/zelda.png", 60, 75);
+        
         // Création d'un joueur
         objPlayer = new Player(7, 6, MapGameState.map.get(indexMap).getTileDimension());
         objPlayer.init(playerSprite);
-        
-        animations = new AnimationView(playerSprite);
                
 		music = new Sounds(map.get(0).getMusicFilename());
 		myHud = new Hud();
