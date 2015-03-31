@@ -63,8 +63,8 @@ public class MapGameState extends BasicGameState {
         HEIGHT_MAX = map.get(0).getHeight();
         map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
-        map.get(0).addTrigger(new HealBonus(9, 1, 20));
-        map.get(0).addTrigger(new Trap(9, 2, 10));
+        map.get(0).addTrigger(new HealBonus(4, 3, 20));
+        map.get(0).addTrigger(new Trap(7, 1, 10));
         
         // Init Second Map
         map.add(new Map("secondMap", "caveMap.ogg", false));
@@ -77,6 +77,7 @@ public class MapGameState extends BasicGameState {
         PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 5, map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
+        map.get(1).addTrigger(new HealBonus(16, 6, 25));
         
         // Init Third Map
         map.add(new Map("thirdMap", "caveMap.ogg", false));
@@ -85,21 +86,21 @@ public class MapGameState extends BasicGameState {
         PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
-        map.get(2).addTrigger(new Trap(17, 10, 10));
-        map.get(2).addTrigger(new HealBonus(14, 9, 30));
+        map.get(2).addTrigger(new Trap(17, 10, 4));
+        map.get(2).addTrigger(new HealBonus(14, 9, 25));
         
         // Init Final Map
         map.add(new Map("fourthMap", "townMap.ogg", false));
-        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 40, map.get(3), 3);
+        PNJ monster3 = new PNJ(9, 9, map.get(3).getTileDimension(), 50, 10, map.get(3), 3);
         monster3.init();
-        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 80, 70, map.get(3), 3);
+        PNJ monster4 = new PNJ(2, 4, map.get(3).getTileDimension(), 5, 2, map.get(3), 3);
         monster4.init();
-        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 100, 100, map.get(3), 3);
+        PNJ monster5 = new PNJ(11, 5, map.get(3).getTileDimension(), 45, 22, map.get(3), 3);
         monster5.init();
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
-        map.get(3).addTrigger(new HealBonus(2, 2, 20));
+        map.get(3).addTrigger(new HealBonus(2, 2, 70));
         map.get(3).addTrigger(new HealBonus(1, 11, 20));
         map.get(3).addTrigger(new EndTrigger(9, 0));
         map.get(3).addTrigger(new EndTrigger(10, 0));
