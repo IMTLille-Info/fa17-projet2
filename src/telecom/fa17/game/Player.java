@@ -37,6 +37,7 @@ public class Player extends Mobile {
 			if (pnj.getPosition().equals(target)) {
 				if(isFighting()){
 					pnj.hurt(getAttack());
+					this.hurt(pnj.getAttack());
 					map.setHitZone(target);
 					if(!pnj.isAlive()){
 						pnj.returnToLastPosition();		

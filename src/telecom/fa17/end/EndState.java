@@ -15,7 +15,7 @@ public class EndState extends BasicGameState {
 
 	private StateBasedGame game;
     private GameContainer container;
-	public boolean victory = true;
+	public static boolean victory = true;
     public static final int ID = 2;
 	
 	@Override

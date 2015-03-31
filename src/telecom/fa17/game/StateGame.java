@@ -7,6 +7,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class StateGame extends StateBasedGame {
 	
+	public static boolean victory = false; 
+	
 	public StateGame() {
 		super("GameZ");
 	}

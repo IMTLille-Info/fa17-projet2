@@ -20,7 +20,7 @@ import telecom.fa17.end.EndState;
 public class MapGameState extends BasicGameState {
 
     private GameContainer container;
-	private StateBasedGame game;
+	public static StateBasedGame game;
     public static final int ID = 1;
     
 	public static List<Map> map;
@@ -64,7 +64,7 @@ public class MapGameState extends BasicGameState {
         map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
         map.get(0).addTrigger(new HealBonus(9, 1, 20));
-        map.get(0).addTrigger(new Trap(9, 2, 10));
+        map.get(0).addTrigger(new Trap(9, 2, 1100));
         
         // Init Second Map
         map.add(new Map("secondMap", "caveMap.ogg", false));
@@ -74,7 +74,7 @@ public class MapGameState extends BasicGameState {
         map.get(1).addTrigger(new Exit(17, 4, 18, 1, 2));
         map.get(1).addTrigger(new Exit(18, 1, 17, 5, 3));
  
-        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 20, map.get(1), 1);
+        PNJ monster = new PNJ(11, 5, map.get(1).getTileDimension(), 30, 5, map.get(1), 1);
         monster.init();
         map.get(1).addAdversary(monster);
         
@@ -97,7 +97,12 @@ public class MapGameState extends BasicGameState {
         map.get(3).addAdversary(monster3);
         map.get(3).addAdversary(monster4);
         map.get(3).addAdversary(monster5);
-        map.get(3).addTrigger(new HealBonus(9, 8, 20));
+        map.get(3).addTrigger(new HealBonus(2, 2, 20));
+        map.get(3).addTrigger(new HealBonus(1, 11, 20));
+        map.get(3).addTrigger(new EndTrigger(9, 0));
+        map.get(3).addTrigger(new EndTrigger(10, 0));
+        map.get(3).addTrigger(new EndTrigger(11, 0));
+        
         
         // Init ARENA Map
         map.add(new Map("Arena", "caveMap.ogg", true));
@@ -189,7 +194,8 @@ public class MapGameState extends BasicGameState {
 		
 		// Player mort = passage à l'état END
 		if(!objPlayer.isAlive()){
-			keyPressed(Input.KEY_NUMPAD9, ' ');
+			EndState.victory = false;
+			game.enterState(EndState.ID);
 		}
 
 		if(!objPlayer.isMoving()){
@@ -218,14 +224,6 @@ public class MapGameState extends BasicGameState {
 	 */	
 	@Override
 	public void keyPressed(int key, char c) {
-		
-		/* 
-		 * TEST POUR ARRIVER A LA FIN
-		 */
-		if (key == Input.KEY_NUMPAD9) {
-				game.enterState(EndState.ID);
-		}
-		/* ****** */
 		
 		// Touche ESC on termine le programme
 		if (key == Input.KEY_ESCAPE) {
