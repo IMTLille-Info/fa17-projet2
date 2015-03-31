@@ -64,7 +64,7 @@ public class MapGameState extends BasicGameState {
         map.get(0).addTrigger(new Exit(9, 0, 9, 14, 1));
         map.get(0).addTrigger(new Exit(10, 0, 16, 14, 1));
         map.get(0).addTrigger(new HealBonus(9, 1, 20));
-        map.get(0).addTrigger(new Trap(9, 2, 1100));
+        map.get(0).addTrigger(new Trap(9, 2, 10));
         
         // Init Second Map
         map.add(new Map("secondMap", "caveMap.ogg", false));
@@ -85,6 +85,8 @@ public class MapGameState extends BasicGameState {
         PNJ monster2 = new PNJ(4, 8, map.get(1).getTileDimension(), 50, 20, map.get(2), 2);
         monster2.init();
         map.get(2).addAdversary(monster2);
+        map.get(2).addTrigger(new Trap(17, 10, 10));
+        map.get(2).addTrigger(new HealBonus(14, 9, 30));
         
         // Init Final Map
         map.add(new Map("fourthMap", "townMap.ogg", false));
@@ -116,6 +118,8 @@ public class MapGameState extends BasicGameState {
         animations = new AnimationView(playerSprite);
            
         // Init Music
+		music = new Sounds(map.get(1).getMusicFilename());
+		music.StopBackgroundMusic();
 		music = new Sounds(map.get(0).getMusicFilename());
 		
 		// Init Player HUD
@@ -194,6 +198,7 @@ public class MapGameState extends BasicGameState {
 		
 		// Player mort = passage à l'état END
 		if(!objPlayer.isAlive()){
+			music.StopBackgroundMusic();
 			EndState.victory = false;
 			game.enterState(EndState.ID);
 		}
